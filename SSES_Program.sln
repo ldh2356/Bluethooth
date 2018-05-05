@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSES_Program", "SSES_Program\SSES_Program.csproj", "{29507F5D-11E8-4754-849A-A758049BFBEE}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GreenLock_nnv_1.0", "GreenLock_nnv_1.0\GreenLock_nnv_1.0.vdproj", "{1A009E0F-A458-4EE3-BBFC-A20C372ED0CD}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GreenLockUpdater_v1.0", "GreenLockUpdater_v1.0\GreenLockUpdater_v1.0.vdproj", "{679E3B96-A7B4-4D30-BAC7-3A1D4D5C3E43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueTooth_Test", "BlueTooth_Test\BlueTooth_Test.csproj", "{4362231A-44EE-4AEC-9726-4789A322D23C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -274,8 +276,41 @@ Global
 		{679E3B96-A7B4-4D30-BAC7-3A1D4D5C3E43}.SingleImage|Any CPU.ActiveCfg = Release
 		{679E3B96-A7B4-4D30-BAC7-3A1D4D5C3E43}.SingleImage|Mixed Platforms.ActiveCfg = Release
 		{679E3B96-A7B4-4D30-BAC7-3A1D4D5C3E43}.SingleImage|x86.ActiveCfg = Release
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.CD_ROM|Mixed Platforms.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.CD_ROM|x86.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Debug|x86.Build.0 = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.DVD-5|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.DVD-5|x86.Build.0 = Debug|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Release|x86.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.Release|x86.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.SingleImage|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.SingleImage|x86.ActiveCfg = Release|Any CPU
+		{4362231A-44EE-4AEC-9726-4789A322D23C}.SingleImage|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB34FD6D-E34C-49A4-AF03-673F3CB287A2}
 	EndGlobalSection
 EndGlobal
