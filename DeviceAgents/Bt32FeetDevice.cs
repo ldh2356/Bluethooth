@@ -128,7 +128,7 @@ namespace DeviceAgents
         }
 
         private void Service_AsyncCallback(IAsyncResult result)
-        {
+        { 
             try
             {
                 bdi = result.AsyncState as BluetoothDeviceInfo;
