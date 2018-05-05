@@ -1,0 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using InTheHand.Net;
+using InTheHand.Net.Bluetooth;
+using InTheHand.Net.Sockets;
+using System.Threading;
+using InTheHand.Net.Bluetooth.AttributeIds;
+
+namespace DeviceAgents
+{
+    public class Bt32FeetDevice : DeviceBase
+    {
+        static string addrs;
+        static BluetoothAddress addr;
+        static BluetoothDeviceInfo bdi;
+        
+        static string uuidStr = "00002415-0000-1000-8000-00805F9B34FB";
+        Guid uuid = new Guid(uuidStr);
+
+        public Bt32FeetDevice()
+        {
+        }
+
+        public void GetBtAddr(string divAddr)
+        {
+            addrs = divAddr;
+        }
+
+        public override void Dispose()
+        {
+            Stop();
+            base.Dispose();
+        }
+
+
+        //---------------------------------------------------------------------
+
+        public override void Init()
+        {
+        }
+        //---------------------------------------------------------------------
+        bool _IsConnected = false;
+        protected override bool IsConnectedImpl()
+        {
+            return _IsConnected;
+        }
+        //---------------------------------------------------------------------
+        bool _IsServiced = false;
+        protected override bool IsServicedImpl()
+        {
+            return _IsServiced;
+        }
+        //---------------------------------------------------------------------
+        protected override void DoWork()
+        {
+            addr = BluetoothAddress.Parse(addrs);
+
+            //Console.WriteLine("Sap :{0}, Nap :{1}",addr.Sap.ToString(), addr.Nap.ToString());
+            bdi = new BluetoothDeviceInfo(addr);
+            try
+            {
+                while (true)
+                {
+                    IAsyncResult ir = bdi.BeginGetServiceRecords(uuid, Service_AsyncCallback, bdi);
+                    Console.Write("AsyncState: {0} , ", ir.CompletedSynchronously.ToString());
+                    //Console.WriteLine("IsConnneted? {0} :: IsServiced? {1}", _IsConnected, _IsServiced);
+                    Console.Write("IsConnneted? {0} :: ", _IsConnected);
+
+                    //if (!_IsServiced) { if (OnData != null) OnData(this, "-95"); }
+                    if (!_IsConnected) { if (OnData != null) OnData(this, "-95"); }
+                    else { if (OnData != null) OnData(this, "-45"); }
+                    Thread.Sleep(200);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + " Thread Exception!!! 1");
+            }
+        }
+
+        private void Service_AsyncCallback(IAsyncResult result)
+        {
+            try
+            {
+                bdi = result.AsyncState as BluetoothDeviceInfo;
+                if (result.IsCompleted)
+                {
+                    ServiceRecord[] services = bdi.EndGetServiceRecords(result);                    
+                    //Console.Write("services.Length = {0} , ", services.Length);
+                    _IsConnected = true;
+                    /*
+                    if (services.Length != 0)
+                    {
+                        _IsServiced = true;
+                        int ind = 0;
+                        foreach (ServiceRecord r in services)
+                        {
+                            int port = ServiceRecordHelper.GetRfcommChannelNumber(r);
+                            string curSvcName = r.GetPrimaryMultiLanguageStringAttributeById(UniversalAttributeId.ServiceName);
+                            Console.WriteLine("{0} : port={1} Name={2}", ind, port, curSvcName);
+                            ind++;
+                        }
+                    }
+                    else _IsServiced = false;                    
+                    */
+                }
+                else
+                {
+                    _IsConnected = false;
+                    _IsServiced = false;
+                }
+            }
+            catch
+            {
+                _IsConnected = false;
+                _IsServiced = false;
+            }
+        }
+    }
+}
