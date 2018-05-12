@@ -776,6 +776,7 @@ namespace SSES_Program
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            MessageBox.Show("인스톨 체크");
 
             UIInvoker = new UIInvokerDelegate(DiplayMessage);
             keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);

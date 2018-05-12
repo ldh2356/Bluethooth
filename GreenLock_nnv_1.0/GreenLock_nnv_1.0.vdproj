@@ -33,12 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_31BFF174B0876BE34EAE6BFF8D7B59AF"
-        "OwnerKey" = "8:_5AC22753C06843BB94C48E8169ED6B09"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3F7EB23E1D4B4633B771A19B478AAF54"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -99,6 +93,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7D31BDE8ADCB568F4B82A3FB08842113"
+        "OwnerKey" = "8:_5AC22753C06843BB94C48E8169ED6B09"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7E37CE46E18D4BAE8D424E167A8F937C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -106,7 +106,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8A112A3417F0790EB0285F333E769AC6"
-        "OwnerKey" = "8:_E49CC2AB5DC39DB9E1E0FD5F1E0A06E0"
+        "OwnerKey" = "8:_E986BB083D49282D6F73484BA189DB30"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -177,7 +177,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E49CC2AB5DC39DB9E1E0FD5F1E0A06E0"
+        "MsmKey" = "8:_E986BB083D49282D6F73484BA189DB30"
         "OwnerKey" = "8:_5AC22753C06843BB94C48E8169ED6B09"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -239,6 +239,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5AC22753C06843BB94C48E8169ED6B09"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7D31BDE8ADCB568F4B82A3FB08842113"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E986BB083D49282D6F73484BA189DB30"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -329,18 +341,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D2DF6E9B4EF06493F60948458E0A774C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_31BFF174B0876BE34EAE6BFF8D7B59AF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E49CC2AB5DC39DB9E1E0FD5F1E0A06E0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -506,37 +506,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_31BFF174B0876BE34EAE6BFF8D7B59AF"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnergySolutions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_31BFF174B0876BE34EAE6BFF8D7B59AF"
-                    {
-                    "Name" = "8:EnergySolutions.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:EnergySolutions.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_47A1C175AD894EF3AA5531BA0EF0FF41"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3F7EB23E1D4B4633B771A19B478AAF54"
             {
             "AssemblyRegister" = "3:1"
@@ -679,6 +648,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7D31BDE8ADCB568F4B82A3FB08842113"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:EnergySolutions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_7D31BDE8ADCB568F4B82A3FB08842113"
+                    {
+                    "Name" = "8:EnergySolutions.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:EnergySolutions.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_47A1C175AD894EF3AA5531BA0EF0FF41"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7E37CE46E18D4BAE8D424E167A8F937C"
@@ -918,14 +918,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E49CC2AB5DC39DB9E1E0FD5F1E0A06E0"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E986BB083D49282D6F73484BA189DB30"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:DeviceAgents, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_E49CC2AB5DC39DB9E1E0FD5F1E0A06E0"
+                    "_E986BB083D49282D6F73484BA189DB30"
                     {
                     "Name" = "8:DeviceAgents.dll"
                     "Attributes" = "3:512"
@@ -1110,7 +1110,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SSES_Program"
         "ProductCode" = "8:{F6B95583-3CD7-42CD-8271-77081BEC9883}"
-        "PackageCode" = "8:{01E4B866-1D28-442A-A51B-08FA018CE47E}"
+        "PackageCode" = "8:{E30D64A4-C796-49C2-8B88-1C921A08986F}"
         "UpgradeCode" = "8:{4BE2B2FB-A108-4B92-AA9F-F270140352B2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1695,7 +1695,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5AC22753C06843BB94C48E8169ED6B09"
             {
-            "SourcePath" = "8:..\\SSES_Program\\obj\\Debug\\SSES_Program.exe"
+            "SourcePath" = "8:..\\SSES_Program\\obj\\Release\\SSES_Program.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47A1C175AD894EF3AA5531BA0EF0FF41"
@@ -1723,7 +1723,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_68A4AAF9D72D4544BBA22AFF99535E38"
             {
-            "SourcePath" = "8:..\\ClientUpdater\\obj\\Debug\\ClientUpdater.exe"
+            "SourcePath" = "8:..\\ClientUpdater\\obj\\Release\\ClientUpdater.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47A1C175AD894EF3AA5531BA0EF0FF41"
