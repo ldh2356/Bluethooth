@@ -11,19 +11,53 @@ using InTheHand.Net.Bluetooth.AttributeIds;
 
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace DeviceAgents
 {
-    public class Bt32FeetDevice : DeviceBase
+    /// <summary>
+    /// 에이전트 핸들러
+    /// </summary>
+    /// <param name="data"></param>
+    public delegate void DeviceDataHandler(Bt32FeetDevice bt32FeetDevice , string data);
+
+    /// <summary>
+    /// 블루투스 컨트롤 클래스
+    /// </summary>
+    public class Bt32FeetDevice : IDisposable
     {
-        static string addrs;
-        static BluetoothAddress addr;
-        static BluetoothDeviceInfo bdi;
+        /// <summary>
+        /// 핸들러
+        /// </summary>
+        public DeviceDataHandler OnData = null;
+
+        /// <summary>
+        /// 에이전트로부터 받아올 맥 어드레스
+        /// </summary>
+        static string MacAddress { get; set; }
+
+
+        /// <summary>
+        /// 블루투스 어드레스 변수
+        /// </summary>
+        static BluetoothAddress bluetoothAddressString;
+
+
+        /// <summary>
+        /// 블루투스 디바이스 정보 클래스
+        /// </summary>
+        static BluetoothDeviceInfo bluetoothDeviceInfo;
+
+        /// <summary>
+        /// 워커 쓰레드
+        /// </summary>
+        protected Thread Worker = null;
+
+
         private int _lockcount;
-        IAsyncResult ir;
-        private ConnectLog log = new ConnectLog();
-
-
+        /// <summary>
+        /// 락 카운트
+        /// </summary>
         public int LockCount
         {
             get 
@@ -35,89 +69,179 @@ namespace DeviceAgents
                 _lockcount = value;
             }
         }
-        public int _model;   
-        
-        
+
+        /// <summary>
+        /// IOS / Android 모델
+        /// </summary>
+        public int _model;
+
+
+        /// <summary>
+        /// 모바일 모델
+        /// </summary>
+        public EnumMobileModel mobileModel
+        {
+            get
+            {
+                if (_model == 0)
+                    return EnumMobileModel.Android;
+                else
+                    return EnumMobileModel.IOS;
+            }
+        }
+
+
+        /// <summary>
+        /// UUID
+        /// </summary>
         static string uuidStr = "00002415-0000-1000-8000-00805F9B34FB";
+
+        /// <summary>
+        /// GUID
+        /// </summary>
         Guid uuid = new Guid(uuidStr);
         
+
+        /// <summary>
+        /// 생성자
+        /// </summary>
         public Bt32FeetDevice()
         {
         }
 
-        public void GetBtAddr(string divAddr)
-        {
-            addrs = divAddr;
-        }
-
-        public override void Dispose()
-        {
-            Stop();
-            base.Dispose();
-        }
-        
-
-        //---------------------------------------------------------------------
-
-        public override void Init()
-        {
-        }
-        //---------------------------------------------------------------------
-        bool _IsConnected = false;
-        protected override bool IsConnectedImpl()
-        {
-            return _IsConnected;
-        }
-        //---------------------------------------------------------------------
-        bool _IsServiced = true;
-        protected override bool IsServicedImpl()
-        {
-            return _IsServiced;
-        }
-        //---------------------------------------------------------------------
-        protected override void DoWork()
+        /// <summary>
+        /// 쓰레드를 시작한다
+        /// </summary>
+        public virtual void Start()
         {
             try
             {
-                addr = BluetoothAddress.Parse(addrs);
+                Worker = new Thread(DoWork);
+                Worker.Start();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-                // 블루투스 확인, (블루투스를 킬 때까지 장치 제어판 계속 띄워줌)
 
+        /// <summary>
+        /// 서비스를 정지한다
+        /// </summary>
+        public virtual void Stop()
+        {
+            try
+            {
+                if (Worker == null)
+                    return;
+
+                Worker.Interrupt();
+                Worker = null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 주소를 져온다
+        /// </summary>
+        /// <param name="divAddr"></param>
+        public void GetBtAddr(string divAddr)
+        {
+            MacAddress = divAddr;
+        }
+
+
+        /// <summary>
+        /// Dispose 
+        /// </summary>
+        public void Dispose()
+        {
+            try
+            {
+                Stop();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+
+        /// <summary>
+        /// 에이전트와 모바일 기기가 서로 통신이 되고있는지 여부 
+        /// </summary>
+        public bool IsServiced { get; set; } = false;
+
+
+
+        /// <summary>
+        /// 통신 체크
+        /// </summary>
+        protected void DoWork()
+        {
+            try
+            {
+                while(true)
+                {
+                    DoCheckBlueToothService();
+                    Thread.Sleep(1000);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        /// <summary>
+        /// 블루투스 서비스를 체크한다
+        /// </summary>
+        private void DoCheckBlueToothService()
+        {
+            try
+            {
+                // 파싱한 주소를 가져온다
+                bluetoothAddressString = BluetoothAddress.Parse(MacAddress);
+
+                // 컴퓨터에 블루투스가 연결되어있는지 여부를 확인 한다 
                 while (true)
                 {
+                    // 블루투스 장치가 켜져있지 않다면 블루투스 설정 화면을 사용자에게 안내한다
                     if (!BluetoothRadio.IsSupported)
                     {
                         Process.Start("bthprops.cpl");
-
-                        //2017.11.29일 - 2차 기능 정의서의 내용중 블뤁추스 장치가 없을 경우 무한 반복되는 메시지 창을 수정
                         if (MessageBox.Show(Device.bluetoothOffMsg, "SSES", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         {
                             break;
                         }
                     }
+                    // 블루투스 제어장치가 확인돈다면
                     else
                     {
-                        bdi = new BluetoothDeviceInfo(addr);
+                        // 블루투스 제어장비를 초기화한다
+                        bluetoothDeviceInfo = new BluetoothDeviceInfo(bluetoothAddressString);
                         break;
                     }
                 }
 
+
+                // 모바일 기기와 연결여부를 지속적으로 체크한다
                 while (true)
                 {
+                    // 콜백 메서드로 이동
+                    IAsyncResult iAsyncResult = bluetoothDeviceInfo.BeginGetServiceRecords(uuid, Service_AsyncCallback, bluetoothDeviceInfo);
+                    
+                    //이벤트 전달
+                    if (OnData != null)
+                        OnData(this, "");
 
-                    ir = bdi.BeginGetServiceRecords(uuid, Service_AsyncCallback, bdi);
-
-                    Console.WriteLine(" uuid  ====> " + uuid);
-                    if (!_IsServiced)
-                    {
-                        if (OnData != null)
-                            OnData(this, "-95");
-                    }
-                    else
-                    {
-                        if (OnData != null)
-                            OnData(this, "-45");
-                    }
                     Thread.Sleep(1000);
                 }
             }
@@ -127,77 +251,75 @@ namespace DeviceAgents
             }
         }
 
-        private void Service_AsyncCallback(IAsyncResult result)
+
+
+        /// <summary>
+        /// 블루투스 통신 부분
+        /// </summary>
+        /// <param name="result"></param>
+        private void Service_AsyncCallback(IAsyncResult iAsyncResult)
         { 
             try
             {
-                bdi = result.AsyncState as BluetoothDeviceInfo;
-                if (result.IsCompleted)
-                {
-                  
-                    _IsConnected = true;
+                bluetoothDeviceInfo = iAsyncResult.AsyncState as BluetoothDeviceInfo;
 
-                    if (_model == 0)
+                // 안드로이드의 경우
+                if (mobileModel == EnumMobileModel.Android)
+                {
+                    try
                     {
-                        ServiceRecord[] services = bdi.EndGetServiceRecords(result);
-                        if (services.Length != 0)
+                        ServiceRecord[] services = bluetoothDeviceInfo.EndGetServiceRecords(iAsyncResult);
+
+                        // 안드로이드 기기와 통신이 성공한경우 (받아온 서비스가 0 개 이상일때)
+                        if (services.Count() > 0)
                         {
-                            _IsServiced = true;
-                            int ind = 0;
-                            _lockcount = 0;
-                            foreach (ServiceRecord r in services)
-                            {
-                                int port = ServiceRecordHelper.GetRfcommChannelNumber(r);
-                                string curSvcName = r.GetPrimaryMultiLanguageStringAttributeById(UniversalAttributeId.ServiceName);
-                                Console.WriteLine("{0} : port={1} Name={2}", ind, port, curSvcName);
-                                ind++;
-                            }
+                            IsServiced = true;
+                            LockCount = 0;
                         }
+                        // 실패한 경우 락카운트를 증가 시킨다
                         else
                         {
-                            log.write("Android DisConnect");
-                            Console.WriteLine("services.Length ==> 0");
-                            _lockcount++;
-                             if (_lockcount > 3)
-                             {
-                                _IsServiced = false;
-                             }
-                        }
-                    }
-                    else
-                    {
-                        try
-                        {
-                            ServiceRecord[] services = bdi.EndGetServiceRecords(result);
-                            Console.WriteLine("IOS Service_AsyncCallback");
-                            _IsServiced = true;
-                            _lockcount = 0;
-                        }
-                        catch(Exception ea)
-                        {
-                            log.write("IOS DisConnect");
-                            Console.WriteLine(ea.Message + "IOS Exception");
-                            _lockcount++;
-                            if(_lockcount >  10)
+                            LockCount++;
+                           
+                            // 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주
+                            if (LockCount > 3)
                             {
-                                _IsConnected = false;
-                                _IsServiced = false;
+                                IsServiced = false;
                             }
                         }
                     }
+                    // 예외 발생시
+                    catch (Exception ex)
+                    {
+                        IsServiced = false;
+                    }
                 }
+                // IOS 의 경우
                 else
                 {
-                    Console.WriteLine("result.IsCompleted false");
-                    _IsConnected = false;
-                    _IsServiced = false;
+                    try
+                    {
+                        // 서비스를 가져올때 예외가 발생하지 않는다면 통신 성공으로 간주한다
+                        ServiceRecord[] services = bluetoothDeviceInfo.EndGetServiceRecords(iAsyncResult);
+                        IsServiced = true;
+                        LockCount = 0;
+                    }
+                    // 실패한 경우 락카운트를 증가 시킨다
+                    catch (Exception)
+                    {
+                        LockCount++;
+                        // 락 카운트가 10 이상인 경우 서비스 통신 실패로 간주
+                        if (LockCount > 10)
+                        {
+                            IsServiced = false;
+                        }
+                    }
                 }
             }
-            catch(Exception ea)
+            catch(Exception ex)
             {
-                Console.WriteLine(ea.ToString() + DateTime.Now.ToString());
-                _IsConnected = false;
-                _IsServiced = false;
+                Console.WriteLine(ex.ToString() + DateTime.Now.ToString());                
+                IsServiced = false;
             }
         }
     }
