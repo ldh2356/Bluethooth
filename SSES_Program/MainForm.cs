@@ -102,8 +102,6 @@ namespace SSES_Program
         {
             try
             {
-                /// 키보드 이벤트 LockCount = 0
-                //Keys keyCode = (Keys)(int)m.WParam & Keys.KeyCode;
                 if ((m.Msg == WM_KEYDOWN || m.Msg == WM_KEYUP) && m.WParam.ToInt32() == 27)// && keyCode == Keys.Escape)
                 {
                     _32FeetDevice.LockCount = 0;
@@ -1036,7 +1034,6 @@ namespace SSES_Program
 
             _32FeetDevice.Stop();
             _32FeetDevice.OnData -= On32FeetData;
-
             string[] AddArray = { deviceUserControl1.TbDeviceAddr0.Text, deviceUserControl1.TbDeviceAddr1.Text, deviceUserControl1.TbDeviceAddr2.Text, deviceUserControl1.TbDeviceAddr3.Text, deviceUserControl1.TbDeviceAddr4.Text, deviceUserControl1.TbDeviceAddr5.Text };
             DevAddrs = String.Join(":", AddArray);
 
@@ -1103,7 +1100,7 @@ namespace SSES_Program
         #endregion
 
         #region bluetooth
-        private void On32FeetData(DeviceBase sender, string data)
+        private void On32FeetData(Bt32FeetDevice sender, string data)
         {
             try
             {
@@ -1113,39 +1110,32 @@ namespace SSES_Program
                 }
                 else
                 {
-                    if(this.IsHandleCreated)
+                    if (this.IsHandleCreated)
                     {
                         this.Invoke((Action)(() => { _Safe_On32FeetData(sender, data); }));
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        private void _Safe_On32FeetData(DeviceBase sender, string data)
+
+
+        private void _Safe_On32FeetData(Bt32FeetDevice sender, string data)
         {
             try
             {
-                Console.WriteLine("data   :" + data);
-                //throw new NotImplementedException();
-                RcvBuffer.Add(int.Parse(data));
-                if (RcvBuffer.Count > RcvMaxCount) RcvBuffer.RemoveAt(0);
-
-                rcvRssi = (int)RcvBuffer.Average();
-                //foreach (int r in RcvBuffer) Console.Write(r + " ");
-                Console.WriteLine("rcvRssi   :" + rcvRssi);
-
-                //RSSIintoProgressBar();
-                Console.WriteLine("_Safe");
                 ScreenSaver();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("eeeeeee");
             }
         }
+
+
 
         // 프로그래스 바 RSSI값 넣기
         void RSSIintoProgressBar()
@@ -1154,20 +1144,20 @@ namespace SSES_Program
 
             Invoke((MethodInvoker)delegate
             {
-                if (!_32FeetDevice.IsConnected)
-                    progressBar1.Style = ProgressBarStyle.Marquee;
+                //if (!_32FeetDevice.IsConnected)
+                //    progressBar1.Style = ProgressBarStyle.Marquee;
                 
-                if (_32FeetDevice.IsConnected)
-                {
-                    progressBar1.Style = ProgressBarStyle.Blocks;
-                    progressBar1.MarqueeAnimationSpeed = 20;
-                    progressBar1.Maximum = 120;
-                    progressBar1.Value = rcvRssi + 120;
-                }
-                else
-                {
-                    progressBar1.Style = ProgressBarStyle.Marquee;
-                }
+                //if (_32FeetDevice.IsConnected)
+                //{
+                //    progressBar1.Style = ProgressBarStyle.Blocks;
+                //    progressBar1.MarqueeAnimationSpeed = 20;
+                //    progressBar1.Maximum = 120;
+                //    progressBar1.Value = rcvRssi + 120;
+                //}
+                //else
+                //{
+                //    progressBar1.Style = ProgressBarStyle.Marquee;
+                //}
 
             });
         }
