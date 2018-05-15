@@ -1168,9 +1168,9 @@ namespace SSES_Program
         {
             try
             {
+                // 블루투스 연결이 끊어지는 경우.. 
                 if (this._32FeetDevice.IsServiced == false )  // will be off
-                {
-                    //Console.WriteLine("screen saver START :: {0}",DateTime.Now);
+                {                  
                     //화면보호기 시작
                     if (screensaverStatus == false && screensaverPasswordflag == false)
                     {
