@@ -28,15 +28,31 @@ using System.Windows;
 
 using MySql.Data.MySqlClient;
 using Microsoft.Win32;
-
+using log4net.Config;
+using log4net;
+using System.Collections;
 
 namespace SSES_Program
 {
     public partial class MainForm : Form, IMessageFilter
     {
+
+        /// <summary>
+        /// 로거
+        /// </summary>
+        private static log4net.ILog logger = null;
+
         // Value
         Bt32FeetDevice _32FeetDevice = new Bt32FeetDevice();
         CalcReduction _CalcReduc = new CalcReduction();
+
+
+        /// <summary>
+        /// 유저의 마우스 또는 키보드 입력이 들어왔는지 체크하는 변수
+        /// </summary>
+        public bool isUserInput { get; set; } = true;
+
+
         public string DevAddrs;
         public int userRssi = -65; // 사용자가 정한 RSSI값
         public double ratedOutput_device = 160.0;
@@ -54,6 +70,8 @@ namespace SSES_Program
         FormScreenSaver screenSaver;
         FormScreenSaver2 screenSaver2;
 
+        Thread inputThread = null;
+
 
         SendPCEnergy sPCEnergy = new SendPCEnergy();
        
@@ -63,8 +81,11 @@ namespace SSES_Program
         public string _CPU = string.Empty;
         public string _memory = string.Empty;
         public string _graphicsCard = string.Empty;
+        private System.Timers.Timer timer;
 
-       
+        public static int threadTimerCount = 0;
+
+
         public string _uptime = string.Empty;
         public string _savingTime = string.Empty;
 
@@ -91,50 +112,147 @@ namespace SSES_Program
         }
         #endregion
 
-        private const int WM_KEYDOWN = 0x100;
-        private const int WM_KEYUP = 0x101;
+
+
+        const int WM_KEYDOWN = 0x100;
+        const int WM_KEYUP = 0x101;
+        const int WM_SYSKEYDOWN = 0x104;
+        Keys lastKeyPressed = Keys.None;
+
+
 
         private int WM_LBUTTONUP = 0x0202; //left mouse up
         private int WM_MBUTTONUP = 0x0208; //middle mouse up
         private int WM_RBUTTONUP = 0x0205; //right mouse up
+        private int keyOrMouseInputDelayMin = 60;
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN))
+            {
+                lastKeyPressed = keyData;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         public bool PreFilterMessage(ref Message m)
         {
             try
             {
-                if ((m.Msg == WM_KEYDOWN || m.Msg == WM_KEYUP) && m.WParam.ToInt32() == 27)// && keyCode == Keys.Escape)
+                if (m.Msg == WM_KEYUP)
                 {
+                    timer.Stop();
+                    logger.Info("keypressed");
                     _32FeetDevice.LockCount = 0;
-                    Console.WriteLine("Ignoring Escape..." + m.ToString());
-                    return true;
+                    threadTimerCount = 0;
+                    timer.Start();
                 }
+                
                 ///마우스 이벤트 발생시 LockCount = 0
-                if (m.Msg == WM_LBUTTONUP || m.Msg == WM_MBUTTONUP || m.Msg == WM_RBUTTONUP)
+                if (m.Msg == WM_LBUTTONUP || m.Msg == WM_MBUTTONUP || m.Msg == WM_RBUTTONUP )
                 {
+                    timer.Stop();
+                    logger.Info("mousePressed");
+                    threadTimerCount = 0;
                     _32FeetDevice.LockCount = 0;
-                    Debug.WriteLine("Clicked");
+                    timer.Start();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString() + "filter");
+                logger.Error(ex);
                 System.Environment.Exit(0);
             }
             return false;
         }
 
 
+ 
+        /// <summary>
+        /// 타이머 이벤트
+        /// </summary>
+        private void DoInputTimer()
+        {
+            try
+            {
+                if (timer == null)
+                    timer = new System.Timers.Timer();
+
+                timer.Elapsed += DoInDoInputTimerAsyncputTimer;
+                timer.Interval = 1000;
+                timer.Start();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        private void DoInDoInputTimerAsyncputTimer(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                threadTimerCount++;
+
+                logger.Info("DoInDoInputTimerAsyncputTimer :" + threadTimerCount);
+
+                if (threadTimerCount > keyOrMouseInputDelayMin)
+                {
+                    timer.Stop();
+                    isUserInput = false;
+                }
+                else
+                {
+                    isUserInput = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 키보드 또는 마우스 입력이 있는경우 정해진 시간동안은 스크린세이버가 들어오는것을 방지한다
+        /// </summary>
+        public void donUseSceenSaveWhenUserInput()
+        {
+            timer.Stop();
+            threadTimerCount = 0;
+            _32FeetDevice.LockCount = 0;
+            timer.Start();
+        }
+
+
+        /// <summary>
+        /// Win32 키보드 후킹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void keyHook_MessageHooked(object sender, Hook.KeyboardHookEventArgs e)
         {
-            _32FeetDevice.LockCount = 0;
+            donUseSceenSaveWhenUserInput();
             BeginInvoke(this.UIInvoker, e.ToString());
         }
 
+
+        /// <summary>
+        /// Win32 마우스 후킹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void mouseHook_MessageHooked(object sender, Hook.MouseHookEventArgs e)
         {
-            _32FeetDevice.LockCount = 0;
+            donUseSceenSaveWhenUserInput();
             BeginInvoke(this.UIInvoker, e.ToString());
         }
+
+
 
         public void DiplayMessage(String msg)
         {
@@ -161,6 +279,10 @@ namespace SSES_Program
         {
             try
             {
+                string appPath = AppDomain.CurrentDomain.BaseDirectory;
+                XmlConfigurator.Configure(new System.IO.FileInfo($@"{appPath}\log4net.xml"));
+                logger = LogManager.GetLogger(typeof(Program));
+
                 screensaverStatus = false;
                 screensaverPasswordflag = false;
 
@@ -168,6 +290,8 @@ namespace SSES_Program
 
                 // 윈도우 절전/화면절전 모드 해제 - 추가
                 //SSES_Program.Win32.PreventScreenAndSleep();
+                // 타이머 진행
+                DoInputTimer();
 
                 //자동 업데이트 추가 
                 if (UpdateChecker.NeedUpdate(this))
@@ -1167,11 +1291,12 @@ namespace SSES_Program
         {
             try
             {
+                logger.Info($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
                 if (this._32FeetDevice.IsServiced == false )  // will be off
                 {
                     //Console.WriteLine("screen saver START :: {0}",DateTime.Now);
                     //화면보호기 시작
-                    if (screensaverStatus == false && screensaverPasswordflag == false)
+                    if (screensaverStatus == false && screensaverPasswordflag == false && isUserInput == false)
                     {
                         _CalcReduc.OperationEndTime = DateTime.Now;
 
