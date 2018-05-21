@@ -49,7 +49,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Device.resx</DependentUpon>
     </Compile>
-    <Compile Include="DeviceAgents.cs" />
     <Compile Include="EnumMobileModel.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

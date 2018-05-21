@@ -34,10 +34,11 @@ namespace SSES_Program
                         temp = string.Format("[{0}] : {1}", GetDateTime(), str );
                         sw.WriteLine(temp);
                     }
+                    
                 }
                 else
                 {
-                    using (sw = new StreamWriter(FilePath))
+                    using (sw = File.AppendText(FilePath))
                     {
                         temp = string.Format("[{0}] : {1}", GetDateTime(), str);
                         sw.WriteLine(temp);
