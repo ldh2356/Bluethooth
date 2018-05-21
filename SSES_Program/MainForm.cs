@@ -214,7 +214,7 @@ namespace SSES_Program
                 else
                 {
                     isUserInput = true;
-                }
+                }    
             }
             catch (Exception ex)
             {
