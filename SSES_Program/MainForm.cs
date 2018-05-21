@@ -354,8 +354,7 @@ namespace SSES_Program
                 userRssi = AppConfig.Instance.TrackBar;
                 ratedOutput_device = AppConfig.Instance.PcPower;
 
-                //MessageBox.Show("PcPower: " + AppConfig.Instance.PcPower.ToString()); // 디버그용 출력
-                //MessageBox.Show("rated: " + ratedOutput_device.ToString()); // 디버그용 출력
+              
 
                 TotreductionSecond = AppConfig.Instance.TotalTime;
                 userPw = AppConfig.Instance.UserPassword;
@@ -770,7 +769,6 @@ namespace SSES_Program
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-
             UIInvoker = new UIInvokerDelegate(DiplayMessage);
             keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);
             mouseHook.MessageHooked += new EventHandler<Hook.MouseHookEventArgs>(mouseHook_MessageHooked);
@@ -782,15 +780,7 @@ namespace SSES_Program
 
             //시작 프로그램 추가 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
-            //레지스트리 등록 할때
-            //if (registryKey.GetValue("GreenLock") == null)
-            //{
-            //    registryKey.SetValue("GreenLock", Application.ExecutablePath.ToString());
-            //}
-            //else if (registryKey.GetValue("GreenLock").Equals(@"C:\HansCreative\SSES_Program\SSES_Program.exe"))
-            //{
-            //    registryKey.SetValue("GreenLock", Application.ExecutablePath.ToString());
-            //}
+           
             if (registryKey.GetValue("MyApp") == null)
             {
                 registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
@@ -801,8 +791,6 @@ namespace SSES_Program
             }
 
             getUpTimeSavingTime();
-            
-
 
             deviceUserControl1.TbDeviceAddr0.TextChanged += new EventHandler(FocusMove);
             deviceUserControl1.TbDeviceAddr1.TextChanged += new EventHandler(FocusMove);
@@ -1166,7 +1154,6 @@ namespace SSES_Program
                 logger.Info($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
                 if (this.bt32FeetDevice.IsServiced == false )  // will be off
                 {
-                    //Console.WriteLine("screen saver START :: {0}",DateTime.Now);
                     //화면보호기 시작
                     if (screensaverStatus == false && screensaverPasswordflag == false && isUserInput == false)
                     {

@@ -48,7 +48,7 @@ namespace BlueTooth_Test
         /// 주소값
         /// </summary>
         //private static string Address { get; set; } = "00:CD:FE:6F:D5:86";
-        private static string Address { get; set; } = "84:2E:27:6B:70:12";
+        private static string Address { get; set; } = "AC:5A:14:10:4F:63";
 
 
         /// <summary>
@@ -94,6 +94,10 @@ namespace BlueTooth_Test
 
                 logger.Info($"로그기록 시작 {DateTime.Now.ToString()} =====");
                 logger.Info($"로그모델 타입:{modelType}");
+                logger.Info($"맥어드레스 입력");
+                string addr = Console.ReadLine();
+
+                Address = addr;
 
                 Service();
             }

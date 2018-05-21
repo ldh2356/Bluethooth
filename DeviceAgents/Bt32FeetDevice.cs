@@ -26,6 +26,8 @@ namespace DeviceAgents
     /// </summary>
     public class Bt32FeetDevice : IDisposable
     {
+        ConnectLog log = new ConnectLog();
+
         /// <summary>
         /// 핸들러
         /// </summary>
@@ -176,7 +178,7 @@ namespace DeviceAgents
         /// <summary>
         /// 에이전트와 모바일 기기가 서로 통신이 되고있는지 여부 
         /// </summary>
-        public bool IsServiced { get; set; } = false;
+        public bool IsServiced { get; set; } = true;
 
 
 
@@ -186,12 +188,8 @@ namespace DeviceAgents
         protected void DoWork()
         {
             try
-            {
-                while(true)
-                {
-                    DoCheckBlueToothService();
-                    Thread.Sleep(1000);
-                }
+            {                 
+                DoCheckBlueToothService();
             }
             catch (Exception ex)
             {
@@ -247,6 +245,8 @@ namespace DeviceAgents
             }
             catch (Exception ex)
             {
+                log.write("==== 통신 예외 발생 ====");
+                log.write(ex.Message);
                 Console.WriteLine(ex.Message + " Thread Exception!!! 1");
             }
         }
@@ -284,6 +284,8 @@ namespace DeviceAgents
                             // 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주
                             if (LockCount > 3)
                             {
+                                log.write("==== 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주 ====");
+                              
                                 IsServiced = false;
                             }
                         }
@@ -291,6 +293,8 @@ namespace DeviceAgents
                     // 예외 발생시
                     catch (Exception ex)
                     {
+                        log.write("==== 안드로이드 통신 예외 발생 ====");
+                        log.write(ex.Message);
                         IsServiced = false;
                     }
                 }
@@ -319,7 +323,7 @@ namespace DeviceAgents
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString() + DateTime.Now.ToString());                
-                IsServiced = false;
+                //IsServiced = false;
             }
         }
     }
