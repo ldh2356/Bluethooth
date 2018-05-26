@@ -28,15 +28,38 @@ using System.Windows;
 
 using MySql.Data.MySqlClient;
 using Microsoft.Win32;
-
+using log4net.Config;
+using log4net;
+using System.Collections;
 
 namespace SSES_Program
 {
     public partial class MainForm : Form, IMessageFilter
     {
-        // Value
-        Bt32FeetDevice _32FeetDevice = new Bt32FeetDevice();
-        CalcReduction _CalcReduc = new CalcReduction();
+
+        /// <summary>
+        /// 로거
+        /// </summary>
+        private static log4net.ILog logger = null;
+
+        
+        /// <summary>
+        /// 블루투스 라이브러리
+        /// </summary>
+        Bt32FeetDevice bt32FeetDevice = new Bt32FeetDevice();
+
+        /// <summary>
+        /// 계산 라이브러리
+        /// </summary>
+        CalcReduction calcReduction = new CalcReduction();
+
+
+        /// <summary>
+        /// 유저의 마우스 또는 키보드 입력이 들어왔는지 체크하는 변수
+        /// </summary>
+        public bool isUserInput { get; set; } = true;
+
+
         public string DevAddrs;
         public int userRssi = -65; // 사용자가 정한 RSSI값
         public double ratedOutput_device = 160.0;
@@ -54,6 +77,8 @@ namespace SSES_Program
         FormScreenSaver screenSaver;
         FormScreenSaver2 screenSaver2;
 
+        Thread inputThread = null;
+
 
         SendPCEnergy sPCEnergy = new SendPCEnergy();
        
@@ -63,8 +88,11 @@ namespace SSES_Program
         public string _CPU = string.Empty;
         public string _memory = string.Empty;
         public string _graphicsCard = string.Empty;
+        private System.Timers.Timer timer;
 
-       
+        public static int threadTimerCount = 0;
+
+
         public string _uptime = string.Empty;
         public string _savingTime = string.Empty;
 
@@ -91,50 +119,153 @@ namespace SSES_Program
         }
         #endregion
 
-        private const int WM_KEYDOWN = 0x100;
-        private const int WM_KEYUP = 0x101;
+
+
+        const int WM_KEYDOWN = 0x100;
+        const int WM_KEYUP = 0x101;
+        const int WM_SYSKEYDOWN = 0x104;
+        Keys lastKeyPressed = Keys.None;
+
+
 
         private int WM_LBUTTONUP = 0x0202; //left mouse up
         private int WM_MBUTTONUP = 0x0208; //middle mouse up
         private int WM_RBUTTONUP = 0x0205; //right mouse up
+        private int keyOrMouseInputDelayMin = 3;
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN))
+            {
+                lastKeyPressed = keyData;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         public bool PreFilterMessage(ref Message m)
         {
             try
             {
-                if ((m.Msg == WM_KEYDOWN || m.Msg == WM_KEYUP) && m.WParam.ToInt32() == 27)// && keyCode == Keys.Escape)
+                if (m.Msg == WM_KEYUP)
                 {
-                    _32FeetDevice.LockCount = 0;
-                    Console.WriteLine("Ignoring Escape..." + m.ToString());
-                    return true;
+                    timer.Stop();
+     
+                    bt32FeetDevice.LockCount = 0;
+                    threadTimerCount = 0;
+                    timer.Start();
                 }
+                
                 ///마우스 이벤트 발생시 LockCount = 0
-                if (m.Msg == WM_LBUTTONUP || m.Msg == WM_MBUTTONUP || m.Msg == WM_RBUTTONUP)
+                if (m.Msg == WM_LBUTTONUP || m.Msg == WM_MBUTTONUP || m.Msg == WM_RBUTTONUP )
                 {
-                    _32FeetDevice.LockCount = 0;
-                    Debug.WriteLine("Clicked");
+                    timer.Stop();
+                  
+                    threadTimerCount = 0;
+                    bt32FeetDevice.LockCount = 0;
+                    timer.Start();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString() + "filter");
+                logger.Error(ex);
                 System.Environment.Exit(0);
             }
             return false;
         }
 
 
+ 
+        /// <summary>
+        /// 타이머 이벤트
+        /// </summary>
+        private void DoInputTimer()
+        {
+            try
+            {
+                if (timer == null)
+                    timer = new System.Timers.Timer();
+
+                timer.Elapsed += DoInDoInputTimerAsyncputTimer;
+                timer.Interval = 1000;
+                timer.Start();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DoInDoInputTimerAsyncputTimer(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                threadTimerCount++;
+
+                logger.Info("DoInDoInputTimerAsyncputTimer :" + threadTimerCount);
+
+                if (threadTimerCount > keyOrMouseInputDelayMin)
+                {
+                    timer.Stop();
+                    isUserInput = false;
+                }
+                else
+                {
+                    isUserInput = true;
+                }    
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 키보드 또는 마우스 입력이 있는경우 정해진 시간동안은 스크린세이버가 들어오는것을 방지한다
+        /// </summary>
+        public void donUseSceenSaveWhenUserInput()
+        {
+            timer.Stop();
+            threadTimerCount = 0;
+            bt32FeetDevice.LockCount = 0;
+            timer.Start();
+        }
+
+
+        /// <summary>
+        /// Win32 키보드 후킹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void keyHook_MessageHooked(object sender, Hook.KeyboardHookEventArgs e)
         {
-            _32FeetDevice.LockCount = 0;
+            donUseSceenSaveWhenUserInput();
             BeginInvoke(this.UIInvoker, e.ToString());
         }
 
+
+        /// <summary>
+        /// Win32 마우스 후킹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void mouseHook_MessageHooked(object sender, Hook.MouseHookEventArgs e)
         {
-            _32FeetDevice.LockCount = 0;
+            donUseSceenSaveWhenUserInput();
             BeginInvoke(this.UIInvoker, e.ToString());
         }
+
+
 
         public void DiplayMessage(String msg)
         {
@@ -146,13 +277,13 @@ namespace SSES_Program
         {
             if(e.Mode == PowerModes.Suspend)
             {
-                _32FeetDevice.Stop();
+                bt32FeetDevice.Stop();
             }
 
             if(e.Mode == PowerModes.Resume)
             {
                 Console.WriteLine("qqqqqqqqqqqqq");
-                _32FeetDevice.Start();
+                bt32FeetDevice.Start();
             }
         }
 
@@ -161,6 +292,10 @@ namespace SSES_Program
         {
             try
             {
+                string appPath = AppDomain.CurrentDomain.BaseDirectory;
+                XmlConfigurator.Configure(new System.IO.FileInfo($@"{appPath}\log4net.xml"));
+                logger = LogManager.GetLogger(typeof(Program));
+
                 screensaverStatus = false;
                 screensaverPasswordflag = false;
 
@@ -168,6 +303,8 @@ namespace SSES_Program
 
                 // 윈도우 절전/화면절전 모드 해제 - 추가
                 //SSES_Program.Win32.PreventScreenAndSleep();
+                // 타이머 진행
+                DoInputTimer();
 
                 //자동 업데이트 추가 
                 if (UpdateChecker.NeedUpdate(this))
@@ -183,7 +320,7 @@ namespace SSES_Program
                 sPCEnergy.hardwardInfo = new Dictionary<string, string>();
                 getHardwardInfo();
 
-                _CalcReduc._OperationStartTime = DateTime.Now;
+                calcReduction._OperationStartTime = DateTime.Now;
 
                 /*if (IsConnectedToInternet())
                 {
@@ -196,14 +333,14 @@ namespace SSES_Program
                 }*/
 
                 // addd
-                _CalcReduc.IsSend = "true";
+                calcReduction.IsSend = "true";
                 this.sendPCEnergy("1");
 
                 AppConfig.Instance.FileName = AppConfigFileName;
                 AppConfig.Instance.LoadFromFile();
                 InitializeComponent();
 
-                _32FeetDevice._model = AppConfig.Instance.Model;
+                bt32FeetDevice._model = AppConfig.Instance.Model;
 
                 DevAddrs = AppConfig.Instance.DeviceAddress;
                 DisplayAddToText(DevAddrs);
@@ -211,9 +348,9 @@ namespace SSES_Program
                 //empty
                 if (DevAddrs != "00:00:00:00:00:00")
                 {
-                    _32FeetDevice.GetBtAddr(DevAddrs);
-                    _32FeetDevice.OnData += On32FeetData;
-                    _32FeetDevice.Start();
+                    bt32FeetDevice.GetBtAddr(DevAddrs);
+                    bt32FeetDevice.OnData += On32FeetData;
+                    bt32FeetDevice.Start();
                 }
                 else
                 {
@@ -259,10 +396,10 @@ namespace SSES_Program
                     this.deviceUserControl1.RadioButton2.Checked = false;
                 }
                 //_CalcReduc.DevicePerKwh = 160.0; // 원래 있던거
-                _CalcReduc.DevicePerKwh = AppConfig.Instance.PcPower; // 추가한거
-                _CalcReduc.WonPerKwh = AppConfig.Instance.ElecRate; // 추가한거
+                calcReduction.DevicePerKwh = AppConfig.Instance.PcPower; // 추가한거
+                calcReduction.WonPerKwh = AppConfig.Instance.ElecRate; // 추가한거
                 //_CalcReduc.Calculate(); // 추가한거
-                _CalcReduc.OnSaveChanged += (sender) =>
+                calcReduction.OnSaveChanged += (sender) =>
                 {
                 /*textBlock_power.Text = String.Format("{0,10:N3}", sender.UsedKwh).ToString();
                 textBlock_cost.Text = String.Format("{0,10:N3}", sender.UsedCost).ToString();
@@ -273,7 +410,7 @@ namespace SSES_Program
                 label_dispTotTime.Text = SsesRes.dispTotTime
                         + String.Format("{0:00}" + SsesRes.day + " {1:00}:{2:00}:{3:00}", sender.UsedSec.Days, Math.Floor(sender.UsedSec.TotalHours), sender.UsedSec.Minutes, sender.UsedSec.Seconds).ToString() + "입니다.";
                 };
-                _CalcReduc.OnSaveChanged(_CalcReduc);
+                calcReduction.OnSaveChanged(calcReduction);
                 Console.WriteLine("_main");
             }
             catch(Exception ex)
@@ -412,7 +549,7 @@ namespace SSES_Program
             string uptime = "0";
             try
             {
-                savingTime = Convert.ToString(this._CalcReduc.UsedSec.TotalSeconds * 1000);
+                savingTime = Convert.ToString(this.calcReduction.UsedSec.TotalSeconds * 1000);
             }
             catch
             {
@@ -421,7 +558,7 @@ namespace SSES_Program
 
             try
             {
-                uptime = Convert.ToString(this._CalcReduc.UsedOperation.TotalSeconds * 1000);
+                uptime = Convert.ToString(this.calcReduction.UsedOperation.TotalSeconds * 1000);
             }
             catch
             {
@@ -429,7 +566,7 @@ namespace SSES_Program
             }
             this.sPCEnergy.uptime = uptime;
             this.sPCEnergy.uptime = TimeSpan.FromMilliseconds(DateTime.Now.Millisecond).ToString();
-            this.sPCEnergy.savingTime = _CalcReduc.UsedSec.ToString();
+            this.sPCEnergy.savingTime = calcReduction.UsedSec.ToString();
         }
 
         /// <summary>
@@ -439,80 +576,19 @@ namespace SSES_Program
         /// <param name="toDate"></param>
         public void getPCEnergy(string fromDate, string toDate)
         {
-            #region
-            /*var httpWebRequest = (HttpWebRequest)WebRequest.Create(Globals.domain + ":8100/getPCEnergy");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-
-            try
-            {
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-
-                    this.gPCEnergy.macAddress = this._macAddress;
-
-                    if (checkBox_LangToggle.Text.Equals("English"))
-                    {
-                        this.gPCEnergy.locale = "KR";
-                    }
-                    else
-                    {
-                        this.gPCEnergy.locale = "US";
-                    }
-          
-                    //this.gPCEnergy.locale = System.Globalization.CultureInfo.CurrentCulture.ToString();
-                    //this.gPCEnergy.macAddress = "ab-cd-ef-gh";
-                    //this.gPCEnergy.fromDate = fromDate;
-                    //this.gPCEnergy.toDate = toDate;
-
-                    string json = JsonConvert.SerializeObject(gPCEnergy);
-
-                    //string json = "{\"macAddress\":\"ab-cd-ef-gh\"}";
-
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                    streamWriter.Close();
-                }
-
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-                    string json = "[" + result + "]";
-
-                    JArray jarr = JArray.Parse(json); //json 객체로
-                    foreach (JObject jobj in jarr)
-                    {
-                        textBlock_power.Text = String.Format("{0,10:N3}", jobj["watt"]).ToString();
-                        textBlock_cost.Text = String.Format("{0,10:N3}", jobj["money"]).ToString();
-                        textBlock_co2.Text = String.Format("{0,10:N3}", jobj["co2"]).ToString();
-                        textBlock_tree.Text = String.Format("{0,10:N3}", jobj["tree"]).ToString();
-
-                        //MessageBox.Show(jobj["ver"].ToString() + " ,  " + jobj["verYn"].ToString() + ",  " + jobj["updateUrl"].ToString()); //플러그인명,버전,url 출력
-                    }
-                    Console.WriteLine(result);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }*/
-            #endregion
-            // PC 저장된 솔루션 처리.
-            //_CalcReduc.Calculate(); // 추가한거
             if (checkBox_LangToggle.Text.Equals("English"))
             {
-                textBlock_power.Text = String.Format("{0,10:N3}", _CalcReduc.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", _CalcReduc.UsedCost).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", _CalcReduc.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", _CalcReduc.Tree).ToString();
+                textBlock_power.Text = String.Format("{0,10:N3}", calcReduction.UsedKwh).ToString();
+                textBlock_cost.Text = String.Format("{0,10:N3}", calcReduction.UsedCost).ToString();
+                textBlock_co2.Text = String.Format("{0,10:N3}", calcReduction.Co2).ToString();
+                textBlock_tree.Text = String.Format("{0,10:N3}", calcReduction.Tree).ToString();
             }
             else
             {
-                textBlock_power.Text = String.Format("{0,10:N3}", _CalcReduc.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", (_CalcReduc.UsedCost/1200)).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", _CalcReduc.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", _CalcReduc.Tree).ToString();
+                textBlock_power.Text = String.Format("{0,10:N3}", calcReduction.UsedKwh).ToString();
+                textBlock_cost.Text = String.Format("{0,10:N3}", (calcReduction.UsedCost/1200)).ToString();
+                textBlock_co2.Text = String.Format("{0,10:N3}", calcReduction.Co2).ToString();
+                textBlock_tree.Text = String.Format("{0,10:N3}", calcReduction.Tree).ToString();
             }
         }
 
@@ -523,101 +599,27 @@ namespace SSES_Program
         /// <param name="toDate"></param>
         public void getUpTimeSavingTime()
         {
-            #region
-            //var httpWebRequest = (HttpWebRequest)WebRequest.Create(Globals.domain + ":8100/getAccrueTime");
-            //httpWebRequest.ContentType = "application/json";
-            //httpWebRequest.Method = "POST";
-
-            //try
-            //{
-            //    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            //    {
-
-            //        this.gPCEnergy.macAddress = this._macAddress;
-            //        string json = JsonConvert.SerializeObject(gPCEnergy);
-
-            //        streamWriter.Write(json);
-            //        streamWriter.Flush();
-            //        streamWriter.Close();
-            //    }
-
-            //    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            //    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            //    {
-            //        var result = streamReader.ReadToEnd();
-            //        string json = "[" + result + "]";
-
-            //        JArray jarr = JArray.Parse(json); //json 객체로
-            //        foreach (JObject jobj in jarr)
-            //        {
-            //            _CalcReduc.UsedSec = TimeSpan.FromMilliseconds(double.Parse(jobj["savingTime"].ToString()));
-            //            _CalcReduc.UsedOperation = TimeSpan.FromMilliseconds(double.Parse(jobj["upTime"].ToString()));         
-            //        }
-            //        Console.WriteLine(result);
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //} 
-#endregion
             DateTime now = DateTime.Now;
             var epoch = new DateTime(1970, 1, 1, 9, 0, 0, DateTimeKind.Utc);
             string uptime = Convert.ToString(Convert.ToInt64((now - epoch).TotalSeconds) * 1000);
             double timestamp = Convert.ToDouble(uptime);
             this.sPCEnergy.uptime = uptime;
             this.sPCEnergy.uptime = TimeSpan.FromMilliseconds(DateTime.Now.Millisecond).ToString();
-            this.sPCEnergy.savingTime = _CalcReduc.UsedSec.ToString();
+            this.sPCEnergy.savingTime = calcReduction.UsedSec.ToString();
         }
+
 
         /// <summary>
         /// PC 정보 전송
         /// </summary>
         public void sendPCInfo()
         {
-#region
-            //var httpWebRequest = (HttpWebRequest)WebRequest.Create(Globals.domain + ":8100/sendPCInfo");
-            //httpWebRequest.ContentType = "application/json";
-            //httpWebRequest.Method = "POST";
-
-            //this.pcInfo.hardwardInfo = new Dictionary<string, string>();
-
-            //try
-            //{
-            //    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            //    {
-            //        this.pcInfo.macAddress = this._macAddress;
-
-
-            //        this.pcInfo.hardwardInfo.Add("manufacturer", this._manufacturer);
-            //        this.pcInfo.hardwardInfo.Add("modelName", this._modelName);
-            //        this.pcInfo.hardwardInfo.Add("CPU", this._CPU);
-            //        this.pcInfo.hardwardInfo.Add("memory", "");
-            //        this.pcInfo.hardwardInfo.Add("graphicsCard", "");
-
-            //        string json = JsonConvert.SerializeObject(this.pcInfo);
-
-            //        //string json = "{\"macAddress\":\"ab-cd-ef-gh\"}";
-
-            //        streamWriter.Write(json);
-            //        streamWriter.Flush();
-            //        streamWriter.Close();
-            //    }
-
-            //    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            //    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            //    {
-            //        var result = streamReader.ReadToEnd();
-            //        Console.WriteLine(result);
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
-#endregion
         }
 
+
+        /// <summary>
+        /// 그래픽 카드
+        /// </summary>
         void GetVGA() // 그래픽 카드
         {
             ManagementObjectSearcher MOS = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
@@ -754,13 +756,13 @@ namespace SSES_Program
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            _CalcReduc.OperationEndTime = DateTime.Now;
+            calcReduction.OperationEndTime = DateTime.Now;
 
             ////if (IsConnectedToInternet())
             //    this.sendPCEnergy("4");
             this.sendPCEnergy("4");
 
-            _CalcReduc._OperationStartTime = DateTime.Now;
+            calcReduction._OperationStartTime = DateTime.Now;
         }
 
         #endregion
@@ -1019,8 +1021,8 @@ namespace SSES_Program
             if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr4.Text)) || (deviceUserControl1.TbDeviceAddr4.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 5th text box"); return; }
             if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr5.Text)) || (deviceUserControl1.TbDeviceAddr5.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 6th text box"); return; }
 
-            _32FeetDevice.Stop();
-            _32FeetDevice.OnData -= On32FeetData;
+            bt32FeetDevice.Stop();
+            bt32FeetDevice.OnData -= On32FeetData;
             string[] AddArray = { deviceUserControl1.TbDeviceAddr0.Text, deviceUserControl1.TbDeviceAddr1.Text, deviceUserControl1.TbDeviceAddr2.Text, deviceUserControl1.TbDeviceAddr3.Text, deviceUserControl1.TbDeviceAddr4.Text, deviceUserControl1.TbDeviceAddr5.Text };
             DevAddrs = String.Join(":", AddArray);
 
@@ -1028,9 +1030,9 @@ namespace SSES_Program
 
             MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
 
-            _32FeetDevice.GetBtAddr(DevAddrs);
-            _32FeetDevice.OnData += On32FeetData;
-            _32FeetDevice.Start();
+            bt32FeetDevice.GetBtAddr(DevAddrs);
+            bt32FeetDevice.OnData += On32FeetData;
+            bt32FeetDevice.Start();
         }
 
         private void rbMonitorMode_CheckedChanged(object sender, EventArgs e)
@@ -1048,14 +1050,14 @@ namespace SSES_Program
         void RadioButton2_Click(object sender, EventArgs e)
         {
             AppConfig.Instance.Model = 1;
-            this._32FeetDevice._model = 1;
+            this.bt32FeetDevice._model = 1;
             //throw new NotImplementedException();
         }
 
         void RadioButton1_Click(object sender, EventArgs e)
         {
             AppConfig.Instance.Model = 0;
-            this._32FeetDevice._model = 0;
+            this.bt32FeetDevice._model = 0;
             //throw new NotImplementedException();
         }
 
@@ -1155,13 +1157,13 @@ namespace SSES_Program
         {
             try
             {
-                // 블루투스 연결이 끊어지는 경우.. 
-                if (this._32FeetDevice.IsServiced == false )  // will be off
-                {                  
+                logger.Info($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
+                if (this.bt32FeetDevice.IsServiced == false )  // will be off
+                {
                     //화면보호기 시작
-                    if (screensaverStatus == false && screensaverPasswordflag == false)
+                    if (screensaverStatus == false && screensaverPasswordflag == false && isUserInput == false)
                     {
-                        _CalcReduc.OperationEndTime = DateTime.Now;
+                        calcReduction.OperationEndTime = DateTime.Now;
 
                         /*if (IsConnectedToInternet())
                             this.sendPCEnergy("2"); */
@@ -1172,7 +1174,7 @@ namespace SSES_Program
                         Thread.Sleep(100);
                         screensaverStatus = true;
 
-                        _CalcReduc.StartTime = DateTime.Now;
+                        calcReduction.StartTime = DateTime.Now;
 
                         if (rbPcMode.Checked) // PC 절전
                         {
@@ -1202,9 +1204,9 @@ namespace SSES_Program
                         Thread.Sleep(40);
                         Service.mouse_event(Service.MOUSE_MOVE, 0, -1, 0, UIntPtr.Zero);
 
-                        _CalcReduc.EndTime = DateTime.Now;
+                        calcReduction.EndTime = DateTime.Now;
 
-                        _CalcReduc._OperationStartTime = DateTime.Now;
+                        calcReduction._OperationStartTime = DateTime.Now;
 
 
                         //화면보호기 종료
@@ -1410,7 +1412,7 @@ namespace SSES_Program
 
                 setBtn_Eng();
                 setTabCtrl_Eng();
-                textBlock_cost.Text = String.Format("{0,10:N3}", _CalcReduc.UsedCost/1200).ToString();
+                textBlock_cost.Text = String.Format("{0,10:N3}", calcReduction.UsedCost/1200).ToString();
             }
             else
             {
@@ -1420,7 +1422,7 @@ namespace SSES_Program
                 setBtnFont("맑은 고딕", 9.75f, FontStyle.Bold);
                 setBtn_Eng();
                 setTabCtrl_Eng();
-                textBlock_cost.Text = String.Format("{0,10:N3}", (_CalcReduc.UsedCost)).ToString();
+                textBlock_cost.Text = String.Format("{0,10:N3}", (calcReduction.UsedCost)).ToString();
                 //setBtn_Kor();
                 //setTabCtrl_Kor();
             }
@@ -1468,7 +1470,7 @@ namespace SSES_Program
 
             //절감량 및 보안시간
             //_CalcReduc.DevicePerKwh = 160.0;
-            _CalcReduc.OnSaveChanged += (sender2) =>
+            calcReduction.OnSaveChanged += (sender2) =>
             {
                 /*textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
                 textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
@@ -1482,7 +1484,7 @@ namespace SSES_Program
                 //label_dispTotTime.Text = "SSES have kept your PC safe while you have been away for total time period of "
                 //    + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
             };
-            _CalcReduc.OnSaveChanged(_CalcReduc);
+            calcReduction.OnSaveChanged(calcReduction);
 
             label_totTime.Text = "";
             label_totTime1.Text = "";
@@ -1645,7 +1647,7 @@ namespace SSES_Program
 
             //
             //_CalcReduc.DevicePerKwh = 160.0;
-            _CalcReduc.OnSaveChanged += (sender2) =>
+            calcReduction.OnSaveChanged += (sender2) =>
             {
                 textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
                 textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
@@ -1657,7 +1659,7 @@ namespace SSES_Program
                 //label_dispTotTime.Text = "SSES 솔루션을 통한 PC의 총 보안시간은 "
                 //    + String.Format("{0:00}일 {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "입니다.";
             };
-            _CalcReduc.OnSaveChanged(_CalcReduc);
+            calcReduction.OnSaveChanged(calcReduction);
 
             //절감량 라벨 폰트 및 위치
             // 1
@@ -1776,11 +1778,11 @@ namespace SSES_Program
             AppConfig.Instance.PcPower = power; // 파일에 저장 (set)
             AppConfig.Instance.ElecRate = bill; // 파일에 저장 (set)
             
-            _CalcReduc.DevicePerKwh = power; // 변수에 값 대입
-            _CalcReduc.WonPerKwh = bill; // 변수에 값 대입
+            calcReduction.DevicePerKwh = power; // 변수에 값 대입
+            calcReduction.WonPerKwh = bill; // 변수에 값 대입
 
             //_CalcReduc.Calculate(); // 절감량 계산
-            _CalcReduc.OnSaveChanged += (sender2) =>
+            calcReduction.OnSaveChanged += (sender2) =>
             {
                 /*textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
                 textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
@@ -1799,7 +1801,7 @@ namespace SSES_Program
                     + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
                 }
             };
-            _CalcReduc.OnSaveChanged(_CalcReduc);
+            calcReduction.OnSaveChanged(calcReduction);
 
         }
         #endregion 

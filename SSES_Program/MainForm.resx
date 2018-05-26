@@ -435,7 +435,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>410, 115</value>
   </data>
   <data name="label4_tree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 15</value>
+    <value>109, 20</value>
   </data>
   <data name="label4_tree.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -471,7 +471,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>300, 115</value>
   </data>
   <data name="label3_co2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 15</value>
+    <value>94, 20</value>
   </data>
   <data name="label3_co2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -504,7 +504,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>159, 115</value>
   </data>
   <data name="label2_cost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 15</value>
+    <value>124, 20</value>
   </data>
   <data name="label2_cost.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -537,7 +537,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>27, 115</value>
   </data>
   <data name="label1_power.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 15</value>
+    <value>140, 20</value>
   </data>
   <data name="label1_power.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1125,7 +1125,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>19, 75</value>
   </data>
   <data name="trackBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 45</value>
+    <value>504, 56</value>
   </data>
   <data name="trackBar.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2920,7 +2920,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>139, 155</value>
   </data>
   <data name="linkLabel_etc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
+    <value>242, 25</value>
   </data>
   <data name="linkLabel_etc.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -2953,7 +2953,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>46, 155</value>
   </data>
   <data name="label_etc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
+    <value>50, 25</value>
   </data>
   <data name="label_etc.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2986,7 +2986,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>31, 121</value>
   </data>
   <data name="label_UserPw.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
+    <value>88, 25</value>
   </data>
   <data name="label_UserPw.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -3040,7 +3040,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>*</value>
   </data>
   <data name="tbUserPw.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 21</value>
+    <value>148, 25</value>
   </data>
   <data name="tbUserPw.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -3100,7 +3100,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>144, 74</value>
   </data>
   <data name="rbPcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 24</value>
+    <value>186, 29</value>
   </data>
   <data name="rbPcMode.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -3133,7 +3133,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>144, 49</value>
   </data>
   <data name="rbMonitorMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 24</value>
+    <value>135, 29</value>
   </data>
   <data name="rbMonitorMode.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -3166,7 +3166,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>14, 48</value>
   </data>
   <data name="label_Mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 20</value>
+    <value>133, 25</value>
   </data>
   <data name="label_Mode.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -3193,7 +3193,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>2</value>
   </data>
   <data name="tbDeviceAddr5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 21</value>
+    <value>30, 25</value>
   </data>
   <data name="tbDeviceAddr5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -3217,7 +3217,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>2</value>
   </data>
   <data name="tbDeviceAddr4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 21</value>
+    <value>30, 25</value>
   </data>
   <data name="tbDeviceAddr4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3241,7 +3241,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>2</value>
   </data>
   <data name="tbDeviceAddr3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 21</value>
+    <value>30, 25</value>
   </data>
   <data name="tbDeviceAddr3.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3265,7 +3265,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>2</value>
   </data>
   <data name="tbDeviceAddr2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 21</value>
+    <value>30, 25</value>
   </data>
   <data name="tbDeviceAddr2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3289,7 +3289,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>2</value>
   </data>
   <data name="tbDeviceAddr1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 21</value>
+    <value>30, 25</value>
   </data>
   <data name="tbDeviceAddr1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3343,7 +3343,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>2</value>
   </data>
   <data name="tbDeviceAddr0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 21</value>
+    <value>30, 25</value>
   </data>
   <data name="tbDeviceAddr0.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3373,7 +3373,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>141, 120</value>
   </data>
   <data name="label_totTime1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 15</value>
+    <value>0, 19</value>
   </data>
   <data name="label_totTime1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -3403,7 +3403,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>141, 9</value>
   </data>
   <data name="label_localName1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
+    <value>88, 25</value>
   </data>
   <data name="label_localName1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3436,7 +3436,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>31, 120</value>
   </data>
   <data name="label_totTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 15</value>
+    <value>0, 19</value>
   </data>
   <data name="label_totTime.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -3466,7 +3466,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>43, 9</value>
   </data>
   <data name="label_pairing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
+    <value>50, 25</value>
   </data>
   <data name="label_pairing.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3652,7 +3652,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>deviceUserControl1</value>
   </data>
   <data name="&gt;&gt;deviceUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.DeviceUserControl, SSES_Program, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SSES_Program.DeviceUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;deviceUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -3682,7 +3682,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>passwordUserControl1</value>
   </data>
   <data name="&gt;&gt;passwordUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.PasswordUserControl, SSES_Program, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SSES_Program.PasswordUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;passwordUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -3712,7 +3712,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>sleepModeUserControl1</value>
   </data>
   <data name="&gt;&gt;sleepModeUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.SleepModeUserControl, SSES_Program, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SSES_Program.SleepModeUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sleepModeUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -6824,25 +6824,25 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>221, 17</value>
   </metadata>
   <data name="열기ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
+    <value>113, 24</value>
   </data>
   <data name="열기ToolStripMenuItem.Text" xml:space="preserve">
     <value>열기</value>
   </data>
   <data name="설정ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
+    <value>113, 24</value>
   </data>
   <data name="설정ToolStripMenuItem.Text" xml:space="preserve">
     <value>환경설정</value>
   </data>
   <data name="종료ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
+    <value>113, 24</value>
   </data>
   <data name="종료ToolStripMenuItem.Text" xml:space="preserve">
     <value>종료</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 70</value>
+    <value>114, 76</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
@@ -6902,13 +6902,13 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>405, 19</value>
   </data>
   <data name="label_Version.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 15</value>
+    <value>69, 20</value>
   </data>
   <data name="label_Version.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="label_Version.Text" xml:space="preserve">
-    <value>nnv 1.0.0</value>
+    <value>nnv 1.2.0</value>
   </data>
   <data name="&gt;&gt;label_Version.Name" xml:space="preserve">
     <value>label_Version</value>
