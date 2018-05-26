@@ -1020,9 +1020,6 @@ namespace SSES_Program
                     {
                         calcReduction.OperationEndTime = DateTime.Now;
 
-                        /*if (IsConnectedToInternet())
-                            this.sendPCEnergy("2"); */
-
                         this.sendPCEnergy("2");
 
                         ScreenSaverSetting();
@@ -1031,11 +1028,13 @@ namespace SSES_Program
 
                         calcReduction.StartTime = DateTime.Now;
 
-                        if (rbPcMode.Checked) // PC 절전
+                        // 모니터 + 본체 절전
+                        if (rbPcMode.Checked)
                         {
                             System.Windows.Forms.Application.SetSuspendState(System.Windows.Forms.PowerState.Suspend, false, false);
                         }
-                        else // 모니터 절전 //if (rbMonitorMode.Checked)
+                        // 모니터 절전 진입
+                        else
                         {
                             Service.SendMessage(this.Handle.ToInt32(), Service.WM_SYSCOMMAND, Service.SC_MONITORPOWER, Service.MONITOR_OFF);
                         }
@@ -1047,11 +1046,6 @@ namespace SSES_Program
                     //스크린 종료
                     if (screensaverStatus == true)
                     {
-                        //Console.WriteLine("screen saver END :: {0}", DateTime.Now);
-
-                        /*if (IsConnectedToInternet())
-                            this.sendPCEnergy("3");*/
-
                         this.sendPCEnergy("3");
 
                         // 컴퓨터 절전해제
@@ -1070,7 +1064,6 @@ namespace SSES_Program
 
                         screensaverStatus = false;
                         Service.SendMessage(this.Handle.ToInt32(), Service.WM_SYSCOMMAND, Service.SC_MONITORPOWER, Service.MONITOR_ON);
-
                     }
                 }
             }
