@@ -1,50 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DeviceAgents;
 using EnergySolutions;
 using System.Threading;
-using System.IO.Ports;
 using System.Diagnostics;
-
 using System.Runtime.InteropServices;
-
-using System.Net.Sockets;
 using InTheHand.Net.Bluetooth;
-using InTheHand.Windows.Forms;
 using InTheHand.Net.Sockets;
-using InTheHand.Net.Bluetooth.AttributeIds;
 using System.Net;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.IO;
 using System.Management;
-using System.Windows;
-
-using MySql.Data.MySqlClient;
 using Microsoft.Win32;
-using log4net.Config;
-using log4net;
-using System.Collections;
 
 namespace SSES_Program
 {
-    public partial class MainForm : Form, IMessageFilter
+    /// <summary>
+    /// 메인폼
+    /// </summary>
+    public partial class MainForm : Form
     {
-
         /// <summary>
-        /// 로거
-        /// </summary>
-        private static log4net.ILog logger = null;
-
-        
-        /// <summary>
-        /// 블루투스 라이브러리
+        /// 블루투스 핸들 클래스
         /// </summary>
         Bt32FeetDevice bt32FeetDevice = new Bt32FeetDevice();
 
@@ -53,12 +31,10 @@ namespace SSES_Program
         /// </summary>
         CalcReduction calcReduction = new CalcReduction();
 
-
         /// <summary>
         /// 유저의 마우스 또는 키보드 입력이 들어왔는지 체크하는 변수
         /// </summary>
         public bool isUserInput { get; set; } = true;
-
 
         public string DevAddrs;
         public int userRssi = -65; // 사용자가 정한 RSSI값
@@ -107,6 +83,9 @@ namespace SSES_Program
         private delegate void UIInvokerDelegate(String msg);
         private UIInvokerDelegate UIInvoker;
 
+        /// <summary>
+        /// 컨피그 파일 이름 세팅
+        /// </summary>
         #region filename
         public static string AppConfigFileName
         {
@@ -143,41 +122,9 @@ namespace SSES_Program
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
-        public bool PreFilterMessage(ref Message m)
-        {
-            try
-            {
-                if (m.Msg == WM_KEYUP)
-                {
-                    timer.Stop();
-     
-                    bt32FeetDevice.LockCount = 0;
-                    threadTimerCount = 0;
-                    timer.Start();
-                }
-                
-                ///마우스 이벤트 발생시 LockCount = 0
-                if (m.Msg == WM_LBUTTONUP || m.Msg == WM_MBUTTONUP || m.Msg == WM_RBUTTONUP )
-                {
-                    timer.Stop();
-                  
-                    threadTimerCount = 0;
-                    bt32FeetDevice.LockCount = 0;
-                    timer.Start();
-                }
-            }
-            catch (Exception ex)
-            {                
-                System.Environment.Exit(0);
-            }
-            return false;
-        }
-
-
  
         /// <summary>
-        /// 타이머 이벤트
+        /// 키보드 마우스 입력 타이머 이벤트
         /// </summary>
         private void DoInputTimer()
         {
@@ -199,7 +146,7 @@ namespace SSES_Program
 
 
         /// <summary>
-        /// 
+        /// 키보드 마우스 입력시 3 초만큼 딜레이를 준다
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -289,18 +236,10 @@ namespace SSES_Program
         {
             try
             {
-                //string appPath = AppDomain.CurrentDomain.BaseDirectory;
-                //XmlConfigurator.Configure(new System.IO.FileInfo($@"{appPath}\log4net.xml"));
-                //logger = LogManager.GetLogger(typeof(Program));
-
                 screensaverStatus = false;
                 screensaverPasswordflag = false;
 
                 log.write("SSES 실행 v1.2");
-
-                // 윈도우 절전/화면절전 모드 해제 - 추가
-                //SSES_Program.Win32.PreventScreenAndSleep();
-                // 타이머 진행
                 DoInputTimer();
 
                 //자동 업데이트 추가 
@@ -318,18 +257,6 @@ namespace SSES_Program
                 getHardwardInfo();
 
                 calcReduction._OperationStartTime = DateTime.Now;
-
-                /*if (IsConnectedToInternet())
-                {
-                    if (_CalcReduc.IsSend.CompareTo("false") == 0)
-                    {
-                        sendPCInfo();
-                        _CalcReduc.IsSend = "true";
-                    }
-                    this.sendPCEnergy("1");
-                }*/
-
-                // addd
                 calcReduction.IsSend = "true";
                 this.sendPCEnergy("1");
 
@@ -342,7 +269,7 @@ namespace SSES_Program
                 DevAddrs = AppConfig.Instance.DeviceAddress;
                 DisplayAddToText(DevAddrs);
                 Console.WriteLine("Start Device Address is {0}", DevAddrs);
-                //empty
+    
                 if (DevAddrs != "00:00:00:00:00:00")
                 {
                     bt32FeetDevice.GetBtAddr(DevAddrs);
@@ -353,7 +280,7 @@ namespace SSES_Program
                 {
                     MessageBox.Show(SsesRes.execution_caution_msg, SsesRes.execution_caution);
                 }
-                //label_localName2.Text = AppConfig.Instance.LocalName;
+
                 userRssi = AppConfig.Instance.TrackBar;
                 ratedOutput_device = AppConfig.Instance.PcPower;
 
@@ -361,12 +288,6 @@ namespace SSES_Program
 
                 TotreductionSecond = AppConfig.Instance.TotalTime;
                 userPw = AppConfig.Instance.UserPassword;
-
-                //DispTimeInit(TotreductionSecond);
-
-                //textBox_Trackbar.Text = userRssi.ToString();
-                //textBox_Power.Text = ratedOutput_device.ToString();
-
                 trackBar.Value = userRssi;
 
                 if (AppConfig.Instance.SleepMode == 1)
@@ -466,82 +387,6 @@ namespace SSES_Program
         /// <param name="eventType"></param>
         public void sendPCEnergy(string eventType)
         {
-            #region
-            //var httpWebRequest = (HttpWebRequest)WebRequest.Create(Globals.domain + ":8100/sendPCEnergy");
-            //httpWebRequest.ContentType = "application/json";
-            //httpWebRequest.Method = "POST";
-
-            //try
-            //{
-            //    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            //    {
-
-            //        this.sPCEnergy.hardwardInfo.Clear();
-
-            //        this.sPCEnergy.eventType = eventType;
-            //        this.sPCEnergy.macAddress = this._macAddress;
-
-
-            //        string savingTime = "0";
-            //        string uptime = "0";
-            //        try
-            //        {
-            //            savingTime = Convert.ToString(this._CalcReduc.UsedSec.TotalSeconds * 1000);
-            //        }
-            //        catch 
-            //        {
-            //            savingTime = "0";
-            //        }
-
-            //        try
-            //        {
-            //            uptime = Convert.ToString(this._CalcReduc.UsedOperation.TotalSeconds * 1000);
-            //        }
-            //        catch
-            //        {
-            //            uptime = "0";
-            //        }
-
-            //        this.sPCEnergy.savingTime = savingTime;
-            //        this.sPCEnergy.uptime = uptime;
-            //        this.sPCEnergy.hardwardInfo.Add("manufacturer", this._manufacturer);
-            //        this.sPCEnergy.hardwardInfo.Add("modelName", this._modelName);
-            //        this.sPCEnergy.hardwardInfo.Add("CPU", this._CPU);
-            //        this.sPCEnergy.hardwardInfo.Add("memory", this._memory);
-            //        this.sPCEnergy.hardwardInfo.Add("graphicsCard", this._graphicsCard);
-
-            //        string json = JsonConvert.SerializeObject(sPCEnergy);
-
-            //        //string json = "{\"macAddress\":\"ab-cd-ef-gh\"}";
-
-            //        streamWriter.Write(json);
-            //        streamWriter.Flush();
-            //        streamWriter.Close();
-            //    }
-
-            //    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            //    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            //    {
-            //        var result = streamReader.ReadToEnd();
-            //        Console.WriteLine(result);
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
-            #endregion
-            //DateTime now = DateTime.Now;
-            //var epoch = new DateTime(1970, 1, 1, 9, 0, 0, DateTimeKind.Utc);
-            //string uptime = Convert.ToString(Convert.ToInt64((now - epoch).TotalSeconds) * 1000);
-
-            //double timestamp = Convert.ToDouble(uptime);
-    
-            //this.sPCEnergy.uptime = uptime;
-
-            //this.sPCEnergy.uptime = TimeSpan.FromMilliseconds(DateTime.Now.Millisecond).ToString() ;
-            //this.sPCEnergy.savingTime = _CalcReduc.UsedSec.ToString();
-
             string savingTime = "0";
             string uptime = "0";
             try
@@ -607,14 +452,6 @@ namespace SSES_Program
 
 
         /// <summary>
-        /// PC 정보 전송
-        /// </summary>
-        public void sendPCInfo()
-        {
-        }
-
-
-        /// <summary>
         /// 그래픽 카드
         /// </summary>
         void GetVGA() // 그래픽 카드
@@ -666,6 +503,9 @@ namespace SSES_Program
 
         }
 
+        /// <summary>
+        /// CPU 정보 
+        /// </summary>
         public void GetCPU()
         {
             string cpuInfo = String.Empty;
@@ -685,6 +525,9 @@ namespace SSES_Program
         }
 
 
+        /// <summary>
+        /// 맥 어드레스 정보
+        /// </summary>
         public void GetMACAddress()
         {
             ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
@@ -705,7 +548,9 @@ namespace SSES_Program
             //Console.WriteLine("-" + MACAddress);
         }
 
-
+        /// <summary>
+        /// 메모리정보
+        /// </summary>
         public void GetMemory()
         {
             ManagementClass cls = new ManagementClass("Win32_OperatingSystem");
@@ -740,6 +585,10 @@ namespace SSES_Program
             Console.ReadLine();
         }
 
+
+        /// <summary>
+        /// 하드웨어 정보
+        /// </summary>
         public void getHardwardInfo()
         {
             GetMACAddress();
@@ -764,7 +613,7 @@ namespace SSES_Program
 
         #endregion
 
-        #region MainForm event
+        #region "메인폼 이벤트"
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
         {
@@ -778,8 +627,6 @@ namespace SSES_Program
 
             keyHook.StartHook();
             mouseHook.StartHook();
-
-            Application.AddMessageFilter(this);
 
             //시작 프로그램 추가 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
@@ -831,8 +678,6 @@ namespace SSES_Program
                 notifyIcon.ShowBalloonTip(300, "SSES", "SSES Program Start", ToolTipIcon.Info);
                 // 키보드 후킹 해제
                 KeyboardHooking.UnBlockCtrlAltDel();
-
-              
             }
             catch (Exception error) {
                 log.write("MainForm_Load");
@@ -918,9 +763,9 @@ namespace SSES_Program
 
         #endregion
 
-        #region button event
+        #region "버튼 이벤트"
 
-                /// <summary>
+        /// <summary>
         /// 포커스이동
         /// </summary>
         /// <param name="sender"></param>
@@ -1007,7 +852,7 @@ namespace SSES_Program
         
         #endregion
 
-        #region tP7_SettingPage
+        #region "tP7_SettingPage"
 
         private void btOk_Click(object sender, EventArgs e)
         {
@@ -1085,7 +930,7 @@ namespace SSES_Program
         }
         #endregion
 
-        #region bluetooth
+        #region "블루투스 이벤트"
         private void On32FeetData(Bt32FeetDevice sender, string data)
         {
             try
@@ -1150,7 +995,7 @@ namespace SSES_Program
         }
         #endregion
 
-        #region Screen Saver
+        #region "스크린세이버"
         void ScreenSaver()
         {
             try
@@ -1338,8 +1183,7 @@ namespace SSES_Program
         }
         #endregion
 
-        #region 트레이아이콘 이벤트
-
+        #region "트레이아이콘 이벤트"
         private void tools_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = this.tP8_SettingPageNew;
@@ -1392,13 +1236,9 @@ namespace SSES_Program
 
         #endregion
 
-        #region 한/영 Toggle
-
+        #region "한/영 Toggle"
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            /*if (IsConnectedToInternet())
-                this.getPCEnergy("", ""); */
-
             this.getPCEnergy("", "");
 
             if (checkBox_LangToggle.Text.Equals("English"))
@@ -1759,7 +1599,7 @@ namespace SSES_Program
 
         #endregion
 
-        #region "Etc"
+        #region "기타"
         private void linkLabel_etc_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SettingPopup popupForm = new SettingPopup();
@@ -1958,40 +1798,6 @@ namespace SSES_Program
         }
 
         #endregion
-    }
-    public class Win32
-    {
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-
-        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
-
-        [FlagsAttribute]
-
-        public enum EXECUTION_STATE : uint
-        {
-
-            ES_AWAYMODE_REQUIRED = 0x00000040,
-
-            ES_CONTINUOUS = 0x80000000,
-
-            ES_DISPLAY_REQUIRED = 0x00000002,
-
-            ES_SYSTEM_REQUIRED = 0x00000001
-        }
-
-        public static void PreventScreenAndSleep()
-        {
-            SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_AWAYMODE_REQUIRED |
-                EXECUTION_STATE.ES_DISPLAY_REQUIRED  | EXECUTION_STATE.ES_SYSTEM_REQUIRED);
-
-        }
-
-        public static void AllowMonitorPowerdown()
-        {
-            Console.WriteLine(SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS));
-        }
-
     }
 }
 
