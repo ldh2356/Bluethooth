@@ -168,8 +168,7 @@ namespace SSES_Program
                 }
             }
             catch (Exception ex)
-            {
-                logger.Error(ex);
+            {                
                 System.Environment.Exit(0);
             }
             return false;
@@ -208,9 +207,7 @@ namespace SSES_Program
         {
             try
             {
-                threadTimerCount++;
-
-                logger.Info("DoInDoInputTimerAsyncputTimer :" + threadTimerCount);
+                threadTimerCount++;                
 
                 if (threadTimerCount > keyOrMouseInputDelayMin)
                 {
@@ -292,14 +289,14 @@ namespace SSES_Program
         {
             try
             {
-                string appPath = AppDomain.CurrentDomain.BaseDirectory;
-                XmlConfigurator.Configure(new System.IO.FileInfo($@"{appPath}\log4net.xml"));
-                logger = LogManager.GetLogger(typeof(Program));
+                //string appPath = AppDomain.CurrentDomain.BaseDirectory;
+                //XmlConfigurator.Configure(new System.IO.FileInfo($@"{appPath}\log4net.xml"));
+                //logger = LogManager.GetLogger(typeof(Program));
 
                 screensaverStatus = false;
                 screensaverPasswordflag = false;
 
-                log.write("SSES 실행");
+                log.write("SSES 실행 v1.2");
 
                 // 윈도우 절전/화면절전 모드 해제 - 추가
                 //SSES_Program.Win32.PreventScreenAndSleep();
@@ -1092,7 +1089,7 @@ namespace SSES_Program
         private void On32FeetData(Bt32FeetDevice sender, string data)
         {
             try
-            {
+            {                
                 if (this.InvokeRequired)
                 {
                     this.Invoke((Action)(() => { _Safe_On32FeetData(sender, data); }));
@@ -1116,6 +1113,7 @@ namespace SSES_Program
         {
             try
             {
+                log.write("_Safe_On32FeetData");
                 ScreenSaver();
             }
             catch (Exception ex)
@@ -1157,7 +1155,8 @@ namespace SSES_Program
         {
             try
             {
-                logger.Info($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
+                log.write($"IsServiced:{bt32FeetDevice.IsServiced.ToString()}");
+                log.write($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
                 if (this.bt32FeetDevice.IsServiced == false )  // will be off
                 {
                     //화면보호기 시작
