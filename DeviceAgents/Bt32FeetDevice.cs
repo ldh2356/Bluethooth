@@ -324,7 +324,7 @@ namespace DeviceAgents
                         {
                             log.write("==== 락 카운트가 10 이상인 경우 서비스 통신 실패로 간주 ====");
                             IsServiced = false;
-                        }
+                        } 
                     }
                 }
             }
