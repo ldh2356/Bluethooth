@@ -280,12 +280,12 @@ namespace DeviceAgents
                         else
                         {
                             LockCount++;
-                           
+
                             // 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주
                             if (LockCount > 3)
                             {
                                 log.write("==== 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주 ====");
-                              
+
                                 IsServiced = false;
                             }
                         }
@@ -293,9 +293,15 @@ namespace DeviceAgents
                     // 예외 발생시
                     catch (Exception ex)
                     {
-                        log.write("==== 안드로이드 통신 예외 발생 ====");
-                        log.write(ex.Message);
-                        IsServiced = false;
+                        LockCount++;
+
+                        // 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주
+                        if (LockCount > 3)
+                        {
+                            log.write("==== 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주 ====");
+
+                            IsServiced = false;
+                        }
                     }
                 }
                 // IOS 의 경우
@@ -322,8 +328,7 @@ namespace DeviceAgents
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.ToString() + DateTime.Now.ToString());                
-                //IsServiced = false;
+                Console.WriteLine(ex.ToString() + DateTime.Now.ToString());                 
             }
         }
     }

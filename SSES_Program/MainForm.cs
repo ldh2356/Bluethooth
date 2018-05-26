@@ -131,7 +131,7 @@ namespace SSES_Program
         private int WM_LBUTTONUP = 0x0202; //left mouse up
         private int WM_MBUTTONUP = 0x0208; //middle mouse up
         private int WM_RBUTTONUP = 0x0205; //right mouse up
-        private int keyOrMouseInputDelayMin = 60;
+        private int keyOrMouseInputDelayMin = 3;
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -198,6 +198,12 @@ namespace SSES_Program
         }
 
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoInDoInputTimerAsyncputTimer(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
