@@ -36,9 +36,22 @@ namespace SSES_Program
         /// </summary>
         public bool isUserInput { get; set; } = true;
 
-        public string DevAddrs;
-        public int userRssi = -65; // 사용자가 정한 RSSI값
-        public double ratedOutput_device = 160.0;
+        /// <summary>
+        /// 사용자로부터 받은 맥주소
+        /// </summary>
+        public string MacAddressFromUserInput { get; set; }
+
+        /// <summary>
+        /// 사용자가 정한 RSSI값
+        /// </summary>
+        public int UserRssiValue { get; set; } = -65;
+
+        /// <summary>
+        /// 파워 정보 밸류값
+        /// </summary>
+        public double RatedOutputDeviceValue { get; set; } = 160.0;
+
+
         public double power_reduction = 0.0;
         public double electricCost_reduction = 0.0;
         public double co2_reduction = 0.0;
@@ -55,9 +68,7 @@ namespace SSES_Program
 
         Thread inputThread = null;
 
-
         SendPCEnergy sPCEnergy = new SendPCEnergy();
-       
         public string _macAddress = string.Empty;
         public string _manufacturer = string.Empty;
         public string _modelName = string.Empty;
@@ -266,13 +277,13 @@ namespace SSES_Program
 
                 bt32FeetDevice._model = AppConfig.Instance.Model;
 
-                DevAddrs = AppConfig.Instance.DeviceAddress;
-                DisplayAddToText(DevAddrs);
-                Console.WriteLine("Start Device Address is {0}", DevAddrs);
+                MacAddressFromUserInput = AppConfig.Instance.DeviceAddress;
+                DisplayAddToText(MacAddressFromUserInput);
+                Console.WriteLine("Start Device Address is {0}", MacAddressFromUserInput);
     
-                if (DevAddrs != "00:00:00:00:00:00")
+                if (MacAddressFromUserInput != "00:00:00:00:00:00")
                 {
-                    bt32FeetDevice.GetBtAddr(DevAddrs);
+                    bt32FeetDevice.GetBtAddr(MacAddressFromUserInput);
                     bt32FeetDevice.OnData += On32FeetData;
                     bt32FeetDevice.Start();
                 }
@@ -281,14 +292,14 @@ namespace SSES_Program
                     MessageBox.Show(SsesRes.execution_caution_msg, SsesRes.execution_caution);
                 }
 
-                userRssi = AppConfig.Instance.TrackBar;
-                ratedOutput_device = AppConfig.Instance.PcPower;
+                UserRssiValue = AppConfig.Instance.TrackBar;
+                RatedOutputDeviceValue = AppConfig.Instance.PcPower;
 
               
 
                 TotreductionSecond = AppConfig.Instance.TotalTime;
                 userPw = AppConfig.Instance.UserPassword;
-                trackBar.Value = userRssi;
+                trackBar.Value = UserRssiValue;
 
                 if (AppConfig.Instance.SleepMode == 1)
                 {
@@ -866,13 +877,13 @@ namespace SSES_Program
             bt32FeetDevice.Stop();
             bt32FeetDevice.OnData -= On32FeetData;
             string[] AddArray = { deviceUserControl1.TbDeviceAddr0.Text, deviceUserControl1.TbDeviceAddr1.Text, deviceUserControl1.TbDeviceAddr2.Text, deviceUserControl1.TbDeviceAddr3.Text, deviceUserControl1.TbDeviceAddr4.Text, deviceUserControl1.TbDeviceAddr5.Text };
-            DevAddrs = String.Join(":", AddArray);
+            MacAddressFromUserInput = String.Join(":", AddArray);
 
-            AppConfig.Instance.DeviceAddress = DevAddrs;
+            AppConfig.Instance.DeviceAddress = MacAddressFromUserInput;
 
             MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
 
-            bt32FeetDevice.GetBtAddr(DevAddrs);
+            bt32FeetDevice.GetBtAddr(MacAddressFromUserInput);
             bt32FeetDevice.OnData += On32FeetData;
             bt32FeetDevice.Start();
         }
@@ -1009,9 +1020,6 @@ namespace SSES_Program
                     {
                         calcReduction.OperationEndTime = DateTime.Now;
 
-                        /*if (IsConnectedToInternet())
-                            this.sendPCEnergy("2"); */
-
                         this.sendPCEnergy("2");
 
                         ScreenSaverSetting();
@@ -1020,11 +1028,13 @@ namespace SSES_Program
 
                         calcReduction.StartTime = DateTime.Now;
 
-                        if (rbPcMode.Checked) // PC 절전
+                        // 모니터 + 본체 절전
+                        if (rbPcMode.Checked)
                         {
                             System.Windows.Forms.Application.SetSuspendState(System.Windows.Forms.PowerState.Suspend, false, false);
                         }
-                        else // 모니터 절전 //if (rbMonitorMode.Checked)
+                        // 모니터 절전 진입
+                        else
                         {
                             Service.SendMessage(this.Handle.ToInt32(), Service.WM_SYSCOMMAND, Service.SC_MONITORPOWER, Service.MONITOR_OFF);
                         }
@@ -1036,11 +1046,6 @@ namespace SSES_Program
                     //스크린 종료
                     if (screensaverStatus == true)
                     {
-                        //Console.WriteLine("screen saver END :: {0}", DateTime.Now);
-
-                        /*if (IsConnectedToInternet())
-                            this.sendPCEnergy("3");*/
-
                         this.sendPCEnergy("3");
 
                         // 컴퓨터 절전해제
@@ -1059,7 +1064,6 @@ namespace SSES_Program
 
                         screensaverStatus = false;
                         Service.SendMessage(this.Handle.ToInt32(), Service.WM_SYSCOMMAND, Service.SC_MONITORPOWER, Service.MONITOR_ON);
-
                     }
                 }
             }
@@ -1612,7 +1616,7 @@ namespace SSES_Program
         {
             //throw new NotImplementedException();
 
-            ratedOutput_device = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
+            RatedOutputDeviceValue = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
 
             AppConfig.Instance.PcPower = power; // 파일에 저장 (set)
             AppConfig.Instance.ElecRate = bill; // 파일에 저장 (set)
@@ -1701,8 +1705,8 @@ namespace SSES_Program
                     trackBar.Value = -90;
                     toolTip1.SetToolTip(trackBar, trackBar.Value.ToString() + " 더 이상 감소시킬 수 없습니다.");
                 }
-                userRssi = trackBar.Value;
-                AppConfig.Instance.TrackBar = userRssi;
+                UserRssiValue = trackBar.Value;
+                AppConfig.Instance.TrackBar = UserRssiValue;
                 //textBox_Trackbar.Text = userRssi.ToString();
 
             }
