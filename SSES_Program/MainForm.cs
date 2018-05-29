@@ -204,8 +204,8 @@ namespace SSES_Program
         /// <param name="e"></param>
         void keyHook_MessageHooked(object sender, Hook.KeyboardHookEventArgs e)
         {
-            donUseSceenSaveWhenUserInput();
-            BeginInvoke(this.UIInvoker, e.ToString());
+            //donUseSceenSaveWhenUserInput();
+            //BeginInvoke(this.UIInvoker, e.ToString());
         }
 
 
@@ -216,8 +216,8 @@ namespace SSES_Program
         /// <param name="e"></param>
         void mouseHook_MessageHooked(object sender, Hook.MouseHookEventArgs e)
         {
-            donUseSceenSaveWhenUserInput();
-            BeginInvoke(this.UIInvoker, e.ToString());
+            //donUseSceenSaveWhenUserInput();
+            //BeginInvoke(this.UIInvoker, e.ToString());
         }
 
 
