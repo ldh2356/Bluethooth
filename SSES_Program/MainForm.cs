@@ -1,36 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DeviceAgents;
 using EnergySolutions;
 using System.Threading;
-using System.IO.Ports;
 using System.Diagnostics;
-
 using System.Runtime.InteropServices;
-
-using System.Net.Sockets;
 using InTheHand.Net.Bluetooth;
-using InTheHand.Windows.Forms;
 using InTheHand.Net.Sockets;
-using InTheHand.Net.Bluetooth.AttributeIds;
 using System.Net;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.IO;
 using System.Management;
-using System.Windows;
-
-using MySql.Data.MySqlClient;
 using Microsoft.Win32;
-using log4net.Config;
-using log4net;
-using System.Collections;
 
 namespace SSES_Program
 {
