@@ -87,7 +87,7 @@ namespace SSES_Program
 
         PCInfo pcInfo = new PCInfo();
 
-        public Log log = new Log();
+        public static Log log = new Log();
 
         private Hook.KeyboardHook keyHook = new Hook.KeyboardHook();
         private Hook.MouseHook mouseHook = new Hook.MouseHook();
@@ -125,11 +125,19 @@ namespace SSES_Program
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN))
+            try
             {
-                lastKeyPressed = keyData;
-            }
+                if ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN))
+                {
+                    lastKeyPressed = keyData;
+                }
 
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -148,9 +156,9 @@ namespace SSES_Program
                 timer.Interval = 1000;
                 timer.Start();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                log.write(ex.Message);
             }
         }
 
@@ -179,7 +187,7 @@ namespace SSES_Program
             }
             catch (Exception ex)
             {
-                throw;
+                log.write(ex.Message);
             }
         }
 
@@ -190,10 +198,17 @@ namespace SSES_Program
         /// </summary>
         public void donUseSceenSaveWhenUserInput()
         {
-            timer.Stop();
-            threadTimerCount = 0;
-            bt32FeetDevice.LockCount = 0;
-            timer.Start();
+            try
+            {
+                timer.Stop();
+                threadTimerCount = 0;
+                bt32FeetDevice.LockCount = 0;
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
 
@@ -204,8 +219,17 @@ namespace SSES_Program
         /// <param name="e"></param>
         void keyHook_MessageHooked(object sender, Hook.KeyboardHookEventArgs e)
         {
-            //donUseSceenSaveWhenUserInput();
-            //BeginInvoke(this.UIInvoker, e.ToString());
+
+            try
+            {
+                donUseSceenSaveWhenUserInput();
+                BeginInvoke(this.UIInvoker, e.ToString());
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+
         }
 
 
@@ -216,29 +240,51 @@ namespace SSES_Program
         /// <param name="e"></param>
         void mouseHook_MessageHooked(object sender, Hook.MouseHookEventArgs e)
         {
-            //donUseSceenSaveWhenUserInput();
-            //BeginInvoke(this.UIInvoker, e.ToString());
+
+            try
+            {
+                donUseSceenSaveWhenUserInput();
+                BeginInvoke(this.UIInvoker, e.ToString());
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+
         }
 
 
 
         public void DiplayMessage(String msg)
         {
-            Console.WriteLine(msg);
-            // 이 안의 내용 변경하면 됩니다.
+            try
+            {   // 이 안의 내용 변경하면 됩니다.
+                Console.WriteLine(msg);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
-            if(e.Mode == PowerModes.Suspend)
+            try
             {
-                bt32FeetDevice.Stop();
-            }
+                if (e.Mode == PowerModes.Suspend)
+                {
+                    bt32FeetDevice.Stop();
+                }
 
-            if(e.Mode == PowerModes.Resume)
+                if (e.Mode == PowerModes.Resume)
+                {
+                    Console.WriteLine("qqqqqqqqqqqqq");
+                    bt32FeetDevice.Start();
+                }
+            }
+            catch (Exception ex)
             {
-                Console.WriteLine("qqqqqqqqqqqqq");
-                bt32FeetDevice.Start();
+                log.write(ex.Message);
             }
         }
 
@@ -344,7 +390,7 @@ namespace SSES_Program
             }
             catch(Exception ex)
             {
-                Console.WriteLine("main :" + ex.ToString());
+                log.write(ex.Message);
             }
         }
 
@@ -363,6 +409,14 @@ namespace SSES_Program
         public static bool IsConnectedToInternet()
         {
             int Desc;
+            try
+            {
+                return InternetGetConnectedState(out Desc, 0);
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
             return InternetGetConnectedState(out Desc, 0);
         }
 
@@ -387,7 +441,7 @@ namespace SSES_Program
             }
             catch(Exception ex)
             {
-                Console.WriteLine("버전 체크");
+                MainForm.log.write(ex.Message);
             }
         }
 
@@ -404,8 +458,9 @@ namespace SSES_Program
             {
                 savingTime = Convert.ToString(this.calcReduction.UsedSec.TotalSeconds * 1000);
             }
-            catch
+            catch(Exception ex)
             {
+                MainForm.log.write(ex.Message);
                 savingTime = "0";
             }
 
@@ -413,13 +468,22 @@ namespace SSES_Program
             {
                 uptime = Convert.ToString(this.calcReduction.UsedOperation.TotalSeconds * 1000);
             }
-            catch
+            catch(Exception ex)
             {
+                MainForm.log.write(ex.Message);
                 uptime = "0";
             }
-            this.sPCEnergy.uptime = uptime;
-            this.sPCEnergy.uptime = TimeSpan.FromMilliseconds(DateTime.Now.Millisecond).ToString();
-            this.sPCEnergy.savingTime = calcReduction.UsedSec.ToString();
+
+            try
+            {
+                this.sPCEnergy.uptime = uptime;
+                this.sPCEnergy.uptime = TimeSpan.FromMilliseconds(DateTime.Now.Millisecond).ToString();
+                this.sPCEnergy.savingTime = calcReduction.UsedSec.ToString();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
 
         /// <summary>
@@ -429,19 +493,26 @@ namespace SSES_Program
         /// <param name="toDate"></param>
         public void getPCEnergy(string fromDate, string toDate)
         {
-            if (checkBox_LangToggle.Text.Equals("English"))
+            try
             {
-                textBlock_power.Text = String.Format("{0,10:N3}", calcReduction.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", calcReduction.UsedCost).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", calcReduction.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", calcReduction.Tree).ToString();
+                if (checkBox_LangToggle.Text.Equals("English"))
+                {
+                    textBlock_power.Text = String.Format("{0,10:N3}", calcReduction.UsedKwh).ToString();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", calcReduction.UsedCost).ToString();
+                    textBlock_co2.Text = String.Format("{0,10:N3}", calcReduction.Co2).ToString();
+                    textBlock_tree.Text = String.Format("{0,10:N3}", calcReduction.Tree).ToString();
+                }
+                else
+                {
+                    textBlock_power.Text = String.Format("{0,10:N3}", calcReduction.UsedKwh).ToString();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", (calcReduction.UsedCost / 1200)).ToString();
+                    textBlock_co2.Text = String.Format("{0,10:N3}", calcReduction.Co2).ToString();
+                    textBlock_tree.Text = String.Format("{0,10:N3}", calcReduction.Tree).ToString();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                textBlock_power.Text = String.Format("{0,10:N3}", calcReduction.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", (calcReduction.UsedCost/1200)).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", calcReduction.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", calcReduction.Tree).ToString();
+                MainForm.log.write(ex.Message);
             }
         }
 
@@ -452,13 +523,22 @@ namespace SSES_Program
         /// <param name="toDate"></param>
         public void getUpTimeSavingTime()
         {
-            DateTime now = DateTime.Now;
-            var epoch = new DateTime(1970, 1, 1, 9, 0, 0, DateTimeKind.Utc);
-            string uptime = Convert.ToString(Convert.ToInt64((now - epoch).TotalSeconds) * 1000);
-            double timestamp = Convert.ToDouble(uptime);
-            this.sPCEnergy.uptime = uptime;
-            this.sPCEnergy.uptime = TimeSpan.FromMilliseconds(DateTime.Now.Millisecond).ToString();
-            this.sPCEnergy.savingTime = calcReduction.UsedSec.ToString();
+
+            try
+            {
+
+                DateTime now = DateTime.Now;
+                var epoch = new DateTime(1970, 1, 1, 9, 0, 0, DateTimeKind.Utc);
+                string uptime = Convert.ToString(Convert.ToInt64((now - epoch).TotalSeconds) * 1000);
+                double timestamp = Convert.ToDouble(uptime);
+                this.sPCEnergy.uptime = uptime;
+                this.sPCEnergy.uptime = TimeSpan.FromMilliseconds(DateTime.Now.Millisecond).ToString();
+                this.sPCEnergy.savingTime = calcReduction.UsedSec.ToString();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
 
 
@@ -467,51 +547,64 @@ namespace SSES_Program
         /// </summary>
         void GetVGA() // 그래픽 카드
         {
-            ManagementObjectSearcher MOS = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
-
-            String str, des, vga = String.Empty;
-            int locs, locl;
-            //Console.WriteLine("#그래픽 카드");
-
-            foreach (ManagementObject VGA in MOS.Get())
+            try
             {
-                str = VGA.GetText(TextFormat.Mof); // 전체 내용
+                ManagementObjectSearcher MOS = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
 
-                //Console.WriteLine(str); // 전체 내용 출력
-                locs = str.IndexOf("\tDescription"); // 모델명 위치 번호
-                //Console.WriteLine(locs); // 모델명 위치 번호 출력
-                des = str.Substring(locs); // descripton부터의 내용
-                locs = des.IndexOf("\"");
-                locl = des.IndexOf(";");
-                vga += des.Substring(locs + 1, locl - locs - 2) + "\n"; // 모델명 얻기
-                this._graphicsCard = vga;
+                String str, des, vga = String.Empty;
+                int locs, locl;
+                //Console.WriteLine("#그래픽 카드");
+
+                foreach (ManagementObject VGA in MOS.Get())
+                {
+                    str = VGA.GetText(TextFormat.Mof); // 전체 내용
+
+                    //Console.WriteLine(str); // 전체 내용 출력
+                    locs = str.IndexOf("\tDescription"); // 모델명 위치 번호
+                                                         //Console.WriteLine(locs); // 모델명 위치 번호 출력
+                    des = str.Substring(locs); // descripton부터의 내용
+                    locs = des.IndexOf("\"");
+                    locl = des.IndexOf(";");
+                    vga += des.Substring(locs + 1, locl - locs - 2) + "\n"; // 모델명 얻기
+                    this._graphicsCard = vga;
+                }
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
             }
         }
 
         void GetProcessor() // CPU
         {
-            ManagementObjectSearcher MOS = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-
-            String str, nam, prc = string.Empty;
-            int locs, locl;
-            //Console.WriteLine("#CPU");
-
-            foreach (ManagementObject PRC in MOS.Get())
+            try
             {
-                str = PRC.GetText(TextFormat.Mof); // 전체 내용
+                ManagementObjectSearcher MOS = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
 
-                //Console.WriteLine(str); // 전체 내용 출력
-                locs = str.IndexOf("\tName"); // 모델명 위치 번호
-                //Console.WriteLine(locs); // 모델명 위치 번호 출력
-                nam = str.Substring(locs); // descripton부터의 내용
-                locs = nam.IndexOf("\"");
-                locl = nam.IndexOf(";");
-                prc = nam.Substring(locs + 1, locl - locs - 2); // 모델명 얻기
-                Console.WriteLine("-" + prc);
+                String str, nam, prc = string.Empty;
+                int locs, locl;
+                //Console.WriteLine("#CPU");
 
-                this._CPU = prc;
+                foreach (ManagementObject PRC in MOS.Get())
+                {
+                    str = PRC.GetText(TextFormat.Mof); // 전체 내용
+
+                    //Console.WriteLine(str); // 전체 내용 출력
+                    locs = str.IndexOf("\tName"); // 모델명 위치 번호
+                                                  //Console.WriteLine(locs); // 모델명 위치 번호 출력
+                    nam = str.Substring(locs); // descripton부터의 내용
+                    locs = nam.IndexOf("\"");
+                    locl = nam.IndexOf(";");
+                    prc = nam.Substring(locs + 1, locl - locs - 2); // 모델명 얻기
+                    Console.WriteLine("-" + prc);
+
+                    this._CPU = prc;
+                }
             }
-
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
 
         /// <summary>
@@ -519,20 +612,27 @@ namespace SSES_Program
         /// </summary>
         public void GetCPU()
         {
-            string cpuInfo = String.Empty;
-            string temp = String.Empty;
-            ManagementClass mc = new ManagementClass("Win32_Processor");
-            ManagementObjectCollection moc = mc.GetInstances();
-            foreach (ManagementObject mo in moc)
+            try
             {
-                if (cpuInfo == String.Empty)
-                {// only return cpuInfo from first CPU
-                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                string cpuInfo = String.Empty;
+                string temp = String.Empty;
+                ManagementClass mc = new ManagementClass("Win32_Processor");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    if (cpuInfo == String.Empty)
+                    {// only return cpuInfo from first CPU
+                        cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                    }
                 }
+                this._CPU = cpuInfo;
+                //Console.WriteLine("-" + cpuInfo);
+                //return cpuInfo;
             }
-            this._CPU = cpuInfo;
-            //Console.WriteLine("-" + cpuInfo);
-            //return cpuInfo;
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
 
 
@@ -541,22 +641,30 @@ namespace SSES_Program
         /// </summary>
         public void GetMACAddress()
         {
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection moc = mc.GetInstances();
-            string MACAddress = String.Empty;
-            foreach (ManagementObject mo in moc)
+            try
             {
-                if (MACAddress == String.Empty)  // only return MAC Address from first card
+                ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                ManagementObjectCollection moc = mc.GetInstances();
+                string MACAddress = String.Empty;
+                foreach (ManagementObject mo in moc)
                 {
-                    if ((bool)mo["IPEnabled"] == true) MACAddress = mo["MacAddress"].ToString();
+                    if (MACAddress == String.Empty)  // only return MAC Address from first card
+                    {
+                        if ((bool)mo["IPEnabled"] == true) MACAddress = mo["MacAddress"].ToString();
+                    }
+                    mo.Dispose();
                 }
-                mo.Dispose();
+
+                //MACAddress = MACAddress.Replace(":", "");
+                this._macAddress = MACAddress;
+
+                //Console.WriteLine("-" + MACAddress);
             }
-
-            //MACAddress = MACAddress.Replace(":", "");
-            this._macAddress = MACAddress;
-
-            //Console.WriteLine("-" + MACAddress);
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
+            
         }
 
         /// <summary>
@@ -564,62 +672,97 @@ namespace SSES_Program
         /// </summary>
         public void GetMemory()
         {
-            ManagementClass cls = new ManagementClass("Win32_OperatingSystem");
-            // ManagementClass cls = new ManagementClass("Win32_LogicalMemoryConfiguration");
-            ManagementObjectCollection instances = cls.GetInstances();
-            // 사실상 싱글톤 객체이므로 이 코드는 1회만 수행된다.
-            foreach (ManagementObject info in instances)
+            try
             {
-                Console.WriteLine("Memory Information ================================");
-                Console.WriteLine("Total Physical Memory : {0:#,###} KB", info["TotalVisibleMemorySize"]);
-
-                this._memory = info["TotalVisibleMemorySize"].ToString();
-            }
-        }
-        public void Manufacturer()
-        {
-            // create management class object
-            ManagementClass mc = new ManagementClass("Win32_ComputerSystem");
-            //collection to store all management objects
-            ManagementObjectCollection moc = mc.GetInstances();
-            if (moc.Count != 0)
-            {
-                foreach (ManagementObject mo in mc.GetInstances())
+                ManagementClass cls = new ManagementClass("Win32_OperatingSystem");
+                // ManagementClass cls = new ManagementClass("Win32_LogicalMemoryConfiguration");
+                ManagementObjectCollection instances = cls.GetInstances();
+                // 사실상 싱글톤 객체이므로 이 코드는 1회만 수행된다.
+                foreach (ManagementObject info in instances)
                 {
-                    this._manufacturer = mo["Manufacturer"].ToString();
-                    // display general system information
-                    Console.WriteLine("\nMachine Make: {0}",
-                                      mo["Manufacturer"].ToString());
+                    Console.WriteLine("Memory Information ================================");
+                    Console.WriteLine("Total Physical Memory : {0:#,###} KB", info["TotalVisibleMemorySize"]);
+
+                    this._memory = info["TotalVisibleMemorySize"].ToString();
                 }
             }
-            //wait for user action
-            Console.ReadLine();
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
+
+
+
+
+
+        public void Manufacturer()
+        {
+            try
+            {
+                // create management class object
+                ManagementClass mc = new ManagementClass("Win32_ComputerSystem");
+                //collection to store all management objects
+                ManagementObjectCollection moc = mc.GetInstances();
+                if (moc.Count != 0)
+                {
+                    foreach (ManagementObject mo in mc.GetInstances())
+                    {
+                        this._manufacturer = mo["Manufacturer"].ToString();
+                        // display general system information
+                        Console.WriteLine("\nMachine Make: {0}",
+                                          mo["Manufacturer"].ToString());
+                    }
+                }
+                //wait for user action
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
+        }
+
 
 
         /// <summary>
         /// 하드웨어 정보
         /// </summary>
+
         public void getHardwardInfo()
         {
-            GetMACAddress();
-            Manufacturer();
-            this._modelName = Environment.OSVersion.ToString();
-            // CPU 함수는 2가지 구현 
-            GetProcessor();
-            GetMemory();
-            GetVGA();
+            try
+            {
+                GetMACAddress();
+                Manufacturer();
+                this._modelName = Environment.OSVersion.ToString();
+                // CPU 함수는 2가지 구현 
+                GetProcessor();
+                GetMemory();
+                GetVGA();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            calcReduction.OperationEndTime = DateTime.Now;
+            try
+            {
+                calcReduction.OperationEndTime = DateTime.Now;
 
-            ////if (IsConnectedToInternet())
-            //    this.sendPCEnergy("4");
-            this.sendPCEnergy("4");
+                ////if (IsConnectedToInternet())
+                //    this.sendPCEnergy("4");
+                this.sendPCEnergy("4");
 
-            calcReduction._OperationStartTime = DateTime.Now;
+                calcReduction._OperationStartTime = DateTime.Now;
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
 
         #endregion
@@ -632,12 +775,15 @@ namespace SSES_Program
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            UIInvoker = new UIInvokerDelegate(DiplayMessage);
-            keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);
-            mouseHook.MessageHooked += new EventHandler<Hook.MouseHookEventArgs>(mouseHook_MessageHooked);
+            try
+            {
+                UIInvoker = new UIInvokerDelegate(DiplayMessage);
+                keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);
+                mouseHook.MessageHooked += new EventHandler<Hook.MouseHookEventArgs>(mouseHook_MessageHooked);
 
-            keyHook.StartHook();
-            mouseHook.StartHook();
+                keyHook.StartHook();
+                mouseHook.StartHook();
+
 
             //시작 프로그램 추가 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
@@ -651,34 +797,50 @@ namespace SSES_Program
                 registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
             }
 
-            getUpTimeSavingTime();
+                if (registryKey.GetValue("MyApp") == null)
+                {
+                    registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
+                }
+                else if (registryKey.GetValue("MyApp").Equals(@"C:\HansCreative\SSES_Program\SSES_Program.exe"))
+                {
+                    registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
+                }
 
-            deviceUserControl1.TbDeviceAddr0.TextChanged += new EventHandler(FocusMove);
-            deviceUserControl1.TbDeviceAddr1.TextChanged += new EventHandler(FocusMove);
-            deviceUserControl1.TbDeviceAddr2.TextChanged += new EventHandler(FocusMove);
-            deviceUserControl1.TbDeviceAddr3.TextChanged += new EventHandler(FocusMove);
-            deviceUserControl1.TbDeviceAddr4.TextChanged += new EventHandler(FocusMove);
-            deviceUserControl1.TbDeviceAddr5.TextChanged += new EventHandler(FocusMove);
+                getUpTimeSavingTime();
 
-            timer1.Start();
-            timer1.Interval = 3600000;
+                deviceUserControl1.TbDeviceAddr0.TextChanged += new EventHandler(FocusMove);
+                deviceUserControl1.TbDeviceAddr1.TextChanged += new EventHandler(FocusMove);
+                deviceUserControl1.TbDeviceAddr2.TextChanged += new EventHandler(FocusMove);
+                deviceUserControl1.TbDeviceAddr3.TextChanged += new EventHandler(FocusMove);
+                deviceUserControl1.TbDeviceAddr4.TextChanged += new EventHandler(FocusMove);
+                deviceUserControl1.TbDeviceAddr5.TextChanged += new EventHandler(FocusMove);
 
-            Application.ApplicationExit +=Application_ApplicationExit;
+                timer1.Start();
+                timer1.Interval = 3600000;
 
-            //this.etcUserControl1.LinkLabel_etc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_etc_LinkClicked);
-            this.passwordUserControl1.ChkUserPw1.Click += new System.EventHandler(this.ChkUserPw_Click);
-            this.passwordUserControl1.TbUserPw.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbUserPw_KeyDown);
-            this.sleepModeUserControl1.ChkMode1.Click += new System.EventHandler(this.ChkMode_Click);
-            this.sleepModeUserControl1.RbPcMode.CheckedChanged += new System.EventHandler(this.rbPcMode_CheckedChanged);
-            this.sleepModeUserControl1.RbMonitorMode.CheckedChanged += new System.EventHandler(this.rbMonitorMode_CheckedChanged);
-            this.deviceUserControl1.BtOk.Click += new System.EventHandler(this.btOk_Click);
-            //this.etcUserControl1.BtnFolder.Click += new System.EventHandler(this.button3_Click_1);
+                Application.ApplicationExit += Application_ApplicationExit;
 
-            this.deviceUserControl1.RadioButton1.Click += RadioButton1_Click;
-            this.deviceUserControl1.RadioButton2.Click += RadioButton2_Click;
+                //this.etcUserControl1.LinkLabel_etc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_etc_LinkClicked);
+                this.passwordUserControl1.ChkUserPw1.Click += new System.EventHandler(this.ChkUserPw_Click);
+                this.passwordUserControl1.TbUserPw.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbUserPw_KeyDown);
+                this.sleepModeUserControl1.ChkMode1.Click += new System.EventHandler(this.ChkMode_Click);
+                this.sleepModeUserControl1.RbPcMode.CheckedChanged += new System.EventHandler(this.rbPcMode_CheckedChanged);
+                this.sleepModeUserControl1.RbMonitorMode.CheckedChanged += new System.EventHandler(this.rbMonitorMode_CheckedChanged);
+                this.deviceUserControl1.BtOk.Click += new System.EventHandler(this.btOk_Click);
+                //this.etcUserControl1.BtnFolder.Click += new System.EventHandler(this.button3_Click_1);
 
-            setBtn_Eng();
-            setTabCtrl_Eng();
+                this.deviceUserControl1.RadioButton1.Click += RadioButton1_Click;
+                this.deviceUserControl1.RadioButton2.Click += RadioButton2_Click;
+
+                setBtn_Eng();
+                setTabCtrl_Eng();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
+
+
 
             try
             {
@@ -722,15 +884,21 @@ namespace SSES_Program
                 log.write(error.StackTrace);
                 MessageBox.Show(error.ToString());
             }
-
         }
 
 
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            this.Hide();
+            try
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -759,7 +927,14 @@ namespace SSES_Program
 
         private void MainForm_Activated(object sender, EventArgs e)
         {
-            this.ShowInTaskbar = true;
+            try
+            {
+                this.ShowInTaskbar = true;
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         /// <summary>
@@ -769,7 +944,14 @@ namespace SSES_Program
         /// <param name="e"></param>
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            try
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         #endregion
@@ -783,20 +965,34 @@ namespace SSES_Program
         /// <param name="e"></param>
         private void FocusMove(object sender, EventArgs e)
         {
+            try
+            {
                 TextBox txt = (TextBox)sender;
                 if (txt.Text.Length == 2) // 이벤트 핸들러 설정된 컨트롤의 글자입력수가 3글자이면,
                 {
-                           SendKeys.Send("{tab}"); // Tab키를 실행하고 Focus를 설정. (Tab Order 기준으로 이동함)
-                           txt.Focus();
+                    SendKeys.Send("{tab}"); // Tab키를 실행하고 Focus를 설정. (Tab Order 기준으로 이동함)
+                    txt.Focus();
                 }
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         private void SetButtonColor(int selected)
         {
-            Button[] buttons = { button5, button1, button2, button4,  button6 };
-            for (int i = 0; i < buttons.Length; i++)
+            try
             {
-                buttons[i].ForeColor = (i == selected) ? Color.Cyan : Color.White;
+                Button[] buttons = { button5, button1, button2, button4, button6 };
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    buttons[i].ForeColor = (i == selected) ? Color.Cyan : Color.White;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
             }
         }
 
@@ -812,8 +1008,10 @@ namespace SSES_Program
             {
                 System.Diagnostics.Process.Start("http://www.hanscreative.com/");
             }
-            catch { }
-
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         /// <summary>
@@ -823,8 +1021,15 @@ namespace SSES_Program
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tP1_IntroHome;
-            SetButtonColor(1);
+            try
+            {
+                tabControl1.SelectedTab = tP1_IntroHome;
+                SetButtonColor(1);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         /// <summary>
@@ -834,9 +1039,16 @@ namespace SSES_Program
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            this.getPCEnergy("", "");
-            tabControl1.SelectedTab = tP2_DpEnergySol;
-            SetButtonColor(2);
+            try
+            {
+                this.getPCEnergy("", "");
+                tabControl1.SelectedTab = tP2_DpEnergySol;
+                SetButtonColor(2);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         /// <summary>
@@ -846,8 +1058,15 @@ namespace SSES_Program
         /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tP4_SecurityPage;
-            SetButtonColor(3);
+            try
+            {
+                tabControl1.SelectedTab = tP4_SecurityPage;
+                SetButtonColor(3);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
         
         /// <summary>
@@ -857,8 +1076,15 @@ namespace SSES_Program
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = this.tP8_SettingPageNew;
-            SetButtonColor(4);
+            try
+            {
+                tabControl1.SelectedTab = this.tP8_SettingPageNew;
+                SetButtonColor(4);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
         
         #endregion
@@ -867,12 +1093,15 @@ namespace SSES_Program
 
         private void btOk_Click(object sender, EventArgs e)
         {
-            if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr0.Text)) || (deviceUserControl1.TbDeviceAddr0.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 1st text box"); return; }
-            if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr1.Text)) || (deviceUserControl1.TbDeviceAddr1.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 2nd text box"); return; }
-            if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr2.Text)) || (deviceUserControl1.TbDeviceAddr2.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 3rd text box"); return; }
-            if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr3.Text)) || (deviceUserControl1.TbDeviceAddr3.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 4th text box"); return; }
-            if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr4.Text)) || (deviceUserControl1.TbDeviceAddr4.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 5th text box"); return; }
-            if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr5.Text)) || (deviceUserControl1.TbDeviceAddr5.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 6th text box"); return; }
+            try
+            {
+                if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr0.Text)) || (deviceUserControl1.TbDeviceAddr0.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 1st text box"); return; }
+                if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr1.Text)) || (deviceUserControl1.TbDeviceAddr1.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 2nd text box"); return; }
+                if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr2.Text)) || (deviceUserControl1.TbDeviceAddr2.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 3rd text box"); return; }
+                if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr3.Text)) || (deviceUserControl1.TbDeviceAddr3.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 4th text box"); return; }
+                if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr4.Text)) || (deviceUserControl1.TbDeviceAddr4.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 5th text box"); return; }
+                if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr5.Text)) || (deviceUserControl1.TbDeviceAddr5.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 6th text box"); return; }
+
 
             bt32FeetDevice.Stop();
             bt32FeetDevice.OnData -= On32FeetData;
@@ -881,11 +1110,21 @@ namespace SSES_Program
 
             AppConfig.Instance.DeviceAddress = MacAddressFromUserInput;
 
-            MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
 
-            bt32FeetDevice.GetBtAddr(MacAddressFromUserInput);
-            bt32FeetDevice.OnData += On32FeetData;
-            bt32FeetDevice.Start();
+                MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
+
+
+                bt32FeetDevice.GetBtAddr(DevAddrs);
+                bt32FeetDevice.OnData += On32FeetData;
+                bt32FeetDevice.Start();
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+
+         
+
         }
 
         private void rbMonitorMode_CheckedChanged(object sender, EventArgs e)
@@ -896,47 +1135,82 @@ namespace SSES_Program
 
         private void rbPcMode_CheckedChanged(object sender, EventArgs e)
         {
-            AppConfig.Instance.SleepMode = 1;
-            //MessageBox.Show("모니터+본체 절전모드로 변경되었습니다.", "절전모드 변경완료");
+            try
+            {
+                AppConfig.Instance.SleepMode = 1;
+                //MessageBox.Show("모니터+본체 절전모드로 변경되었습니다.", "절전모드 변경완료");
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         void RadioButton2_Click(object sender, EventArgs e)
         {
-            AppConfig.Instance.Model = 1;
-            this.bt32FeetDevice._model = 1;
-            //throw new NotImplementedException();
+            try
+            {
+                AppConfig.Instance.Model = 1;
+                this.bt32FeetDevice._model = 1;
+                //throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         void RadioButton1_Click(object sender, EventArgs e)
         {
-            AppConfig.Instance.Model = 0;
-            this.bt32FeetDevice._model = 0;
-            //throw new NotImplementedException();
+            try
+            {
+                AppConfig.Instance.Model = 0;
+                this.bt32FeetDevice._model = 0;
+                //throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         private void ChkMode_Click(object sender, EventArgs e)
         {
-            if (this.sleepModeUserControl1.RbPcMode.Checked) // PC 절전
+            try
             {
-                MessageBox.Show(SsesRes.sleepMode_changeMsg1, SsesRes.sleepMode_changeTitle);
+                if (this.sleepModeUserControl1.RbPcMode.Checked) // PC 절전
+                {
+                    MessageBox.Show(SsesRes.sleepMode_changeMsg1, SsesRes.sleepMode_changeTitle);
+                }
+                else // 모니터 절전 //if (rbMonitorMode.Checked)
+                {
+                    MessageBox.Show(SsesRes.sleepMode_changeMsg0, SsesRes.sleepMode_changeTitle);
+                }
             }
-            else // 모니터 절전 //if (rbMonitorMode.Checked)
+            catch (Exception ex)
             {
-                MessageBox.Show(SsesRes.sleepMode_changeMsg0, SsesRes.sleepMode_changeTitle);
+                log.write(ex.Message);
             }
         }
 
         private void DisplayAddToText(string Addr)
         {
-            string[] textResult = Addr.Split(':');
-            if (textResult != null)
+            try
             {
-                deviceUserControl1.TbDeviceAddr0.Text = textResult[0];
-                deviceUserControl1.TbDeviceAddr1.Text = textResult[1];
-                deviceUserControl1.TbDeviceAddr2.Text = textResult[2];
-                deviceUserControl1.TbDeviceAddr3.Text = textResult[3];
-                deviceUserControl1.TbDeviceAddr4.Text = textResult[4];
-                deviceUserControl1.TbDeviceAddr5.Text = textResult[5];
+                string[] textResult = Addr.Split(':');
+                if (textResult != null)
+                {
+                    deviceUserControl1.TbDeviceAddr0.Text = textResult[0];
+                    deviceUserControl1.TbDeviceAddr1.Text = textResult[1];
+                    deviceUserControl1.TbDeviceAddr2.Text = textResult[2];
+                    deviceUserControl1.TbDeviceAddr3.Text = textResult[3];
+                    deviceUserControl1.TbDeviceAddr4.Text = textResult[4];
+                    deviceUserControl1.TbDeviceAddr5.Text = textResult[5];
+                }
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
             }
         }
         #endregion
@@ -958,9 +1232,9 @@ namespace SSES_Program
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                log.write(ex.Message);
             }
         }
 
@@ -974,7 +1248,7 @@ namespace SSES_Program
             }
             catch (Exception ex)
             {
-                Console.WriteLine("eeeeeee");
+                log.write(ex.Message);
             }
         }
 
@@ -983,30 +1257,40 @@ namespace SSES_Program
         // 프로그래스 바 RSSI값 넣기
         void RSSIintoProgressBar()
         {
-            if (!this.IsHandleCreated) return;
 
-            Invoke((MethodInvoker)delegate
+            try
             {
-                //if (!_32FeetDevice.IsConnected)
-                //    progressBar1.Style = ProgressBarStyle.Marquee;
-                
-                //if (_32FeetDevice.IsConnected)
-                //{
-                //    progressBar1.Style = ProgressBarStyle.Blocks;
-                //    progressBar1.MarqueeAnimationSpeed = 20;
-                //    progressBar1.Maximum = 120;
-                //    progressBar1.Value = rcvRssi + 120;
-                //}
-                //else
-                //{
-                //    progressBar1.Style = ProgressBarStyle.Marquee;
-                //}
 
-            });
+                if (!this.IsHandleCreated) return;
+
+                Invoke((MethodInvoker)delegate
+                {
+                    //if (!_32FeetDevice.IsConnected)
+                    //    progressBar1.Style = ProgressBarStyle.Marquee;
+
+                    //if (_32FeetDevice.IsConnected)
+                    //{
+                    //    progressBar1.Style = ProgressBarStyle.Blocks;
+                    //    progressBar1.MarqueeAnimationSpeed = 20;
+                    //    progressBar1.Maximum = 120;
+                    //    progressBar1.Value = rcvRssi + 120;
+                    //}
+                    //else
+                    //{
+                    //    progressBar1.Style = ProgressBarStyle.Marquee;
+                    //}
+
+                });
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
-        #endregion
+
 
         #region "스크린세이버"
+
         void ScreenSaver()
         {
             try
@@ -1082,9 +1366,9 @@ namespace SSES_Program
             {
                 this.screenSaver = screenSaver;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("ScreenSaver1");
+                log.write(ex.Message);
             }
         }
 
@@ -1094,9 +1378,9 @@ namespace SSES_Program
             {
                 this.screenSaver2 = screenSaver2;
             }
-            catch(Exception ee)
+            catch (Exception ex)
             {
-                Console.WriteLine("ScreenSaver2");
+                log.write(ex.Message);
             }
         }
 
@@ -1119,26 +1403,33 @@ namespace SSES_Program
                 screensaverPasswordflag = true;
                 Service.AlertSoundStop();
             }
-            catch(Exception ee)
+            catch (Exception ex)
             {
-                Console.WriteLine("ScreenAllStop");
-
+                log.write(ex.Message);
             }
         }
         
         void ScreenSaverSetting()
         {
-            Screen[] screen = Screen.AllScreens;
 
-            // 듀얼모니터를 사용하지않는 경우
-            if (screen.GetLength(0) != 2)
+            try
             {
-                DualMonitor(screen, 0);
+                Screen[] screen = Screen.AllScreens;
+
+                // 듀얼모니터를 사용하지않는 경우
+                if (screen.GetLength(0) != 2)
+                {
+                    DualMonitor(screen, 0);
+                }
+                else // 듀얼모니터를 사용하는 경우
+                {
+                    DualMonitor(screen, 0);
+                    DualMonitor(screen, 1);
+                }
             }
-            else // 듀얼모니터를 사용하는 경우
+            catch (Exception ex)
             {
-                DualMonitor(screen, 0);
-                DualMonitor(screen, 1);
+                log.write(ex.Message);
             }
         }
 
@@ -1180,9 +1471,9 @@ namespace SSES_Program
                     screenSaver2.Show(this);
                 }
             }
-            catch(Exception ee)
+            catch (Exception ex)
             {
-                Console.WriteLine("DualMonitor Error");
+                log.write(ex.Message);
             }
         }
         #endregion
@@ -1190,19 +1481,26 @@ namespace SSES_Program
         #region "트레이아이콘 이벤트"
         private void tools_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = this.tP8_SettingPageNew;
-            SetButtonColor(4);
-
-            if (this.WindowState == FormWindowState.Minimized || this.TopMost == false)
+            try
             {
-                this.WindowState = FormWindowState.Normal;
-                this.StartPosition = FormStartPosition.CenterScreen;
+                tabControl1.SelectedTab = this.tP8_SettingPageNew;
+                SetButtonColor(4);
 
-                // Activate the form.
-                this.Activate();
+                if (this.WindowState == FormWindowState.Minimized || this.TopMost == false)
+                {
+                    this.WindowState = FormWindowState.Normal;
+                    this.StartPosition = FormStartPosition.CenterScreen;
+
+                    // Activate the form.
+                    this.Activate();
+                }
+
+                if (this.Visible == false) { this.Show(); }
             }
-
-            if (this.Visible == false) { this.Show(); }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
@@ -1243,333 +1541,415 @@ namespace SSES_Program
         #region "한/영 Toggle"
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            this.getPCEnergy("", "");
 
-            if (checkBox_LangToggle.Text.Equals("English"))
+            try
             {
-                //한->영
-                checkBox_LangToggle.Text = "한글";
-                SsesRes.Culture = new System.Globalization.CultureInfo("en-US");
-                
-                setBtnFont("맑은 고딕", 9, FontStyle.Bold);
 
-                setBtn_Eng();
-                setTabCtrl_Eng();
-                textBlock_cost.Text = String.Format("{0,10:N3}", calcReduction.UsedCost/1200).ToString();
+
+                this.getPCEnergy("", "");
+
+
+                if (checkBox_LangToggle.Text.Equals("English"))
+                {
+                    //한->영
+                    checkBox_LangToggle.Text = "한글";
+                    SsesRes.Culture = new System.Globalization.CultureInfo("en-US");
+
+                    setBtnFont("맑은 고딕", 9, FontStyle.Bold);
+
+                    setBtn_Eng();
+                    setTabCtrl_Eng();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", calcReduction.UsedCost / 1200).ToString();
+                }
+                else
+                {
+                    //영->한
+                    checkBox_LangToggle.Text = "English";
+                    SsesRes.Culture = new System.Globalization.CultureInfo("ko-KR");
+                    setBtnFont("맑은 고딕", 9.75f, FontStyle.Bold);
+                    setBtn_Eng();
+                    setTabCtrl_Eng();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", (calcReduction.UsedCost)).ToString();
+                    //setBtn_Kor();
+                    //setTabCtrl_Kor();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //영->한
-                checkBox_LangToggle.Text = "English";
-                SsesRes.Culture = new System.Globalization.CultureInfo("ko-KR");
-                setBtnFont("맑은 고딕", 9.75f, FontStyle.Bold);
-                setBtn_Eng();
-                setTabCtrl_Eng();
-                textBlock_cost.Text = String.Format("{0,10:N3}", (calcReduction.UsedCost)).ToString();
-                //setBtn_Kor();
-                //setTabCtrl_Kor();
+                log.write(ex.Message);
             }
         }
 
         /////
         void setBtn_Eng()
         {
-            setBtnFont("맑은 고딕", 9, FontStyle.Bold);
+            try
+            {
+                setBtnFont("맑은 고딕", 9, FontStyle.Bold);
 
-            setControl(button5, new Point(30, 55), 110, 40, SsesRes.hansCreative_introduction);
-            setControl(button1, new Point(147, 55), 81, 40, SsesRes.what_Sses);
-            setControl(button2, new Point(238, 55), 105, 40, SsesRes.energy_saved);
-            setControl(button4, new Point(349, 55), 118, 40, SsesRes.security_worked);
-            setControl(button6, new Point(474, 55), 96, 40, SsesRes.sses_configuration);
+                setControl(button5, new Point(30, 55), 110, 40, SsesRes.hansCreative_introduction);
+                setControl(button1, new Point(147, 55), 81, 40, SsesRes.what_Sses);
+                setControl(button2, new Point(238, 55), 105, 40, SsesRes.energy_saved);
+                setControl(button4, new Point(349, 55), 118, 40, SsesRes.security_worked);
+                setControl(button6, new Point(474, 55), 96, 40, SsesRes.sses_configuration);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         void setBtn_Kor()
         {
-            setBtnFont("맑은 고딕", 9.75f, FontStyle.Bold);
+            try
+            {
+                setBtnFont("맑은 고딕", 9.75f, FontStyle.Bold);
 
-            setControl(button5, new Point(30, 50), 110, 40, SsesRes.hansCreative_introduction);
-            setControl(button1, new Point(147, 50), 81, 40, SsesRes.what_Sses);
-            setControl(button2, new Point(238, 50), 105, 40, SsesRes.energy_saved);
-            setControl(button4, new Point(349, 50), 118, 40, SsesRes.security_worked);
-            setControl(button6, new Point(474, 50), 96, 40, SsesRes.sses_configuration);
+                setControl(button5, new Point(30, 50), 110, 40, SsesRes.hansCreative_introduction);
+                setControl(button1, new Point(147, 50), 81, 40, SsesRes.what_Sses);
+                setControl(button2, new Point(238, 50), 105, 40, SsesRes.energy_saved);
+                setControl(button4, new Point(349, 50), 118, 40, SsesRes.security_worked);
+                setControl(button6, new Point(474, 50), 96, 40, SsesRes.sses_configuration);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         void setBtnFont(string name, float size, FontStyle style)
         {
-            Font font = new Font(name, size, style);
+            try
+            {
+                Font font = new Font(name, size, style);
 
-            button5.Font = font;
-            button1.Font = font;
-            button2.Font = font;
-            button4.Font = font;
-            button6.Font = font;
+                button5.Font = font;
+                button1.Font = font;
+                button2.Font = font;
+                button4.Font = font;
+                button6.Font = font;
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         void setTabCtrl_Eng()
         {
-            //SSES 소개
-
-            textBox.Text = SsesRes.sses_introduction;
-
-            //절감량 및 보안시간
-            //_CalcReduc.DevicePerKwh = 160.0;
-            calcReduction.OnSaveChanged += (sender2) =>
+            try
             {
-                /*textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
-                */
+                //SSES 소개
 
-                label_dispTotTime.Text = SsesRes.dispTotTime
-                    + String.Format(" {0:00}" + SsesRes.day +" {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
+                textBox.Text = SsesRes.sses_introduction;
 
-                //label_dispTotTime.Text = "SSES have kept your PC safe while you have been away for total time period of "
-                //    + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
-            };
-            calcReduction.OnSaveChanged(calcReduction);
+                //절감량 및 보안시간
+                //_CalcReduc.DevicePerKwh = 160.0;
+                calcReduction.OnSaveChanged += (sender2) =>
+                {
+                    /*textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
+                    textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
+                    textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
+                    */
 
-            label_totTime.Text = "";
-            label_totTime1.Text = "";
+                    label_dispTotTime.Text = SsesRes.dispTotTime
+                        + String.Format(" {0:00}" + SsesRes.day + " {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
 
+                    //label_dispTotTime.Text = "SSES have kept your PC safe while you have been away for total time period of "
+                    //    + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
+                };
+                calcReduction.OnSaveChanged(calcReduction);
 
-             //절감량 라벨 폰트 및 위치
-             // 1
-             setControl(pictureBox4, new Point(28, 25));
-             setControl(label1_power, new Point(27, 95), 92, 51, SsesRes.power);
-             setControl(textBlock_power, new Point(15, 150));
-
-             // 2
-             setControl(pictureBox5, new Point(179, 25));
-             setControl(label2_cost, new Point(159, 95), 92, 51, SsesRes.cost);
-             setControl(textBlock_cost, new Point(150, 150));
-
-             // 3
-             setControl(pictureBox6, new Point(300, 25));
-             setControl(label3_co2, new Point(280, 95), 103, 51, SsesRes.co2);
-             setControl(textBlock_co2, new Point(268, 150));
-
-             // 4
-             setControl(pictureBox7, new Point(400, 25));
-             setControl(label4_tree, new Point(410, 95), 100, 34, SsesRes.tree);
-             setControl(textBlock_tree, new Point(394, 150));
-            
-             //환경설정
-             label1.Text = SsesRes.pairing;
-             label2.Text = SsesRes.mode;
-             label3.Text = SsesRes.userPw;
-             //label4.Text = SsesRes.etc;
-             this.deviceUserControl1.Label1.Text = SsesRes.localName1;
-
-             //setControl(label1, new Point(24, 1), 85, 40, SsesRes.pairing);
-             //setControl(label2, new Point(14, 48), 103, 40, SsesRes.mode);
-             //setControl(this.deviceUserControl1.Label1, new Point(117, 9), 110, 20, SsesRes.localName1);
-             //setControl(label3, new Point(24, 1), 85, 40, SsesRes.userPw);
-             //setControl(label4, new Point(14, 48), 103, 40, SsesRes.etc);
-
-             this.sleepModeUserControl1.RbMonitorMode.Text = SsesRes.monitorMode;
-             this.sleepModeUserControl1.RbPcMode.Text = SsesRes.pcMode;
-
-             //setControl(this.sleepModeUserControl1.RbMonitorMode, rbMonitorMode.Location, 116, 24, SsesRes.monitorMode);
-             //setControl(this.sleepModeUserControl1.RbPcMode, new Point(400, 49), SsesRes.pcMode);
-
-             this.sleepModeUserControl1.ChkMode1.Text = SsesRes.chkMode;
-             //setControl(this.sleepModeUserControl1.ChkMode1, new Point(400, 49), SsesRes.chkMode);
-           
-              this.deviceUserControl1.BtOk.Text = SsesRes.btOk;
-            
-              this.passwordUserControl1.ChkUserPw1.Text = SsesRes.chkUserPw;
+                label_totTime.Text = "";
+                label_totTime1.Text = "";
 
 
-            // 소비전력 및 전기요금 설정
-            // this.etcUserControl1.LinkLabel_etc.Text = SsesRes.link_etc;
-            // this.etcUserControl1.BtnFolder.Text = SsesRes.folderSec;
-            //linkLabel_etc.Text = SsesRes.link_etc;
+                //절감량 라벨 폰트 및 위치
+                // 1
+                setControl(pictureBox4, new Point(28, 25));
+                setControl(label1_power, new Point(27, 95), 92, 51, SsesRes.power);
+                setControl(textBlock_power, new Point(15, 150));
 
-            /*setControl(label_pairing, new Point(24, 1), 85, 40, SsesRes.pairing);
-            setControl(label_Mode, new Point(14, 48), 103, 40, SsesRes.mode);
-            setControl(label_localName1, new Point(117, 9), 110, 20, SsesRes.localName1);
-            setControl(rbMonitorMode, rbMonitorMode.Location, 116, 24, SsesRes.monitorMode);
-            setControl(rbPcMode, new Point(144, 74), 385, 44, SsesRes.pcMode);
+                // 2
+                setControl(pictureBox5, new Point(179, 25));
+                setControl(label2_cost, new Point(159, 95), 92, 51, SsesRes.cost);
+                setControl(textBlock_cost, new Point(150, 150));
 
-            // Confirm button
-            btOk.Text = SsesRes.btOk;
-            setControl(ChkMode, new Point(400, 49), SsesRes.chkMode);
+                // 3
+                setControl(pictureBox6, new Point(300, 25));
+                setControl(label3_co2, new Point(280, 95), 103, 51, SsesRes.co2);
+                setControl(textBlock_co2, new Point(268, 150));
 
-            // user Password
-            label_UserPw.Text = SsesRes.userPw;
-            ChkUserPw.Text = SsesRes.chkUserPw;
+                // 4
+                setControl(pictureBox7, new Point(400, 25));
+                setControl(label4_tree, new Point(410, 95), 100, 34, SsesRes.tree);
+                setControl(textBlock_tree, new Point(394, 150));
 
-            // 소비전력 및 전기요금 설정
-            label_etc.Text = SsesRes.etc;
-            linkLabel_etc.Text = SsesRes.link_etc;
-           */
+                //환경설정
+                label1.Text = SsesRes.pairing;
+                label2.Text = SsesRes.mode;
+                label3.Text = SsesRes.userPw;
+                //label4.Text = SsesRes.etc;
+                this.deviceUserControl1.Label1.Text = SsesRes.localName1;
+
+                //setControl(label1, new Point(24, 1), 85, 40, SsesRes.pairing);
+                //setControl(label2, new Point(14, 48), 103, 40, SsesRes.mode);
+                //setControl(this.deviceUserControl1.Label1, new Point(117, 9), 110, 20, SsesRes.localName1);
+                //setControl(label3, new Point(24, 1), 85, 40, SsesRes.userPw);
+                //setControl(label4, new Point(14, 48), 103, 40, SsesRes.etc);
+
+                this.sleepModeUserControl1.RbMonitorMode.Text = SsesRes.monitorMode;
+                this.sleepModeUserControl1.RbPcMode.Text = SsesRes.pcMode;
+
+                //setControl(this.sleepModeUserControl1.RbMonitorMode, rbMonitorMode.Location, 116, 24, SsesRes.monitorMode);
+                //setControl(this.sleepModeUserControl1.RbPcMode, new Point(400, 49), SsesRes.pcMode);
+
+                this.sleepModeUserControl1.ChkMode1.Text = SsesRes.chkMode;
+                //setControl(this.sleepModeUserControl1.ChkMode1, new Point(400, 49), SsesRes.chkMode);
+
+                this.deviceUserControl1.BtOk.Text = SsesRes.btOk;
+
+                this.passwordUserControl1.ChkUserPw1.Text = SsesRes.chkUserPw;
 
 
-            /*textBox.Text = "SSES keeps your PC safe even when you're away from it and saves its \r\n"
-                + "consumption of electricity at the same time. Installing tiny mobile app \r\n"
-                + "and small PC agent SW get you very easy and friendly to use this novelty.\r\n"
-                + "Protect your PC from abuse and contribute to conservation of earth's \r\n"
-                + "enviroment from global climate change. Simply go ahead with the \r\n"
-                + "typing 6-byte device address shown on mobile app in the configuration\r\n"
-                + "tab of PC agent SW.";
+                // 소비전력 및 전기요금 설정
+                // this.etcUserControl1.LinkLabel_etc.Text = SsesRes.link_etc;
+                // this.etcUserControl1.BtnFolder.Text = SsesRes.folderSec;
+                //linkLabel_etc.Text = SsesRes.link_etc;
 
-            //절감량 및 보안시간
-            //_CalcReduc.DevicePerKwh = 160.0;
-            _CalcReduc.OnSaveChanged += (sender2) =>
+                /*setControl(label_pairing, new Point(24, 1), 85, 40, SsesRes.pairing);
+                setControl(label_Mode, new Point(14, 48), 103, 40, SsesRes.mode);
+                setControl(label_localName1, new Point(117, 9), 110, 20, SsesRes.localName1);
+                setControl(rbMonitorMode, rbMonitorMode.Location, 116, 24, SsesRes.monitorMode);
+                setControl(rbPcMode, new Point(144, 74), 385, 44, SsesRes.pcMode);
+
+                // Confirm button
+                btOk.Text = SsesRes.btOk;
+                setControl(ChkMode, new Point(400, 49), SsesRes.chkMode);
+
+                // user Password
+                label_UserPw.Text = SsesRes.userPw;
+                ChkUserPw.Text = SsesRes.chkUserPw;
+
+                // 소비전력 및 전기요금 설정
+                label_etc.Text = SsesRes.etc;
+                linkLabel_etc.Text = SsesRes.link_etc;
+               */
+
+
+                /*textBox.Text = "SSES keeps your PC safe even when you're away from it and saves its \r\n"
+                    + "consumption of electricity at the same time. Installing tiny mobile app \r\n"
+                    + "and small PC agent SW get you very easy and friendly to use this novelty.\r\n"
+                    + "Protect your PC from abuse and contribute to conservation of earth's \r\n"
+                    + "enviroment from global climate change. Simply go ahead with the \r\n"
+                    + "typing 6-byte device address shown on mobile app in the configuration\r\n"
+                    + "tab of PC agent SW.";
+
+                //절감량 및 보안시간
+                //_CalcReduc.DevicePerKwh = 160.0;
+                _CalcReduc.OnSaveChanged += (sender2) =>
+                {
+                    textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
+                    textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
+                    textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
+
+
+                    label_dispTotTime.Text =  SsesRes.dispTotTime
+                        + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
+
+                    //label_dispTotTime.Text = "SSES have kept your PC safe while you have been away for total time period of "
+                    //    + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
+                };
+                _CalcReduc.OnSaveChanged(_CalcReduc);
+
+                label_totTime.Text = "";
+                label_totTime1.Text = "";
+
+
+               /* //절감량 라벨 폰트 및 위치
+                // 1
+                setControl(pictureBox4, new Point(28, 25));
+                setControl(label1_power, new Point(27, 95), 92, 51, "  Amount of\r\n" + "energy saving\r\n" + "     (kWh)");
+                setControl(textBlock_power, new Point(15, 150));
+
+                // 2
+                setControl(pictureBox5, new Point(179, 25));
+                setControl(label2_cost, new Point(159, 95), 92, 51, " Money from\r\n" + "energy saving\r\n" + "     (USD)");
+                setControl(textBlock_cost, new Point(150, 150));
+
+                // 3
+                setControl(pictureBox6, new Point(300, 25));
+                setControl(label3_co2, new Point(280, 95), 103, 51, "Amount of CO2\r\n" + "    reduction\r\n" + "       (Ton)");
+                setControl(textBlock_co2, new Point(268, 150));
+
+                // 4
+                setControl(pictureBox7, new Point(400, 25));
+                setControl(label4_tree, new Point(410, 95), 100, 34, "Number of trees\r\n" + "  from savings");
+                setControl(textBlock_tree, new Point(394, 150));
+
+                //환경설정
+                setControl(label_pairing, new Point(24, 1), 85, 40, " Bluetooth\r\nconnection");
+                setControl(label_Mode, new Point(14, 48), 103, 40, "   Mode of\r\nenergy saving");
+                setControl(label_localName1, new Point(117, 9), 110, 20, "Device address");
+                setControl(rbMonitorMode, rbMonitorMode.Location, 116, 24, "Monitor only");
+                setControl(rbPcMode, new Point(144, 74), 385, 44, "Monitor together with CPU\r\nThis mode expects any key stroke to unlock your PC");
+
+                // Confirm button
+                btOk.Text = "Confirm";
+                setControl(ChkMode, new Point(400, 49), "Confirm");
+
+                // user Password
+                label_UserPw.Text = "Password";
+                ChkUserPw.Text = "Confirm";
+
+                // 소비전력 및 전기요금 설정
+                label_etc.Text = "etc";
+                linkLabel_etc.Text = "Set power consumption and electricity rate"; */
+            }
+            catch (Exception ex)
             {
-                textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
-
-
-                label_dispTotTime.Text =  SsesRes.dispTotTime
-                    + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
-
-                //label_dispTotTime.Text = "SSES have kept your PC safe while you have been away for total time period of "
-                //    + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
-            };
-            _CalcReduc.OnSaveChanged(_CalcReduc);
-
-            label_totTime.Text = "";
-            label_totTime1.Text = "";
-
-
-           /* //절감량 라벨 폰트 및 위치
-            // 1
-            setControl(pictureBox4, new Point(28, 25));
-            setControl(label1_power, new Point(27, 95), 92, 51, "  Amount of\r\n" + "energy saving\r\n" + "     (kWh)");
-            setControl(textBlock_power, new Point(15, 150));
-
-            // 2
-            setControl(pictureBox5, new Point(179, 25));
-            setControl(label2_cost, new Point(159, 95), 92, 51, " Money from\r\n" + "energy saving\r\n" + "     (USD)");
-            setControl(textBlock_cost, new Point(150, 150));
-
-            // 3
-            setControl(pictureBox6, new Point(300, 25));
-            setControl(label3_co2, new Point(280, 95), 103, 51, "Amount of CO2\r\n" + "    reduction\r\n" + "       (Ton)");
-            setControl(textBlock_co2, new Point(268, 150));
-
-            // 4
-            setControl(pictureBox7, new Point(400, 25));
-            setControl(label4_tree, new Point(410, 95), 100, 34, "Number of trees\r\n" + "  from savings");
-            setControl(textBlock_tree, new Point(394, 150));
-
-            //환경설정
-            setControl(label_pairing, new Point(24, 1), 85, 40, " Bluetooth\r\nconnection");
-            setControl(label_Mode, new Point(14, 48), 103, 40, "   Mode of\r\nenergy saving");
-            setControl(label_localName1, new Point(117, 9), 110, 20, "Device address");
-            setControl(rbMonitorMode, rbMonitorMode.Location, 116, 24, "Monitor only");
-            setControl(rbPcMode, new Point(144, 74), 385, 44, "Monitor together with CPU\r\nThis mode expects any key stroke to unlock your PC");
-
-            // Confirm button
-            btOk.Text = "Confirm";
-            setControl(ChkMode, new Point(400, 49), "Confirm");
-
-            // user Password
-            label_UserPw.Text = "Password";
-            ChkUserPw.Text = "Confirm";
-
-            // 소비전력 및 전기요금 설정
-            label_etc.Text = "etc";
-            linkLabel_etc.Text = "Set power consumption and electricity rate"; */
+                log.write(ex.Message);
+            }
         }
 
         void setTabCtrl_Kor()
         {
-            textBox.Text = SsesRes.sses_introduction;
-
-            //SSES 소개
-           /* textBox.Text = "SSES 는 Smart Security and Energy Saving 의 약자로써, PC와 mobile 간\r\n"
-                + "의 블루투스 통신을 이용하여 PC 보안 및 에너지를 절약하는 솔루션입니다.\r\n"
-                + "PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하실 수 있습니다.\r\n"
-                + "환경설정에서 mobile 프로그램에 있는 장치주소를 입력한 후, 사용하시기 바랍니다.\r\n\r\n"
-                + "감사합니다. :-)"; */
-
-            //
-            //_CalcReduc.DevicePerKwh = 160.0;
-            calcReduction.OnSaveChanged += (sender2) =>
+            try
             {
-                textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
-                label_dispTotTime.Text = SsesRes.dispTotTime
-                    + String.Format(" {0:00}" + SsesRes.day + " {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
+                textBox.Text = SsesRes.sses_introduction;
 
-                //label_dispTotTime.Text = "SSES 솔루션을 통한 PC의 총 보안시간은 "
-                //    + String.Format("{0:00}일 {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "입니다.";
-            };
-            calcReduction.OnSaveChanged(calcReduction);
+                //SSES 소개
+                /* textBox.Text = "SSES 는 Smart Security and Energy Saving 의 약자로써, PC와 mobile 간\r\n"
+                     + "의 블루투스 통신을 이용하여 PC 보안 및 에너지를 절약하는 솔루션입니다.\r\n"
+                     + "PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하실 수 있습니다.\r\n"
+                     + "환경설정에서 mobile 프로그램에 있는 장치주소를 입력한 후, 사용하시기 바랍니다.\r\n\r\n"
+                     + "감사합니다. :-)"; */
 
-            //절감량 라벨 폰트 및 위치
-            // 1
-            setControl(pictureBox4, new Point(28, 25));
-            setControl(label1_power, new Point(27, 115), 110, 12, "에너지절감량(kWh)");
-            setControl(textBlock_power, new Point(15, 150));
+                //
+                //_CalcReduc.DevicePerKwh = 160.0;
+                calcReduction.OnSaveChanged += (sender2) =>
+                {
+                    textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
+                    textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
+                    textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
+                    label_dispTotTime.Text = SsesRes.dispTotTime
+                        + String.Format(" {0:00}" + SsesRes.day + " {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
 
-            // 2
-            setControl(pictureBox5, new Point(179, 25));
-            setControl(label2_cost, new Point(159, 115), 99, 12, "전기료절감액(원)");
-            setControl(textBlock_cost, new Point(150, 150));
+                    //label_dispTotTime.Text = "SSES 솔루션을 통한 PC의 총 보안시간은 "
+                    //    + String.Format("{0:00}일 {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "입니다.";
+                };
+                calcReduction.OnSaveChanged(calcReduction);
 
-            // 3
-            setControl(pictureBox6, new Point(300, 25));
-            setControl(label3_co2, new Point(300, 115), 75, 12, "CO2절감(톤)");
-            setControl(textBlock_co2, new Point(268, 150));
+                //절감량 라벨 폰트 및 위치
+                // 1
+                setControl(pictureBox4, new Point(28, 25));
+                setControl(label1_power, new Point(27, 115), 110, 12, "에너지절감량(kWh)");
+                setControl(textBlock_power, new Point(15, 150));
 
-            // 4
-            setControl(pictureBox7, new Point(400, 25));
-            setControl(label4_tree, new Point(410, 115), 87, 12, "환경보호(그루)");
-            setControl(textBlock_tree, new Point(394, 150));
-            
-            //환경설정
-            setControl(label_pairing, new Point(43, 9), 37, 15, "연결");
-            setControl(label_Mode, new Point(14, 48), 103, 40, "절전모드 선택");
-            setControl(label_localName1, new Point(141, 9), 67, 15, "장치주소");
-            setControl(rbMonitorMode, rbMonitorMode.Location, 105, 19, "모니터 절전");
-            setControl(rbPcMode, new Point(144, 74), 143, 19, "모니터+본체 절전");
+                // 2
+                setControl(pictureBox5, new Point(179, 25));
+                setControl(label2_cost, new Point(159, 115), 99, 12, "전기료절감액(원)");
+                setControl(textBlock_cost, new Point(150, 150));
 
-            // 입력/확인 버튼
-            btOk.Text = "입력";
-            setControl(ChkMode, new Point(320, 49), "확인");
+                // 3
+                setControl(pictureBox6, new Point(300, 25));
+                setControl(label3_co2, new Point(300, 115), 75, 12, "CO2절감(톤)");
+                setControl(textBlock_co2, new Point(268, 150));
 
-            // user Password
-            label_UserPw.Text = "비밀번호";
-            ChkUserPw.Text = "확인";
+                // 4
+                setControl(pictureBox7, new Point(400, 25));
+                setControl(label4_tree, new Point(410, 115), 87, 12, "환경보호(그루)");
+                setControl(textBlock_tree, new Point(394, 150));
 
-            // 소비전력 및 전기요금 설정
-            label_etc.Text = "기타";
-            linkLabel_etc.Text = "소비전력 및 전기요금 설정";
+                //환경설정
+                setControl(label_pairing, new Point(43, 9), 37, 15, "연결");
+                setControl(label_Mode, new Point(14, 48), 103, 40, "절전모드 선택");
+                setControl(label_localName1, new Point(141, 9), 67, 15, "장치주소");
+                setControl(rbMonitorMode, rbMonitorMode.Location, 105, 19, "모니터 절전");
+                setControl(rbPcMode, new Point(144, 74), 143, 19, "모니터+본체 절전");
+
+                // 입력/확인 버튼
+                btOk.Text = "입력";
+                setControl(ChkMode, new Point(320, 49), "확인");
+
+                // user Password
+                label_UserPw.Text = "비밀번호";
+                ChkUserPw.Text = "확인";
+
+                // 소비전력 및 전기요금 설정
+                label_etc.Text = "기타";
+                linkLabel_etc.Text = "소비전력 및 전기요금 설정";
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
         
 
         private void setControl(Control ctrl, Point location)
         {
-            ctrl.Location = location;
+
+            try
+            {
+                ctrl.Location = location;
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+            
         }
 
         private void setControl(Control ctrl, Point location, string text)
         {
-            ctrl.Location = location;
-            ctrl.Text = text;
+
+            try
+            {
+                ctrl.Location = location;
+                ctrl.Text = text;
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+
         }
 
         private void setControl(Control ctrl, Point location, int width, int height)
         {
-            ctrl.Location = location;
-            ctrl.Width = width;
-            ctrl.Height = height;
+
+            try
+            {
+                ctrl.Location = location;
+                ctrl.Width = width;
+                ctrl.Height = height;
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+
         }
 
         private void setControl(Control ctrl, Point location, int width, int height, string text)
         {
-            ctrl.Text = text;
-            ctrl.Location = location;
-            ctrl.Width = width;
-            ctrl.Height = height;
+
+            try
+            {
+                ctrl.Text = text;
+                ctrl.Location = location;
+                ctrl.Width = width;
+                ctrl.Height = height;
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+
         }
 
         #endregion
@@ -1578,26 +1958,40 @@ namespace SSES_Program
 
         private void ChkUserPw_Click(object sender, EventArgs e)
         {
-            if (this.passwordUserControl1.TbUserPw.Text != "")
+            try
             {
-                userPw = this.passwordUserControl1.TbUserPw.Text;
-                AppConfig.Instance.UserPassword = userPw;
+                if (this.passwordUserControl1.TbUserPw.Text != "")
+                {
+                    userPw = this.passwordUserControl1.TbUserPw.Text;
+                    AppConfig.Instance.UserPassword = userPw;
 
-                MessageBox.Show("비밀번호가 변경되었습니다.", "비밀번호 변경완료");
+                    MessageBox.Show("비밀번호가 변경되었습니다.", "비밀번호 변경완료");
+                }
+                else
+                {
+                    MessageBox.Show("다시 입력해주세요", "비밀번호 재설정");
+                }
+
+                this.passwordUserControl1.TbUserPw.Clear();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("다시 입력해주세요", "비밀번호 재설정");
+                log.write(ex.Message);
             }
-
-            this.passwordUserControl1.TbUserPw.Clear();
         }
 
         private void tbUserPw_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                ChkUserPw_Click(sender, e);
+                if (e.KeyCode == Keys.Enter)
+                {
+                    ChkUserPw_Click(sender, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
             }
         }
 
@@ -1606,45 +2000,66 @@ namespace SSES_Program
         #region "기타"
         private void linkLabel_etc_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            SettingPopup popupForm = new SettingPopup();
-            popupForm.Owner = this;
-            popupForm.Popup_BtnClickEvent += PopupForm_Popup_BtnClickEvent;
-            popupForm.ShowDialog();
+            try
+            {
+                SettingPopup popupForm = new SettingPopup();
+                popupForm.Owner = this;
+                popupForm.Popup_BtnClickEvent += PopupForm_Popup_BtnClickEvent;
+                popupForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
         }
 
         private void PopupForm_Popup_BtnClickEvent(double power, double bill)
         {
-            //throw new NotImplementedException();
+
 
             RatedOutputDeviceValue = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
 
-            AppConfig.Instance.PcPower = power; // 파일에 저장 (set)
-            AppConfig.Instance.ElecRate = bill; // 파일에 저장 (set)
-            
-            calcReduction.DevicePerKwh = power; // 변수에 값 대입
-            calcReduction.WonPerKwh = bill; // 변수에 값 대입
 
-            //_CalcReduc.Calculate(); // 절감량 계산
-            calcReduction.OnSaveChanged += (sender2) =>
+
+            try
             {
-                /*textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
-                textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
-                textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
-                textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
-                */
+                //throw new NotImplementedException();
 
-                if (checkBox_LangToggle.Text.Equals("English"))
+                ratedOutput_device = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
+
+                AppConfig.Instance.PcPower = power; // 파일에 저장 (set)
+                AppConfig.Instance.ElecRate = bill; // 파일에 저장 (set)
+
+                calcReduction.DevicePerKwh = power; // 변수에 값 대입
+                calcReduction.WonPerKwh = bill; // 변수에 값 대입
+
+                //_CalcReduc.Calculate(); // 절감량 계산
+                calcReduction.OnSaveChanged += (sender2) =>
                 {
-                    label_dispTotTime.Text = "SSES 솔루션을 통한 PC의 총 보안시간은 "
-                    + String.Format("{0:00}일 {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "입니다.";
-                }
-                else
-                {
-                    label_dispTotTime.Text = "SSES have kept your PC safe while you have been away for total time period of "
-                    + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
-                }
-            };
-            calcReduction.OnSaveChanged(calcReduction);
+                    /*textBlock_power.Text = String.Format("{0,10:N3}", sender2.UsedKwh).ToString();
+                    textBlock_cost.Text = String.Format("{0,10:N3}", sender2.UsedCost).ToString();
+                    textBlock_co2.Text = String.Format("{0,10:N3}", sender2.Co2).ToString();
+                    textBlock_tree.Text = String.Format("{0,10:N3}", sender2.Tree).ToString();
+                    */
+
+                    if (checkBox_LangToggle.Text.Equals("English"))
+                    {
+                        label_dispTotTime.Text = "SSES 솔루션을 통한 PC의 총 보안시간은 "
+                        + String.Format("{0:00}일 {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "입니다.";
+                    }
+                    else
+                    {
+                        label_dispTotTime.Text = "SSES have kept your PC safe while you have been away for total time period of "
+                        + String.Format("{0:00}day {1:00}:{2:00}:{3:00}", sender2.UsedSec.Days, Math.Floor(sender2.UsedSec.TotalHours), sender2.UsedSec.Minutes, sender2.UsedSec.Seconds).ToString() + "";
+                    }
+                };
+                calcReduction.OnSaveChanged(calcReduction);
+            }
+            catch (Exception ex)
+            {
+                log.write(ex.Message);
+            }
+            
 
         }
         #endregion 
@@ -1803,5 +2218,55 @@ namespace SSES_Program
 
         #endregion
     }
+
+    public class Win32
+    {
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+
+        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
+
+        [FlagsAttribute]
+
+        public enum EXECUTION_STATE : uint
+        {
+
+            ES_AWAYMODE_REQUIRED = 0x00000040,
+
+            ES_CONTINUOUS = 0x80000000,
+
+            ES_DISPLAY_REQUIRED = 0x00000002,
+
+            ES_SYSTEM_REQUIRED = 0x00000001
+        }
+
+        public static void PreventScreenAndSleep()
+        {
+            try
+            {
+                SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_AWAYMODE_REQUIRED |
+                EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_SYSTEM_REQUIRED);
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
+        }
+
+        public static void AllowMonitorPowerdown()
+        {
+            try
+            {
+                Console.WriteLine(SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS));
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
+            
+        }
+
+    }
+
 }
 

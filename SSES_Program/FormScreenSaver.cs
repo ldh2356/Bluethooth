@@ -119,18 +119,31 @@ namespace SSES_Program
 
         private void pb_screenSaver_MouseDown(object sender, MouseEventArgs e)
         {
-            main.log.write("모니터 1번에 마우스 다운 이벤트");
-            formScreenSaverCancel = new FormScreenSaverCancel(this);
-            formScreenSaverCancel.TopMost = true;
-            formScreenSaverCancel.ShowDialog();
+            try
+            {
+
+                formScreenSaverCancel = new FormScreenSaverCancel(this);
+                formScreenSaverCancel.TopMost = true;
+                formScreenSaverCancel.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);                
+            }
         }
 
         private void pb_screenSaver_Click(object sender, EventArgs e)
         {
-            main.log.write("모니터 1번에 클릭 이벤트");
-            formScreenSaverCancel = new FormScreenSaverCancel(this);
-            formScreenSaverCancel.TopMost = true;
-            formScreenSaverCancel.ShowDialog();
+            try
+            {
+                formScreenSaverCancel = new FormScreenSaverCancel(this);
+                formScreenSaverCancel.TopMost = true;
+                formScreenSaverCancel.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
     }
 }

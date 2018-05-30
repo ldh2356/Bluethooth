@@ -67,7 +67,7 @@ namespace SSES_Program
 
         private void pb_screenSaver_MouseDown(object sender, MouseEventArgs e)
         {
-            main.log.write("모니터 2번에 마우스 다운 이벤트");
+            MainForm.log.write("모니터 2번에 마우스 다운 이벤트");
             formScreenSaverCancel = new FormScreenSaverCancel(this);
             formScreenSaverCancel.TopMost = true;
             formScreenSaverCancel.ShowDialog();
