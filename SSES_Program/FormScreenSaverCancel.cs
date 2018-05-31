@@ -72,7 +72,7 @@ namespace SSES_Program
         void ButtonEvent()
         {
             //if (textBox1.Text == "0000")
-            if (textBox1.Text == MainForm.userPw)
+            if (textBox1.Text == MainForm.userDefaultPasword)
             {
                 this.Close();
                 //formScreenSaver.main.screenSaverAllStop(); // 기존에 이거만 있었음

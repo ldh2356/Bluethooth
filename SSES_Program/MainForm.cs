@@ -51,53 +51,174 @@ namespace SSES_Program
         /// </summary>
         public double RatedOutputDeviceValue { get; set; } = 160.0;
 
+        /// <summary>
+        /// 키 다운
+        /// </summary>
+        const int WM_KEYDOWN = 0x100;
 
+        /// <summary>
+        /// 키업
+        /// </summary>
+        const int WM_KEYUP = 0x101;
+
+        /// <summary>
+        /// 시스템 키 다운
+        /// </summary>
+        const int WM_SYSKEYDOWN = 0x104;
+        Keys lastKeyPressed = Keys.None;
+
+
+        /// <summary>
+        /// 마우스버튼 왼쪽클릭
+        /// </summary>
+        private int WM_LBUTTONUP = 0x0202; //left mouse up
+
+        /// <summary>
+        /// 마우스 중앙 버튼클릭
+        /// </summary>
+        private int WM_MBUTTONUP = 0x0208; //middle mouse up
+
+        /// <summary>
+        /// 마우스 오른쪽 버튼 클릭
+        /// </summary>
+        private int WM_RBUTTONUP = 0x0205; //right mouse up
+        private int keyOrMouseInputDelayMin = 3;
+
+        /// <summary>
+        /// 로거
+        /// </summary>
+        public static Log log = new Log();
+
+        /// <summary>
+        /// 유저 기본 패스워드
+        /// </summary>
+        public static string userDefaultPasword = "0000";
+
+        /// <summary>
+        /// 에너지 소모 
+        /// </summary>
         public double power_reduction = 0.0;
+
+        /// <summary>
+        /// 전기에너지 소모
+        /// </summary>
         public double electricCost_reduction = 0.0;
+
+        /// <summary>
+        /// 산소 
+        /// </summary>
         public double co2_reduction = 0.0;
+
+        /// <summary>
+        /// 나무
+        /// </summary>
         public double tree_reduction = 0.0;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public int TotreductionSecond = 0;
-        public static string userPw = "0000";
+
+        /// <summary>
+        /// 키보드후킹 클래스
+        /// </summary>
+        private Hook.KeyboardHook keyHook = new Hook.KeyboardHook();
+
+        /// <summary>
+        /// 마우스 후킹 클래스
+        /// </summary>
+        private Hook.MouseHook mouseHook = new Hook.MouseHook();
+
+        /// <summary>
+        /// 스크린세이버
+        /// </summary>
+        FormScreenSaver screenSaverMain;
+
+        /// <summary>
+        /// 스크린세이버 듀얼모니터용
+        /// </summary>
+        FormScreenSaver2 screenSaverDual;
+
+        /// <summary>
+        /// 스크린세이버 상태값
+        /// </summary>
+        public bool screensaverStatus;
+
+        /// <summary>
+        /// 스크린세이버 패스워드 플래스
+        /// </summary>
+        public bool screenSaverPasswordFlag;
+
+        /// <summary>
+        /// 맥 주소
+        /// </summary>
+        public string macAddress = string.Empty;
+
+        /// <summary>
+        /// 시리얼?
+        /// </summary>
+        public string manufacturer = string.Empty;
+
+        /// <summary>
+        /// 모델 네임
+        /// </summary>
+        public string modelName = string.Empty;
+
+        /// <summary>
+        /// CPU
+        /// </summary>
+        public string CPU = string.Empty;
+
+        /// <summary>
+        /// 메모리 카드
+        /// </summary>
+        public string memory = string.Empty;
+
+        /// <summary>
+        /// 그래픽 카드
+        /// </summary>
+        public string graphicsCard = string.Empty;
+
+
+        /// <summary>
+        /// 피시 전력소모 전달클래스
+        /// </summary>
+        SendPCEnergy sPCEnergy = new SendPCEnergy();
+
+        /// <summary>
+        /// 피시 정보 수집
+        /// </summary>
+        GetPCEnergy gPCEnergy = new GetPCEnergy();
+
+        /// <summary>
+        /// 피시 정보 클래스
+        /// </summary>
+        PCInfo pcInfo = new PCInfo();
+
+        /// <summary>
+        /// 현재시간
+        /// </summary>
+        public string upTime = string.Empty;
+
+        /// <summary>
+        /// 아낀시간
+        /// </summary>
+        public string savingTime = string.Empty;
+
+
+        #region 정리중
         public List<int> RcvBuffer = new List<int>();
         public const int RcvMaxCount = 1;
         public int rcvRssi = default(int); // 시리얼 포트에서 받아 온 이전 RSSI값
-        public bool screensaverStatus;
-        public bool screensaverPasswordflag;
-        FormScreenSaver screenSaver;
-        FormScreenSaver2 screenSaver2;
-
-        Thread inputThread = null;
-
-        SendPCEnergy sPCEnergy = new SendPCEnergy();
-        public string _macAddress = string.Empty;
-        public string _manufacturer = string.Empty;
-        public string _modelName = string.Empty;
-        public string _CPU = string.Empty;
-        public string _memory = string.Empty;
-        public string _graphicsCard = string.Empty;
-        private System.Timers.Timer timer;
-
         public static int threadTimerCount = 0;
-
-
-        public string _uptime = string.Empty;
-        public string _savingTime = string.Empty;
-
-        GetPCEnergy gPCEnergy = new GetPCEnergy();
-
-        PCInfo pcInfo = new PCInfo();
-
-        public static Log log = new Log();
-
-        private Hook.KeyboardHook keyHook = new Hook.KeyboardHook();
-        private Hook.MouseHook mouseHook = new Hook.MouseHook();
         private delegate void UIInvokerDelegate(String msg);
         private UIInvokerDelegate UIInvoker;
+        #endregion
+
 
         /// <summary>
         /// 컨피그 파일 이름 세팅
         /// </summary>
-        #region filename
         public static string AppConfigFileName
         {
             get
@@ -107,22 +228,14 @@ namespace SSES_Program
                 return drivepath + fileName;
             }
         }
-        #endregion
 
 
-
-        const int WM_KEYDOWN = 0x100;
-        const int WM_KEYUP = 0x101;
-        const int WM_SYSKEYDOWN = 0x104;
-        Keys lastKeyPressed = Keys.None;
-
-
-
-        private int WM_LBUTTONUP = 0x0202; //left mouse up
-        private int WM_MBUTTONUP = 0x0208; //middle mouse up
-        private int WM_RBUTTONUP = 0x0205; //right mouse up
-        private int keyOrMouseInputDelayMin = 3;
-
+        /// <summary>
+        /// 명령키 처리
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             try
@@ -141,75 +254,6 @@ namespace SSES_Program
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
- 
-        /// <summary>
-        /// 키보드 마우스 입력 타이머 이벤트
-        /// </summary>
-        private void DoInputTimer()
-        {
-            try
-            {
-                if (timer == null)
-                    timer = new System.Timers.Timer();
-
-                timer.Elapsed += DoInDoInputTimerAsyncputTimer;
-                timer.Interval = 1000;
-                timer.Start();
-            }
-            catch (Exception ex)
-            {
-                log.write(ex.Message);
-            }
-        }
-
-
-
-        /// <summary>
-        /// 키보드 마우스 입력시 3 초만큼 딜레이를 준다
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DoInDoInputTimerAsyncputTimer(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            try
-            {
-                threadTimerCount++;                
-
-                if (threadTimerCount > keyOrMouseInputDelayMin)
-                {
-                    timer.Stop();
-                    isUserInput = false;
-                }
-                else
-                {
-                    isUserInput = true;
-                }    
-            }
-            catch (Exception ex)
-            {
-                log.write(ex.Message);
-            }
-        }
-
-
-
-        /// <summary>
-        /// 키보드 또는 마우스 입력이 있는경우 정해진 시간동안은 스크린세이버가 들어오는것을 방지한다
-        /// </summary>
-        public void donUseSceenSaveWhenUserInput()
-        {
-            try
-            {
-                timer.Stop();
-                threadTimerCount = 0;
-                bt32FeetDevice.LockCount = 0;
-                timer.Start();
-            }
-            catch (Exception ex)
-            {
-                log.write(ex.Message);
-            }
-        }
 
 
         /// <summary>
@@ -222,7 +266,6 @@ namespace SSES_Program
 
             try
             {
-                donUseSceenSaveWhenUserInput();
                 BeginInvoke(this.UIInvoker, e.ToString());
             }
             catch (Exception ex)
@@ -240,17 +283,14 @@ namespace SSES_Program
         /// <param name="e"></param>
         void mouseHook_MessageHooked(object sender, Hook.MouseHookEventArgs e)
         {
-
             try
             {
-                donUseSceenSaveWhenUserInput();
                 BeginInvoke(this.UIInvoker, e.ToString());
             }
             catch (Exception ex)
             {
                 log.write(ex.Message);
             }
-
         }
 
 
@@ -289,15 +329,17 @@ namespace SSES_Program
         }
 
 
+        /// <summary>
+        /// 생성자
+        /// </summary>
         public MainForm()
         {
             try
             {
                 screensaverStatus = false;
-                screensaverPasswordflag = false;
+                screenSaverPasswordFlag = false;
 
                 log.write("SSES 실행 v1.2");
-                DoInputTimer();
 
                 //자동 업데이트 추가 
                 if (UpdateChecker.NeedUpdate(this))
@@ -344,7 +386,7 @@ namespace SSES_Program
               
 
                 TotreductionSecond = AppConfig.Instance.TotalTime;
-                userPw = AppConfig.Instance.UserPassword;
+                userDefaultPasword = AppConfig.Instance.UserPassword;
                 trackBar.Value = UserRssiValue;
 
                 if (AppConfig.Instance.SleepMode == 1)
@@ -566,7 +608,7 @@ namespace SSES_Program
                     locs = des.IndexOf("\"");
                     locl = des.IndexOf(";");
                     vga += des.Substring(locs + 1, locl - locs - 2) + "\n"; // 모델명 얻기
-                    this._graphicsCard = vga;
+                    this.graphicsCard = vga;
                 }
             }
             catch (Exception ex)
@@ -598,7 +640,7 @@ namespace SSES_Program
                     prc = nam.Substring(locs + 1, locl - locs - 2); // 모델명 얻기
                     Console.WriteLine("-" + prc);
 
-                    this._CPU = prc;
+                    this.CPU = prc;
                 }
             }
             catch (Exception ex)
@@ -625,7 +667,7 @@ namespace SSES_Program
                         cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
                     }
                 }
-                this._CPU = cpuInfo;
+                this.CPU = cpuInfo;
                 //Console.WriteLine("-" + cpuInfo);
                 //return cpuInfo;
             }
@@ -656,7 +698,7 @@ namespace SSES_Program
                 }
 
                 //MACAddress = MACAddress.Replace(":", "");
-                this._macAddress = MACAddress;
+                this.macAddress = MACAddress;
 
                 //Console.WriteLine("-" + MACAddress);
             }
@@ -683,7 +725,7 @@ namespace SSES_Program
                     Console.WriteLine("Memory Information ================================");
                     Console.WriteLine("Total Physical Memory : {0:#,###} KB", info["TotalVisibleMemorySize"]);
 
-                    this._memory = info["TotalVisibleMemorySize"].ToString();
+                    this.memory = info["TotalVisibleMemorySize"].ToString();
                 }
             }
             catch (Exception ex)
@@ -708,7 +750,7 @@ namespace SSES_Program
                 {
                     foreach (ManagementObject mo in mc.GetInstances())
                     {
-                        this._manufacturer = mo["Manufacturer"].ToString();
+                        this.manufacturer = mo["Manufacturer"].ToString();
                         // display general system information
                         Console.WriteLine("\nMachine Make: {0}",
                                           mo["Manufacturer"].ToString());
@@ -735,7 +777,7 @@ namespace SSES_Program
             {
                 GetMACAddress();
                 Manufacturer();
-                this._modelName = Environment.OSVersion.ToString();
+                this.modelName = Environment.OSVersion.ToString();
                 // CPU 함수는 2가지 구현 
                 GetProcessor();
                 GetMemory();
@@ -1103,18 +1145,18 @@ namespace SSES_Program
                 if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr5.Text)) || (deviceUserControl1.TbDeviceAddr5.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 6th text box"); return; }
 
 
-            bt32FeetDevice.Stop();
-            bt32FeetDevice.OnData -= On32FeetData;
-            string[] AddArray = { deviceUserControl1.TbDeviceAddr0.Text, deviceUserControl1.TbDeviceAddr1.Text, deviceUserControl1.TbDeviceAddr2.Text, deviceUserControl1.TbDeviceAddr3.Text, deviceUserControl1.TbDeviceAddr4.Text, deviceUserControl1.TbDeviceAddr5.Text };
-            MacAddressFromUserInput = String.Join(":", AddArray);
+                bt32FeetDevice.Stop();
+                bt32FeetDevice.OnData -= On32FeetData;
+                string[] AddArray = { deviceUserControl1.TbDeviceAddr0.Text, deviceUserControl1.TbDeviceAddr1.Text, deviceUserControl1.TbDeviceAddr2.Text, deviceUserControl1.TbDeviceAddr3.Text, deviceUserControl1.TbDeviceAddr4.Text, deviceUserControl1.TbDeviceAddr5.Text };
+                MacAddressFromUserInput = String.Join(":", AddArray);
 
-            AppConfig.Instance.DeviceAddress = MacAddressFromUserInput;
+                AppConfig.Instance.DeviceAddress = MacAddressFromUserInput;
 
 
                 MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
 
 
-                bt32FeetDevice.GetBtAddr(DevAddrs);
+                bt32FeetDevice.GetBtAddr(MacAddressFromUserInput);
                 bt32FeetDevice.OnData += On32FeetData;
                 bt32FeetDevice.Start();
             }
@@ -1287,7 +1329,7 @@ namespace SSES_Program
                 log.write(ex.Message);
             }
         }
-
+        #endregion
 
         #region "스크린세이버"
 
@@ -1296,11 +1338,11 @@ namespace SSES_Program
             try
             {
                 log.write($"IsServiced:{bt32FeetDevice.IsServiced.ToString()}");
-                log.write($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
+                log.write($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screenSaverPasswordFlag} isUserInput:{isUserInput}");
                 if (this.bt32FeetDevice.IsServiced == false )  // will be off
                 {
                     //화면보호기 시작
-                    if (screensaverStatus == false && screensaverPasswordflag == false && isUserInput == false)
+                    if (screensaverStatus == false && screenSaverPasswordFlag == false && isUserInput == false)
                     {
                         calcReduction.OperationEndTime = DateTime.Now;
 
@@ -1326,7 +1368,7 @@ namespace SSES_Program
                 }
                 else  // will be wake-up 
                 {
-                    screensaverPasswordflag = false;
+                    screenSaverPasswordFlag = false;
                     //스크린 종료
                     if (screensaverStatus == true)
                     {
@@ -1364,7 +1406,7 @@ namespace SSES_Program
         {
             try
             {
-                this.screenSaver = screenSaver;
+                this.screenSaverMain = screenSaver;
             }
             catch (Exception ex)
             {
@@ -1376,7 +1418,7 @@ namespace SSES_Program
         {
             try
             {
-                this.screenSaver2 = screenSaver2;
+                this.screenSaverDual = screenSaver2;
             }
             catch (Exception ex)
             {
@@ -1388,19 +1430,19 @@ namespace SSES_Program
         {
             try
             {
-                if (screenSaver != null)
+                if (screenSaverMain != null)
                 {
-                    screenSaver.Close();
-                    screenSaver = null;
+                    screenSaverMain.Close();
+                    screenSaverMain = null;
 
-                    if (screenSaver2 != null)
+                    if (screenSaverDual != null)
                     {
-                        screenSaver2.Close();
-                        screenSaver2 = null;
+                        screenSaverDual.Close();
+                        screenSaverDual = null;
                     }
                 }
                 screensaverStatus = false;
-                screensaverPasswordflag = true;
+                screenSaverPasswordFlag = true;
                 Service.AlertSoundStop();
             }
             catch (Exception ex)
@@ -1444,31 +1486,31 @@ namespace SSES_Program
 
                 if (screen[primaryNum] == screen[screen1])
                 {
-                    screenSaver = new FormScreenSaver(this);
+                    screenSaverMain = new FormScreenSaver(this);
 
                     point = new Point(screen[screen1].Bounds.Location.X, screen[screen1].Bounds.Location.Y);
-                    screenSaver.Location = point;
+                    screenSaverMain.Location = point;
 
                     //GIF파일의 크기를 메인모니터 크기로 조정
-                    screenSaver.pb_screenSaver.Size = new Size(screen[screen1].Bounds.Width, screen[screen1].Bounds.Height);
-                    screenSaver.Size = screenSaver.pb_screenSaver.Size;
+                    screenSaverMain.pb_screenSaver.Size = new Size(screen[screen1].Bounds.Width, screen[screen1].Bounds.Height);
+                    screenSaverMain.Size = screenSaverMain.pb_screenSaver.Size;
 
-                    screenSaver.Show(this);
+                    screenSaverMain.Show(this);
 
                     //KeyboardHooking.TaskBarHide();
                 }
                 else
                 {
-                    screenSaver2 = new FormScreenSaver2(this);
+                    screenSaverDual = new FormScreenSaver2(this);
 
                     point = new Point(screen[screen2].Bounds.Location.X, screen[screen2].Bounds.Location.Y);
-                    screenSaver2.Location = point;
+                    screenSaverDual.Location = point;
 
                     //GIF파일의 크기를 서브모니터 크기로 조정
-                    screenSaver2.pb_screenSaver.Size = new Size(screen[screen2].Bounds.Width, screen[screen2].Bounds.Height);
-                    screenSaver2.Size = screenSaver2.pb_screenSaver.Size;
+                    screenSaverDual.pb_screenSaver.Size = new Size(screen[screen2].Bounds.Width, screen[screen2].Bounds.Height);
+                    screenSaverDual.Size = screenSaverDual.pb_screenSaver.Size;
 
-                    screenSaver2.Show(this);
+                    screenSaverDual.Show(this);
                 }
             }
             catch (Exception ex)
@@ -1962,8 +2004,8 @@ namespace SSES_Program
             {
                 if (this.passwordUserControl1.TbUserPw.Text != "")
                 {
-                    userPw = this.passwordUserControl1.TbUserPw.Text;
-                    AppConfig.Instance.UserPassword = userPw;
+                    userDefaultPasword = this.passwordUserControl1.TbUserPw.Text;
+                    AppConfig.Instance.UserPassword = userDefaultPasword;
 
                     MessageBox.Show("비밀번호가 변경되었습니다.", "비밀번호 변경완료");
                 }
@@ -2025,7 +2067,7 @@ namespace SSES_Program
             {
                 //throw new NotImplementedException();
 
-                ratedOutput_device = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
+                //ratedOutput_device = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
 
                 AppConfig.Instance.PcPower = power; // 파일에 저장 (set)
                 AppConfig.Instance.ElecRate = bill; // 파일에 저장 (set)
