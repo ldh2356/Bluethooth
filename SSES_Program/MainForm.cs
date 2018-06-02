@@ -778,11 +778,12 @@ namespace SSES_Program
             try
             {
                 UIInvoker = new UIInvokerDelegate(DiplayMessage);
-                keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);
-                mouseHook.MessageHooked += new EventHandler<Hook.MouseHookEventArgs>(mouseHook_MessageHooked);
 
-                keyHook.StartHook();
-                mouseHook.StartHook();
+                //keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);
+                //mouseHook.MessageHooked += new EventHandler<Hook.MouseHookEventArgs>(mouseHook_MessageHooked);
+
+                //keyHook.StartHook();
+                //mouseHook.StartHook();
 
 
             //시작 프로그램 추가 
@@ -1114,7 +1115,7 @@ namespace SSES_Program
                 MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
 
 
-                bt32FeetDevice.GetBtAddr(DevAddrs);
+                //bt32FeetDevice.GetBtAddr(DevAddrs);
                 bt32FeetDevice.OnData += On32FeetData;
                 bt32FeetDevice.Start();
             }
@@ -1287,6 +1288,7 @@ namespace SSES_Program
                 log.write(ex.Message);
             }
         }
+        #endregion
 
 
         #region "스크린세이버"
@@ -2025,7 +2027,7 @@ namespace SSES_Program
             {
                 //throw new NotImplementedException();
 
-                ratedOutput_device = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
+               // ratedOutput_device = power; // 변수에 저장 (변수 왜 있는지 모르겠음)
 
                 AppConfig.Instance.PcPower = power; // 파일에 저장 (set)
                 AppConfig.Instance.ElecRate = bill; // 파일에 저장 (set)
