@@ -165,19 +165,19 @@ namespace SSES_Program
                     //}
 
                     //Alt+Tab, Alt+Esc, Ctrl+Esc, Windows Key, ESC
-                    if (((lParam.vkCode == VK_TAB) && (lParam.flags == LLKHF_ALTDOWN)) ||
-                        ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == LLKHF_ALTDOWN)) ||
-                        ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == 0)) ||
-                        ((lParam.vkCode == VK_DELETE)) ||
-                        ((lParam.vkCode == VK_LWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
-                        ((lParam.vkCode == VK_RWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
-                        ((true) && (lParam.flags == LLKHF_ALTDOWN)) ||
-                        (lParam.vkCode == VK_TAB) ||
-                        (lParam.flags == LLKHF_ALTDOWN))
-                    {
-                        blnEat = true;
-                    }
-                    Service.AlertSoundStart();
+                    //if (((lParam.vkCode == VK_TAB) && (lParam.flags == LLKHF_ALTDOWN)) ||
+                    //    ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == LLKHF_ALTDOWN)) ||
+                    //    ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == 0)) ||
+                    //    ((lParam.vkCode == VK_DELETE)) ||
+                    //    ((lParam.vkCode == VK_LWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
+                    //    ((lParam.vkCode == VK_RWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
+                    //    ((true) && (lParam.flags == LLKHF_ALTDOWN)) ||
+                    //    (lParam.vkCode == VK_TAB) ||
+                    //    (lParam.flags == LLKHF_ALTDOWN))
+                    //{
+                    //    blnEat = true;
+                    //}
+                    //Service.AlertSoundStart();
                     break;
             }
 
