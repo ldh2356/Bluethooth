@@ -63,33 +63,50 @@ namespace SSES_Program
         // 비번 박스
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                ButtonEvent();
+                MainForm.log.write("Button Event");
+
+                if (e.KeyCode == Keys.Enter)
+                {
+                    ButtonEvent();
+                }
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.StackTrace);
             }
         }
 
         void ButtonEvent()
         {
-            //if (textBox1.Text == "0000")
-            if (textBox1.Text == MainForm.userPw)
+            try
             {
-                this.Close();
-                //formScreenSaver.main.screenSaverAllStop(); // 기존에 이거만 있었음
+                //if (textBox1.Text == "0000")
+                if (textBox1.Text == MainForm.userPw)
+                {
+                    this.Close();
+                    //formScreenSaver.main.screenSaverAllStop(); // 기존에 이거만 있었음
 
-                // 여기부터 내가 추가한거
-                // 1. 스크린 세이버만 종료
-                Screen[] screen = Screen.AllScreens; // 시스템 내 모든 디스플레이 배열을 가져옴
-                
-                if (screen.GetLength(0) != 2) // 듀얼 모니터가 아닌 경우
-                    formScreenSaver.main.screenSaverAllStop();
-                else // 듀얼 모니터인 경우
-                    formScreenSaver2.main.screenSaverAllStop();
+                    // 여기부터 내가 추가한거
+                    // 1. 스크린 세이버만 종료
+                    Screen[] screen = Screen.AllScreens; // 시스템 내 모든 디스플레이 배열을 가져옴
+
+                    if (screen.GetLength(0) != 2) // 듀얼 모니터가 아닌 경우
+                        formScreenSaver.main.screenSaverAllStop();
+                    else // 듀얼 모니터인 경우
+                        formScreenSaver2.main.screenSaverAllStop();
+                }
+                else
+                {
+                    MessageBox.Show("비밀번호가 틀렸습니다. \n다시 입력해 주세요.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("비밀번호가 틀렸습니다. \n다시 입력해 주세요.");
+                MainForm.log.write(ex.StackTrace);
             }
+
         }
     }
 }

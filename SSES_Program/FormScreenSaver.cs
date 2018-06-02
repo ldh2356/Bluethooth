@@ -134,16 +134,7 @@ namespace SSES_Program
 
         private void pb_screenSaver_Click(object sender, EventArgs e)
         {
-            try
-            {
-                formScreenSaverCancel = new FormScreenSaverCancel(this);
-                formScreenSaverCancel.TopMost = true;
-                formScreenSaverCancel.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MainForm.log.write(ex.Message);
-            }
+
         }
     }
 }

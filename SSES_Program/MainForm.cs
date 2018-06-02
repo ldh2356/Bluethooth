@@ -1965,7 +1965,7 @@ namespace SSES_Program
                 if (this.passwordUserControl1.TbUserPw.Text != "")
                 {
                     userPw = this.passwordUserControl1.TbUserPw.Text;
-                    AppConfig.Instance.UserPassword = userPw;
+                    AppConfig.Instance.UserPassword = userPw; 
 
                     MessageBox.Show("비밀번호가 변경되었습니다.", "비밀번호 변경완료");
                 }
