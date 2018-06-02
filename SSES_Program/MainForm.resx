@@ -234,32 +234,6 @@
   <data name="tP1_IntroHome.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="textBox.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="textBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 11.25pt</value>
-  </data>
-  <data name="textBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 15</value>
-  </data>
-  <data name="textBox.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>503, 162</value>
-  </data>
-  <data name="textBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textBox.Text" xml:space="preserve">
-    <value>SSES 는 Smart Security and Energy Saving 의 약자로써, PC와 mobile 간
-의 블루투스 통신을 이용하여 PC 보안 및 에너지를 절약하는 솔루션입니다.
-PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하실 수 있습니다.
-환경설정에서 mobile 프로그램에 있는 장치주소를 입력한 후, 사용하시기 바랍니다.
-
-감사합니다. :-)</value>
-  </data>
   <data name="&gt;&gt;textBox.Name" xml:space="preserve">
     <value>textBox</value>
   </data>
@@ -301,6 +275,984 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   </data>
   <data name="tP2_DpEnergySol.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
+  </data>
+  <data name="&gt;&gt;textBlock_tree.Name" xml:space="preserve">
+    <value>textBlock_tree</value>
+  </data>
+  <data name="&gt;&gt;textBlock_tree.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBlock_tree.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;textBlock_tree.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textBlock_co2.Name" xml:space="preserve">
+    <value>textBlock_co2</value>
+  </data>
+  <data name="&gt;&gt;textBlock_co2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBlock_co2.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;textBlock_co2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;textBlock_cost.Name" xml:space="preserve">
+    <value>textBlock_cost</value>
+  </data>
+  <data name="&gt;&gt;textBlock_cost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBlock_cost.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;textBlock_cost.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBlock_power.Name" xml:space="preserve">
+    <value>textBlock_power</value>
+  </data>
+  <data name="&gt;&gt;textBlock_power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBlock_power.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;textBlock_power.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label4_tree.Name" xml:space="preserve">
+    <value>label4_tree</value>
+  </data>
+  <data name="&gt;&gt;label4_tree.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4_tree.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;label4_tree.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label3_co2.Name" xml:space="preserve">
+    <value>label3_co2</value>
+  </data>
+  <data name="&gt;&gt;label3_co2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3_co2.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;label3_co2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label2_cost.Name" xml:space="preserve">
+    <value>label2_cost</value>
+  </data>
+  <data name="&gt;&gt;label2_cost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2_cost.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;label2_cost.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;label1_power.Name" xml:space="preserve">
+    <value>label1_power</value>
+  </data>
+  <data name="&gt;&gt;label1_power.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1_power.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;label1_power.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;pictureBox7.Name" xml:space="preserve">
+    <value>pictureBox7</value>
+  </data>
+  <data name="&gt;&gt;pictureBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox7.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;pictureBox7.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.Name" xml:space="preserve">
+    <value>pictureBox6</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.Name" xml:space="preserve">
+    <value>pictureBox5</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.Name" xml:space="preserve">
+    <value>pictureBox4</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.Parent" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="tP2_DpEnergySol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="tP2_DpEnergySol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tP2_DpEnergySol.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tP2_DpEnergySol.Text" xml:space="preserve">
+    <value>에너지 절감량</value>
+  </data>
+  <data name="&gt;&gt;tP2_DpEnergySol.Name" xml:space="preserve">
+    <value>tP2_DpEnergySol</value>
+  </data>
+  <data name="&gt;&gt;tP2_DpEnergySol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tP2_DpEnergySol.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tP2_DpEnergySol.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tP3_ChkProximity.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="&gt;&gt;textBox_Caution.Name" xml:space="preserve">
+    <value>textBox_Caution</value>
+  </data>
+  <data name="&gt;&gt;textBox_Caution.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_Caution.Parent" xml:space="preserve">
+    <value>tP3_ChkProximity</value>
+  </data>
+  <data name="&gt;&gt;textBox_Caution.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textBox7.Name" xml:space="preserve">
+    <value>textBox7</value>
+  </data>
+  <data name="&gt;&gt;textBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox7.Parent" xml:space="preserve">
+    <value>tP3_ChkProximity</value>
+  </data>
+  <data name="&gt;&gt;textBox7.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
+    <value>progressBar1</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
+    <value>tP3_ChkProximity</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;trackBar.Name" xml:space="preserve">
+    <value>trackBar</value>
+  </data>
+  <data name="&gt;&gt;trackBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar.Parent" xml:space="preserve">
+    <value>tP3_ChkProximity</value>
+  </data>
+  <data name="&gt;&gt;trackBar.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tP3_ChkProximity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="tP3_ChkProximity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tP3_ChkProximity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tP3_ChkProximity.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tP3_ChkProximity.Text" xml:space="preserve">
+    <value>위치정밀도</value>
+  </data>
+  <data name="&gt;&gt;tP3_ChkProximity.Name" xml:space="preserve">
+    <value>tP3_ChkProximity</value>
+  </data>
+  <data name="&gt;&gt;tP3_ChkProximity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tP3_ChkProximity.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tP3_ChkProximity.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tP4_SecurityPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="&gt;&gt;label_dispTotTime.Name" xml:space="preserve">
+    <value>label_dispTotTime</value>
+  </data>
+  <data name="&gt;&gt;label_dispTotTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_dispTotTime.Parent" xml:space="preserve">
+    <value>tP4_SecurityPage</value>
+  </data>
+  <data name="&gt;&gt;label_dispTotTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pictureBox9.Name" xml:space="preserve">
+    <value>pictureBox9</value>
+  </data>
+  <data name="&gt;&gt;pictureBox9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox9.Parent" xml:space="preserve">
+    <value>tP4_SecurityPage</value>
+  </data>
+  <data name="&gt;&gt;pictureBox9.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tP4_SecurityPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="tP4_SecurityPage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tP4_SecurityPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tP4_SecurityPage.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tP4_SecurityPage.Text" xml:space="preserve">
+    <value>보안</value>
+  </data>
+  <data name="&gt;&gt;tP4_SecurityPage.Name" xml:space="preserve">
+    <value>tP4_SecurityPage</value>
+  </data>
+  <data name="&gt;&gt;tP4_SecurityPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tP4_SecurityPage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tP4_SecurityPage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tP5_HomePage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tP5_HomePage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="tP5_HomePage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tP5_HomePage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tP5_HomePage.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tP5_HomePage.Text" xml:space="preserve">
+    <value>회사소개</value>
+  </data>
+  <data name="&gt;&gt;tP5_HomePage.Name" xml:space="preserve">
+    <value>tP5_HomePage</value>
+  </data>
+  <data name="&gt;&gt;tP5_HomePage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tP5_HomePage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tP5_HomePage.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tP6_UserManual.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tP6_UserManual.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="tP6_UserManual.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tP6_UserManual.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tP6_UserManual.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tP6_UserManual.Text" xml:space="preserve">
+    <value>도움말</value>
+  </data>
+  <data name="&gt;&gt;tP6_UserManual.Name" xml:space="preserve">
+    <value>tP6_UserManual</value>
+  </data>
+  <data name="&gt;&gt;tP6_UserManual.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tP6_UserManual.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tP6_UserManual.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tP7_SettingPage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAh4AAACnCAYAAABemVXeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAA6FJREFUeF7t1gEJxEAAxMD37+4UtRqewhGWGYiH/B4AgEuMBwBwjfEAAK75NB7n
+        HIUCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54
+        DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEY
+        CgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEU
+        ANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygA
+        qDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQ
+        ZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDO
+        eAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3x
+        GAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMx
+        FADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMo
+        AKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AA
+        UGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCg
+        zngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd
+        8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrj
+        MRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZj
+        KACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAuk/jAQDwD+MBAFxjPACAS57nBZw0K2KzvOtTAAAAAElFTkSu
+        QmCC
+</value>
+  </data>
+  <data name="tP7_SettingPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="&gt;&gt;linkLabel_etc.Name" xml:space="preserve">
+    <value>linkLabel_etc</value>
+  </data>
+  <data name="&gt;&gt;linkLabel_etc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabel_etc.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;linkLabel_etc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label_etc.Name" xml:space="preserve">
+    <value>label_etc</value>
+  </data>
+  <data name="&gt;&gt;label_etc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_etc.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;label_etc.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label_UserPw.Name" xml:space="preserve">
+    <value>label_UserPw</value>
+  </data>
+  <data name="&gt;&gt;label_UserPw.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_UserPw.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;label_UserPw.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ChkUserPw.Name" xml:space="preserve">
+    <value>ChkUserPw</value>
+  </data>
+  <data name="&gt;&gt;ChkUserPw.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ChkUserPw.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;ChkUserPw.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbUserPw.Name" xml:space="preserve">
+    <value>tbUserPw</value>
+  </data>
+  <data name="&gt;&gt;tbUserPw.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbUserPw.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tbUserPw.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ChkMode.Name" xml:space="preserve">
+    <value>ChkMode</value>
+  </data>
+  <data name="&gt;&gt;ChkMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ChkMode.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;ChkMode.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;rbPcMode.Name" xml:space="preserve">
+    <value>rbPcMode</value>
+  </data>
+  <data name="&gt;&gt;rbPcMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbPcMode.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;rbPcMode.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;rbMonitorMode.Name" xml:space="preserve">
+    <value>rbMonitorMode</value>
+  </data>
+  <data name="&gt;&gt;rbMonitorMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbMonitorMode.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;rbMonitorMode.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label_Mode.Name" xml:space="preserve">
+    <value>label_Mode</value>
+  </data>
+  <data name="&gt;&gt;label_Mode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_Mode.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;label_Mode.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr5.Name" xml:space="preserve">
+    <value>tbDeviceAddr5</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr5.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr5.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr4.Name" xml:space="preserve">
+    <value>tbDeviceAddr4</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr4.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr4.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr3.Name" xml:space="preserve">
+    <value>tbDeviceAddr3</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr3.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr3.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr2.Name" xml:space="preserve">
+    <value>tbDeviceAddr2</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr2.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr2.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr1.Name" xml:space="preserve">
+    <value>tbDeviceAddr1</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr1.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr1.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;btOk.Name" xml:space="preserve">
+    <value>btOk</value>
+  </data>
+  <data name="&gt;&gt;btOk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btOk.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;btOk.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr0.Name" xml:space="preserve">
+    <value>tbDeviceAddr0</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr0.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tbDeviceAddr0.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;label_totTime1.Name" xml:space="preserve">
+    <value>label_totTime1</value>
+  </data>
+  <data name="&gt;&gt;label_totTime1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_totTime1.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;label_totTime1.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;label_localName1.Name" xml:space="preserve">
+    <value>label_localName1</value>
+  </data>
+  <data name="&gt;&gt;label_localName1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_localName1.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;label_localName1.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;label_totTime.Name" xml:space="preserve">
+    <value>label_totTime</value>
+  </data>
+  <data name="&gt;&gt;label_totTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_totTime.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;label_totTime.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;label_pairing.Name" xml:space="preserve">
+    <value>label_pairing</value>
+  </data>
+  <data name="&gt;&gt;label_pairing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_pairing.Parent" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;label_pairing.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="tP7_SettingPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="tP7_SettingPage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tP7_SettingPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tP7_SettingPage.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tP7_SettingPage.Text" xml:space="preserve">
+    <value>환경설정</value>
+  </data>
+  <data name="&gt;&gt;tP7_SettingPage.Name" xml:space="preserve">
+    <value>tP7_SettingPage</value>
+  </data>
+  <data name="&gt;&gt;tP7_SettingPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tP7_SettingPage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tP7_SettingPage.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel1.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
+    <value>Single</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 11.25pt</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 59</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>장치</value>
+  </data>
+  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 11.25pt</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 61</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 59</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>절전모드</value>
+  </data>
+  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 11.25pt</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 121</value>
+  </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 39</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>비밀번호</value>
+  </data>
+  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="deviceUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="deviceUserControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 9pt</value>
+  </data>
+  <data name="deviceUserControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 5</value>
+  </data>
+  <data name="deviceUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="deviceUserControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 51</value>
+  </data>
+  <data name="deviceUserControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;deviceUserControl1.Name" xml:space="preserve">
+    <value>deviceUserControl1</value>
+  </data>
+  <data name="&gt;&gt;deviceUserControl1.Type" xml:space="preserve">
+    <value>SSES_Program.DeviceUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;deviceUserControl1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;deviceUserControl1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="passwordUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="passwordUserControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 9pt</value>
+  </data>
+  <data name="passwordUserControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 125</value>
+  </data>
+  <data name="passwordUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="passwordUserControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 31</value>
+  </data>
+  <data name="passwordUserControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;passwordUserControl1.Name" xml:space="preserve">
+    <value>passwordUserControl1</value>
+  </data>
+  <data name="&gt;&gt;passwordUserControl1.Type" xml:space="preserve">
+    <value>SSES_Program.PasswordUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;passwordUserControl1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;passwordUserControl1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="sleepModeUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="sleepModeUserControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 9pt</value>
+  </data>
+  <data name="sleepModeUserControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 65</value>
+  </data>
+  <data name="sleepModeUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="sleepModeUserControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 51</value>
+  </data>
+  <data name="sleepModeUserControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;sleepModeUserControl1.Name" xml:space="preserve">
+    <value>sleepModeUserControl1</value>
+  </data>
+  <data name="&gt;&gt;sleepModeUserControl1.Type" xml:space="preserve">
+    <value>SSES_Program.SleepModeUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;sleepModeUserControl1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;sleepModeUserControl1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>tP8_SettingPageNew</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deviceUserControl1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="passwordUserControl1" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="sleepModeUserControl1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,20,Percent,80" /&gt;&lt;Rows Styles="Percent,30,Percent,30,Percent,20,Percent,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tP8_SettingPageNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="tP8_SettingPageNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 204</value>
+  </data>
+  <data name="tP8_SettingPageNew.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;tP8_SettingPageNew.Name" xml:space="preserve">
+    <value>tP8_SettingPageNew</value>
+  </data>
+  <data name="&gt;&gt;tP8_SettingPageNew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tP8_SettingPageNew.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tP8_SettingPageNew.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tabControl1.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 1</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 102</value>
+  </data>
+  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tabControl1.Padding" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 213</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="textBox.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="textBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 11.25pt</value>
+  </data>
+  <data name="textBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 15</value>
+  </data>
+  <data name="textBox.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>503, 162</value>
+  </data>
+  <data name="textBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBox.Text" xml:space="preserve">
+    <value>SSES 는 Smart Security and Energy Saving 의 약자로써, PC와 mobile 간
+의 블루투스 통신을 이용하여 PC 보안 및 에너지를 절약하는 솔루션입니다.
+PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하실 수 있습니다.
+환경설정에서 mobile 프로그램에 있는 장치주소를 입력한 후, 사용하시기 바랍니다.
+
+감사합니다. :-)</value>
+  </data>
+  <data name="&gt;&gt;textBox.Name" xml:space="preserve">
+    <value>textBox</value>
+  </data>
+  <data name="&gt;&gt;textBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox.Parent" xml:space="preserve">
+    <value>tP1_IntroHome</value>
+  </data>
+  <data name="&gt;&gt;textBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="textBlock_tree.Font" type="System.Drawing.Font, System.Drawing">
     <value>맑은 고딕, 12pt</value>
@@ -1002,33 +1954,6 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   <data name="&gt;&gt;pictureBox4.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="tP2_DpEnergySol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="tP2_DpEnergySol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tP2_DpEnergySol.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tP2_DpEnergySol.Text" xml:space="preserve">
-    <value>에너지 절감량</value>
-  </data>
-  <data name="&gt;&gt;tP2_DpEnergySol.Name" xml:space="preserve">
-    <value>tP2_DpEnergySol</value>
-  </data>
-  <data name="&gt;&gt;tP2_DpEnergySol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tP2_DpEnergySol.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tP2_DpEnergySol.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tP3_ChkProximity.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="textBox_Caution.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1141,36 +2066,6 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   </data>
   <data name="&gt;&gt;trackBar.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="tP3_ChkProximity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="tP3_ChkProximity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tP3_ChkProximity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tP3_ChkProximity.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tP3_ChkProximity.Text" xml:space="preserve">
-    <value>위치정밀도</value>
-  </data>
-  <data name="&gt;&gt;tP3_ChkProximity.Name" xml:space="preserve">
-    <value>tP3_ChkProximity</value>
-  </data>
-  <data name="&gt;&gt;tP3_ChkProximity.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tP3_ChkProximity.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tP3_ChkProximity.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tP4_SecurityPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
   </data>
   <data name="label_dispTotTime.Font" type="System.Drawing.Font, System.Drawing">
     <value>맑은 고딕, 11.25pt</value>
@@ -2795,118 +3690,6 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   <data name="&gt;&gt;pictureBox9.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tP4_SecurityPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="tP4_SecurityPage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tP4_SecurityPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tP4_SecurityPage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tP4_SecurityPage.Text" xml:space="preserve">
-    <value>보안</value>
-  </data>
-  <data name="&gt;&gt;tP4_SecurityPage.Name" xml:space="preserve">
-    <value>tP4_SecurityPage</value>
-  </data>
-  <data name="&gt;&gt;tP4_SecurityPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tP4_SecurityPage.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tP4_SecurityPage.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tP5_HomePage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tP5_HomePage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="tP5_HomePage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tP5_HomePage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tP5_HomePage.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="tP5_HomePage.Text" xml:space="preserve">
-    <value>회사소개</value>
-  </data>
-  <data name="&gt;&gt;tP5_HomePage.Name" xml:space="preserve">
-    <value>tP5_HomePage</value>
-  </data>
-  <data name="&gt;&gt;tP5_HomePage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tP5_HomePage.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tP5_HomePage.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tP6_UserManual.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tP6_UserManual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="tP6_UserManual.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tP6_UserManual.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tP6_UserManual.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="tP6_UserManual.Text" xml:space="preserve">
-    <value>도움말</value>
-  </data>
-  <data name="&gt;&gt;tP6_UserManual.Name" xml:space="preserve">
-    <value>tP6_UserManual</value>
-  </data>
-  <data name="&gt;&gt;tP6_UserManual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tP6_UserManual.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tP6_UserManual.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tP7_SettingPage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAh4AAACnCAYAAABemVXeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        xAAADsQBlSsOGwAAA6FJREFUeF7t1gEJxEAAxMD37+4UtRqewhGWGYiH/B4AgEuMBwBwjfEAAK75NB7n
-        HIUCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54
-        DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEY
-        CgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEU
-        ANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygA
-        qDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQ
-        ZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDO
-        eAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3x
-        GAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAOuMx
-        FADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCgzngMBQB1xmMo
-        AKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd8RgKAOqMx1AA
-        UGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrjMRQA1BmPoQCg
-        zngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZjKACoMx5DAUCd
-        8RgKAOqMx1AAUGc8hgKAOuMxFADUGY+hAKDOeAwFAHXGYygAqDMeQwFAnfEYCgDqjMdQAFBnPIYCgDrj
-        MRQA1BmPoQCgzngMBQB1xmMoAKgzHkMBQJ3xGAoA6ozHUABQZzyGAoA64zEUANQZj6EAoM54DAUAdcZj
-        KACoMx5DAUCd8RgKAOqMx1AAUGc8hgKAuk/jAQDwD+MBAFxjPACAS57nBZw0K2KzvOtTAAAAAElFTkSu
-        QmCC
-</value>
-  </data>
-  <data name="tP7_SettingPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
   <data name="linkLabel_etc.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3485,318 +4268,6 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   </data>
   <data name="&gt;&gt;label_pairing.ZOrder" xml:space="preserve">
     <value>19</value>
-  </data>
-  <data name="tP7_SettingPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="tP7_SettingPage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tP7_SettingPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tP7_SettingPage.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="tP7_SettingPage.Text" xml:space="preserve">
-    <value>환경설정</value>
-  </data>
-  <data name="&gt;&gt;tP7_SettingPage.Name" xml:space="preserve">
-    <value>tP7_SettingPage</value>
-  </data>
-  <data name="&gt;&gt;tP7_SettingPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tP7_SettingPage.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tP7_SettingPage.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tableLayoutPanel1.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
-    <value>Single</value>
-  </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 11.25pt</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 75</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>장치</value>
-  </data>
-  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 11.25pt</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 77</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 75</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>절전모드</value>
-  </data>
-  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 11.25pt</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 153</value>
-  </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 50</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>비밀번호</value>
-  </data>
-  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="deviceUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="deviceUserControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 9pt</value>
-  </data>
-  <data name="deviceUserControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 5</value>
-  </data>
-  <data name="deviceUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="deviceUserControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 67</value>
-  </data>
-  <data name="deviceUserControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;deviceUserControl1.Name" xml:space="preserve">
-    <value>deviceUserControl1</value>
-  </data>
-  <data name="&gt;&gt;deviceUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.DeviceUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;deviceUserControl1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;deviceUserControl1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="passwordUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="passwordUserControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 9pt</value>
-  </data>
-  <data name="passwordUserControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 157</value>
-  </data>
-  <data name="passwordUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="passwordUserControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 42</value>
-  </data>
-  <data name="passwordUserControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;passwordUserControl1.Name" xml:space="preserve">
-    <value>passwordUserControl1</value>
-  </data>
-  <data name="&gt;&gt;passwordUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.PasswordUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;passwordUserControl1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;passwordUserControl1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="sleepModeUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="sleepModeUserControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 9pt</value>
-  </data>
-  <data name="sleepModeUserControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 81</value>
-  </data>
-  <data name="sleepModeUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="sleepModeUserControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 67</value>
-  </data>
-  <data name="sleepModeUserControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;sleepModeUserControl1.Name" xml:space="preserve">
-    <value>sleepModeUserControl1</value>
-  </data>
-  <data name="&gt;&gt;sleepModeUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.SleepModeUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;sleepModeUserControl1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;sleepModeUserControl1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>tP8_SettingPageNew</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deviceUserControl1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="passwordUserControl1" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="sleepModeUserControl1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,20,Percent,80" /&gt;&lt;Rows Styles="Percent,30,Percent,30,Percent,20,Percent,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tP8_SettingPageNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="tP8_SettingPageNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 204</value>
-  </data>
-  <data name="tP8_SettingPageNew.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;tP8_SettingPageNew.Name" xml:space="preserve">
-    <value>tP8_SettingPageNew</value>
-  </data>
-  <data name="&gt;&gt;tP8_SettingPageNew.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tP8_SettingPageNew.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tP8_SettingPageNew.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="tabControl1.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 1</value>
-  </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 102</value>
-  </data>
-  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tabControl1.Padding" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>554, 213</value>
-  </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6823,6 +7294,15 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>221, 17</value>
   </metadata>
+  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 76</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
+    <value>contextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="열기ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 24</value>
   </data>
@@ -6840,15 +7320,6 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   </data>
   <data name="종료ToolStripMenuItem.Text" xml:space="preserve">
     <value>종료</value>
-  </data>
-  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 76</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
-    <value>contextMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBox_LangToggle.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>

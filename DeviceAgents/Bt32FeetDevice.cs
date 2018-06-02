@@ -320,9 +320,9 @@ namespace DeviceAgents
                     {
                         LockCount++;
                         // 락 카운트가 10 이상인 경우 서비스 통신 실패로 간주
-                        if (LockCount > 10)
+                        if (LockCount > 3)
                         {
-                            log.write("==== 락 카운트가 10 이상인 경우 서비스 통신 실패로 간주 ====");
+                            log.write("==== IOS 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주 ====");
                             IsServiced = false;
                         } 
                     }

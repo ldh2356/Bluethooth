@@ -31,13 +31,28 @@ namespace SSES_Program
 
         public static void AlertSoundStart()
         {
-            Player.SoundLocation = drivepath + fileName;
-            Player.PlayLooping();
+            try
+            {
+                AudioManager.SetMasterVolume(100);
+                Player.SoundLocation = drivepath + fileName;
+                Player.PlayLooping();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
 
         public static void AlertSoundStop()
         {
-            Player.Stop();
+            try
+            {
+                Player.Stop();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Message);
+            }
         }
     }
 }

@@ -57,39 +57,39 @@ namespace SSES_Program
 
         public static void BlockCtrlAltDel()
         {
-            //RegistryKey regkey;
-            //string keyValueInt = "1";
-            //string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
+            RegistryKey regkey;
+            string keyValueInt = "1";
+            string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
 
-            //try
-            //{
-            //    regkey = Registry.CurrentUser.CreateSubKey(subKey);
-            //    regkey.SetValue("DisableTaskMgr", keyValueInt);
-            //    regkey.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    ex.ToString();
-            //    //  MessageBox.Show(ex.ToString());
-            //}
+            try
+            {
+                regkey = Registry.CurrentUser.CreateSubKey(subKey);
+                regkey.SetValue("DisableTaskMgr", keyValueInt);
+                regkey.Close();
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                //  MessageBox.Show(ex.ToString());
+            }
         }
 
         public static void UnBlockCtrlAltDel()
         {
-            //try
-            //{
-            //    string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
-            //    RegistryKey rk = Registry.CurrentUser;
-            //    RegistryKey sk1 = rk.OpenSubKey(subKey);
+            try
+            {
+                string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
+                RegistryKey rk = Registry.CurrentUser;
+                RegistryKey sk1 = rk.OpenSubKey(subKey);
 
-            //    if (sk1 != null)
-            //        rk.DeleteSubKeyTree(subKey);
-            //}
-            //catch (Exception ex)
-            //{
-            //    ex.ToString();
-            //    // MessageBox.Show(ex.ToString());
-            //}
+                if (sk1 != null)
+                    rk.DeleteSubKeyTree(subKey);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                // MessageBox.Show(ex.ToString());
+            }
         }
 
         #region Flag
@@ -161,23 +161,23 @@ namespace SSES_Program
 
                     //if (lParam.vkCode == VK_ESCAPE) // ESC 후킹
                     //{
-                        //FormScreenSaverCancel.instance.Show();
+                    //    FormScreenSaverCancel.instance.Show();
                     //}
 
-                    //Alt+Tab, Alt+Esc, Ctrl+Esc, Windows Key, ESC
-                    //if (((lParam.vkCode == VK_TAB) && (lParam.flags == LLKHF_ALTDOWN)) ||
-                    //    ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == LLKHF_ALTDOWN)) ||
-                    //    ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == 0)) ||
-                    //    ((lParam.vkCode == VK_DELETE)) ||
-                    //    ((lParam.vkCode == VK_LWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
-                    //    ((lParam.vkCode == VK_RWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
-                    //    ((true) && (lParam.flags == LLKHF_ALTDOWN)) ||
-                    //    (lParam.vkCode == VK_TAB) ||
-                    //    (lParam.flags == LLKHF_ALTDOWN))
-                    //{
-                    //    blnEat = true;
-                    //}
-                    //Service.AlertSoundStart();
+                    //Alt + Tab, Alt + Esc, Ctrl + Esc, Windows Key, ESC
+                    if (((lParam.vkCode == VK_TAB) && (lParam.flags == LLKHF_ALTDOWN)) ||
+                        ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == LLKHF_ALTDOWN)) ||
+                        ((lParam.vkCode == VK_ESCAPE) && (lParam.flags == 0)) ||
+                        ((lParam.vkCode == VK_DELETE)) ||
+                        ((lParam.vkCode == VK_LWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
+                        ((lParam.vkCode == VK_RWIN) && (lParam.flags == LLKHF_EXTENDED)) ||
+                        ((true) && (lParam.flags == LLKHF_ALTDOWN)) ||
+                        (lParam.vkCode == VK_TAB) ||
+                        (lParam.flags == LLKHF_ALTDOWN))
+                    {
+                        blnEat = true;
+                    }
+                    Service.AlertSoundStart();
                     break;
             }
 

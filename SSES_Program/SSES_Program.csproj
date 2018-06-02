@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="AudioManager.cs" />
     <Compile Include="checkpassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +156,7 @@
     <Compile Include="SleepModeUserControl.Designer.cs">
       <DependentUpon>SleepModeUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="SoundUtil.cs" />
     <Compile Include="SsesRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

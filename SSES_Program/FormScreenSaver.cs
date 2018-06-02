@@ -121,7 +121,6 @@ namespace SSES_Program
         {
             try
             {
-
                 formScreenSaverCancel = new FormScreenSaverCancel(this);
                 formScreenSaverCancel.TopMost = true;
                 formScreenSaverCancel.ShowDialog();
