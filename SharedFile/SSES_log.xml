@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SaveEnergy>
+  <UsedSec>1.19:31:36.4647901</UsedSec>
+  <UsedOperation>6.23:02:48.3370960</UsedOperation>
+  <UsedKwh>6.9642873240044452</UsedKwh>
+  <UsedCost>1274.4645802928135</UsedCost>
+  <Co2>2.9528578253778845</Co2>
+  <Tree>1.0660136553710775</Tree>
+  <IsSend>true</IsSend>
+</SaveEnergy>

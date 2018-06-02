@@ -779,6 +779,12 @@ namespace SSES_Program
             {
                 UIInvoker = new UIInvokerDelegate(DiplayMessage);
 
+
+#if (_nnv)
+    Console.Write("");     
+#else
+    Console.Write("");
+#endif
                 //keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);
                 //mouseHook.MessageHooked += new EventHandler<Hook.MouseHookEventArgs>(mouseHook_MessageHooked);
 
@@ -786,8 +792,8 @@ namespace SSES_Program
                 //mouseHook.StartHook();
 
 
-            //시작 프로그램 추가 
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+                //시작 프로그램 추가 
+                RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
            
             if (registryKey.GetValue("MyApp") == null)
             {
