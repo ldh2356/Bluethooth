@@ -96,6 +96,8 @@ namespace SSES_Program
                         formScreenSaver.main.screenSaverAllStop();
                     else // 듀얼 모니터인 경우
                         formScreenSaver2.main.screenSaverAllStop();
+
+                    formScreenSaver.main.screensaverPasswordflag = true;
                 }
                 else
                 {

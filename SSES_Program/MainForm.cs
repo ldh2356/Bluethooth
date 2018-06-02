@@ -1115,7 +1115,7 @@ namespace SSES_Program
                 MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
 
 
-                //bt32FeetDevice.GetBtAddr(DevAddrs);
+                bt32FeetDevice.GetBtAddr(MacAddressFromUserInput);
                 bt32FeetDevice.OnData += On32FeetData;
                 bt32FeetDevice.Start();
             }
@@ -1402,7 +1402,6 @@ namespace SSES_Program
                     }
                 }
                 screensaverStatus = false;
-                screensaverPasswordflag = true;
                 Service.AlertSoundStop();
             }
             catch (Exception ex)
