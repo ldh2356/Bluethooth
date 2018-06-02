@@ -1104,12 +1104,12 @@ namespace SSES_Program
                 if ((String.IsNullOrEmpty(deviceUserControl1.TbDeviceAddr5.Text)) || (deviceUserControl1.TbDeviceAddr5.TextLength < 2)) { MessageBox.Show(SsesRes.bluetooth_setting_msg + "\n 6th text box"); return; }
 
 
-            bt32FeetDevice.Stop();
-            bt32FeetDevice.OnData -= On32FeetData;
-            string[] AddArray = { deviceUserControl1.TbDeviceAddr0.Text, deviceUserControl1.TbDeviceAddr1.Text, deviceUserControl1.TbDeviceAddr2.Text, deviceUserControl1.TbDeviceAddr3.Text, deviceUserControl1.TbDeviceAddr4.Text, deviceUserControl1.TbDeviceAddr5.Text };
-            MacAddressFromUserInput = String.Join(":", AddArray);
+                bt32FeetDevice.Stop();
+                bt32FeetDevice.OnData -= On32FeetData;
+                string[] AddArray = { deviceUserControl1.TbDeviceAddr0.Text, deviceUserControl1.TbDeviceAddr1.Text, deviceUserControl1.TbDeviceAddr2.Text, deviceUserControl1.TbDeviceAddr3.Text, deviceUserControl1.TbDeviceAddr4.Text, deviceUserControl1.TbDeviceAddr5.Text };
+                MacAddressFromUserInput = String.Join(":", AddArray);
 
-            AppConfig.Instance.DeviceAddress = MacAddressFromUserInput;
+                AppConfig.Instance.DeviceAddress = MacAddressFromUserInput;
 
 
                 MessageBox.Show(SsesRes.deviceAddr_changeMsg, SsesRes.deviceAddr_changeTitle);
