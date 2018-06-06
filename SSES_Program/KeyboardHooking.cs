@@ -67,7 +67,7 @@ namespace SSES_Program
             }
             catch (Exception ex)
             {
-                MainForm.log.write(ex.Source);
+                MainForm.log.write(ex.StackTrace);
             }
         }
 
@@ -82,7 +82,7 @@ namespace SSES_Program
             }
             catch (Exception ex)
             {
-                MainForm.log.write(ex.Source);
+                MainForm.log.write(ex.StackTrace);
             }
         }
 
@@ -113,7 +113,7 @@ namespace SSES_Program
             }
             catch (Exception ex)
             {
-                MainForm.log.write(ex.Source);                
+                MainForm.log.write(ex.StackTrace);                
             }
         }
 
