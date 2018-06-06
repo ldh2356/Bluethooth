@@ -52,8 +52,7 @@ namespace SSES_Program
                     isSoundPlaying = true;
 
                     // 재생직전 볼륨을 저장한다
-                    lastVolumePercentage = int.Parse(AudioManager.GetMasterVolume().ToString());
-                    MainForm.log.write("lastVolumePercentage" + lastVolumePercentage.ToString());
+                    lastVolumePercentage = int.Parse(AudioManager.GetMasterVolume().ToString());                    
 
                     // 재생직전 최고 볼륨으로 마스터 볼륨을 설정한다
                     AudioManager.SetMasterVolume(100);

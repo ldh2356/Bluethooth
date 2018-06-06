@@ -55,45 +55,63 @@ namespace SSES_Program
             }
         }
 
+
+        /// <summary>
+        /// 작업관리자 실행시 실행이 안되도록 한다
+        /// </summary>
         public static void BlockCtrlAltDel()
         {
-            RegistryKey regkey;
-            string keyValueInt = "1";
-            string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
-
             try
             {
-                regkey = Registry.CurrentUser.CreateSubKey(subKey);
-                regkey.SetValue("DisableTaskMgr", keyValueInt);
-                regkey.Close();
+                ToggleTaskManagerBlock(false);
             }
             catch (Exception ex)
             {
-                ex.ToString();
-                //  MessageBox.Show(ex.ToString());
+                MainForm.log.write(ex.Source);
             }
         }
 
+        /// <summary>
+        /// 작업관리자 실행시 실행이 안되도록 하는것을 복원한다
+        /// </summary>
         public static void UnBlockCtrlAltDel()
         {
             try
             {
-                string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
-                RegistryKey rk = Registry.CurrentUser;
-                RegistryKey sk1 = rk.OpenSubKey(subKey);
-
-                if (sk1 != null)
-                    rk.DeleteSubKeyTree(subKey);
+                ToggleTaskManagerBlock(true);
             }
             catch (Exception ex)
             {
-                ex.ToString();
-                // MessageBox.Show(ex.ToString());
+                MainForm.log.write(ex.Source);
+            }
+        }
+
+
+
+        /// <summary>
+        /// 작업관리자 Enable/Disable 을 설정한다
+        /// </summary>
+        /// <param name="enable"></param>
+        public static void ToggleTaskManagerBlock(bool enable)
+        {
+            try
+            {
+                RegistryKey objRegistryKey = Registry.CurrentUser.CreateSubKey(
+                @"Software\Microsoft\Windows\CurrentVersion\Policies\System");
+                if (enable && objRegistryKey.GetValue("DisableTaskMgr") != null)
+                    objRegistryKey.DeleteValue("DisableTaskMgr");
+                else
+                    objRegistryKey.SetValue("DisableTaskMgr", "1");
+                objRegistryKey.Close();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.Source);                
             }
         }
 
         #region Flag
-        
+
         const int WM_KEYFIRST = 0x100;
         const int WM_KEYDOWN = 0x100;
         const int WM_KEYUP = 0x101;
