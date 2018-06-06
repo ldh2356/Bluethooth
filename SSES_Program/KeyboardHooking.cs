@@ -89,19 +89,26 @@ namespace SSES_Program
 
 
         /// <summary>
-        /// 작업관리자 Enable/Disable 을 설정한다
+        /// 작업관리자 Enable/Disable 을 관리한다
         /// </summary>
         /// <param name="enable"></param>
         public static void ToggleTaskManagerBlock(bool enable)
         {
             try
             {
-                RegistryKey objRegistryKey = Registry.CurrentUser.CreateSubKey(
-                @"Software\Microsoft\Windows\CurrentVersion\Policies\System");
+                RegistryKey objRegistryKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System");
+
+                // 작업관리자를 복원하고 레지스트리에 DisableTaskMgr 가 등록 안되어있다면 값을 제거
                 if (enable && objRegistryKey.GetValue("DisableTaskMgr") != null)
+                {
                     objRegistryKey.DeleteValue("DisableTaskMgr");
+                }
+                // 작업관리자를 Diabled 시킬경우 레지스트리에 값을 추가
                 else
+                {
                     objRegistryKey.SetValue("DisableTaskMgr", "1");
+                }
+
                 objRegistryKey.Close();
             }
             catch (Exception ex)
