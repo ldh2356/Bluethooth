@@ -202,7 +202,7 @@ namespace SSES_Program
                     {
                         blnEat = true;
                     }
-                    Service.AlertSoundStart();
+                    //Service.AlertSoundStart();
                     break;
             }
 
