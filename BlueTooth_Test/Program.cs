@@ -48,8 +48,7 @@ namespace BlueTooth_Test
         /// 주소값
         /// </summary>
         //private static string Address { get; set; } = "00:CD:FE:6F:D5:86";
-        private static string Address { get; set; } = "AC:5A:14:10:4F:63";
-
+        private static string MacAddress { get; set; } = "AC:5A:14:10:4F:63";
 
         /// <summary>
         /// 블루투스 
@@ -57,14 +56,16 @@ namespace BlueTooth_Test
         private static IAsyncResult iasyncResult;
 
         /// <summary>
-        /// 블루투스 주소
-        /// </summary>
-        private static BluetoothAddress bluetoothAddress;
-
         /// <summary>
         /// 블루투스 디바이스 정보
         /// </summary>
         private static BluetoothDeviceInfo bluetoothDeviceInfo;
+
+        /// <summary>
+        /// 메인클래스
+        /// 블루투스 주소
+        /// </summary>
+        private static BluetoothAddress bluetoothAddress;
 
         /// <summary>
         /// 락 카운트
@@ -75,30 +76,35 @@ namespace BlueTooth_Test
         /// <summary>
         /// 모델 0: 안드로이드 1: 아이폰
         /// </summary>
-        private static readonly int model = 0;
-
+        private static readonly int model = 1;
 
         /// <summary>
-        /// 메인클래스
+        /// 생성자
+        /// </summary>
+        public Program()
+        {
+        }
+
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
             try
             {
-                // 로그 세팅
-                string modelType = (model == 0 ? "안드로이드" : "아이폰");
+                // 로그 세팅            
                 string appPath = AppDomain.CurrentDomain.BaseDirectory;
                 XmlConfigurator.Configure(new System.IO.FileInfo($@"{appPath}\log4net.xml"));
                 logger = LogManager.GetLogger(typeof(Program));
-
                 logger.Info($"로그기록 시작 {DateTime.Now.ToString()} =====");
-                logger.Info($"로그모델 타입:{modelType}");
+                logger.Info($"로그모델 타입:{(model == 0 ? "안드로이드" : "아이폰")}");
                 logger.Info($"맥어드레스 입력");
-                string addr = Console.ReadLine();
+                string userInput = Console.ReadLine();
+                if(userInput.Trim() == "")
+                {
+                    userInput = "00:CD:FE:6F:D5:87";
+                }
 
-                Address = addr;
-
+                MacAddress = userInput;
                 Service();
             }
             catch (Exception ex)
@@ -164,7 +170,9 @@ namespace BlueTooth_Test
 
                 // 종료중이 아닐경우
                 if (!shutDown)
+                {
                     BlueToothTest();
+                }
             }
             catch (Exception ex)
             {
@@ -180,13 +188,42 @@ namespace BlueTooth_Test
 
 
         /// <summary>
+        /// 블루투스 신호가 범위안에 잡히는지 테스트한다
+        /// </summary>
+        /// <returns></returns>
+        private static bool IsInRange()
+        {
+            bool inRange = false;
+
+            // 가짜 UUID 를 생성한다
+            Guid fakeUuid = new Guid("{F13F471D-47CB-41d6-9609-BAD0690BF891}");
+            bluetoothAddress = BluetoothAddress.Parse(MacAddress);
+            BluetoothDeviceInfo device = new BluetoothDeviceInfo(bluetoothAddress);
+
+            try
+            {
+                ServiceRecord[] records = device.GetServiceRecords(uuid);
+                inRange = true;
+            }
+            catch (Exception ex)
+            {
+                logger.Info("Out of range of bluetooh");
+                logger.Info(ex.Message);
+                inRange = false;
+            }
+
+            return inRange;
+        }
+
+
+        /// <summary>
         /// 블루투스 테스트를 진행한다
         /// </summary>
         private static void BlueToothTest()
         {
             try
             {                
-                bluetoothAddress = BluetoothAddress.Parse(Address);
+                bluetoothAddress = BluetoothAddress.Parse(MacAddress);
 
                 // 블루투스 장치가 켜져있는지 확인한다
                 while (true)
@@ -206,9 +243,13 @@ namespace BlueTooth_Test
                     }
                 }
 
-
-                // 블루투스 신호 설정
-                iasyncResult = bluetoothDeviceInfo.BeginGetServiceRecords(uuid, ServiceAsyncCallBack, bluetoothDeviceInfo);
+                // 기기가 범위안에 있는지 테스트한다 켜져있다면 블루투스 신호를 제대로 주고 받는지 테스트한다
+                if (IsInRange())
+                {
+                    // 블루투스 신호 설정
+                    iasyncResult = bluetoothDeviceInfo.BeginGetServiceRecords(uuid, ServiceAsyncCallBack, bluetoothDeviceInfo);
+                }                
+                
             }
             catch (Exception ex)
             {
@@ -228,53 +269,47 @@ namespace BlueTooth_Test
             {
                 bluetoothDeviceInfo = iasyncResult.AsyncState as BluetoothDeviceInfo;
 
-                if (!iasyncResult.IsCompleted)
-                    logger.Info($"{DateTime.Now.ToString()} 통신실패");
-                
-                if (iasyncResult.IsCompleted)
+                // 안드로이드의 경우
+                if (model == 0)
                 {
-                    
-                    // 안드로이드의 경우
-                    if (model == 0)
+                    try
                     {
-                        try
+                        ServiceRecord[] services = bluetoothDeviceInfo.EndGetServiceRecords(iasyncResult);
+                        if (services.Count() > 0)
                         {
-                            ServiceRecord[] services = bluetoothDeviceInfo.EndGetServiceRecords(iasyncResult);
-                            if(services.Count() > 0)
-                            {
-                                lockCount = 0;
-                                logger.Info($"{DateTime.Now.ToString()} 통신성공");
-                            }
-                            else
-                            {
-                                logger.Info($"{DateTime.Now.ToString()} 통신실패, 카운트:{++lockCount}");
+                            lockCount = 0;
+                            logger.Info($"{DateTime.Now.ToString()} 통신성공");
+                        }
+                        else
+                        {
+                            logger.Info($"{DateTime.Now.ToString()} 통신실패, 카운트:{++lockCount}");
 
-                                if(lockCount >= 3)
-                                {
-                                    logger.Info($"{DateTime.Now.ToString()} 라이브러리 오류, 카운트:{lockCount}");
-                                }
+                            if (lockCount >= 3)
+                            {
+                                logger.Info($"{DateTime.Now.ToString()} 라이브러리 오류, 카운트:{lockCount}");
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            logger.Info($"통신실패");
-                            logger.Info(ex.Message);
-                            throw;
-                        }
-                        
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        try
-                        {
-                            ServiceRecord[] serviceRecords = bluetoothDeviceInfo.EndGetServiceRecords(iasyncResult);
-                            logger.Info($"IOS {DateTime.Now.ToString()} 통신성공");
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Error(ex.Message);
-                            logger.Info($"IOS {DateTime.Now.ToString()} 통신실패");
-                        }
+                        logger.Info($"통신실패");
+                        logger.Info(ex.Message);
+                        throw;
+                    }
+
+                }
+                // 아이폰의 경우
+                else
+                {
+                    try
+                    {
+                        ServiceRecord[] serviceRecords = bluetoothDeviceInfo.EndGetServiceRecords(iasyncResult);
+                        logger.Info($"IOS {DateTime.Now.ToString()} 통신성공");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex.Message);
+                        logger.Info($"IOS {DateTime.Now.ToString()} 통신실패");
                     }
                 }
             }

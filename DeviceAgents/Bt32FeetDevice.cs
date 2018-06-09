@@ -198,6 +198,32 @@ namespace DeviceAgents
         }
 
 
+
+        /// <summary>
+        /// 블루투스 신호가 범위안에 잡히는지 테스트한다
+        /// </summary>
+        /// <returns></returns>
+        private static bool IsInRange()
+        {
+            bool inRange = false;
+
+            // 가짜 UUID 를 생성한다
+            Guid fakeUuid = new Guid("{F13F471D-47CB-41d6-9609-BAD0690BF891}");
+            BluetoothDeviceInfo device = new BluetoothDeviceInfo(BluetoothAddress.Parse(MacAddress));
+
+            try
+            {
+                ServiceRecord[] records = device.GetServiceRecords(fakeUuid);
+                inRange = true;
+            }
+            catch (Exception ex)
+            {
+                inRange = false;
+            }
+
+            return inRange;
+        }
+
         /// <summary>
         /// 블루투스 서비스를 체크한다
         /// </summary>
@@ -233,9 +259,39 @@ namespace DeviceAgents
                 // 모바일 기기와 연결여부를 지속적으로 체크한다
                 while (true)
                 {
-                    // 콜백 메서드로 이동
-                    IAsyncResult iAsyncResult = bluetoothDeviceInfo.BeginGetServiceRecords(uuid, Service_AsyncCallback, bluetoothDeviceInfo);
-                    
+                    // 블루투스 라디오 신호가 범위안에 잡히는지 확인한다
+                    if (IsInRange())
+                    {
+                        // 콜백 메서드로 이동
+                        IAsyncResult iAsyncResult = bluetoothDeviceInfo.BeginGetServiceRecords(uuid, Service_AsyncCallback, bluetoothDeviceInfo);
+                    }
+                    // 잡히지 않는다면 Count 를 증가시킨다
+                    else
+                    {
+                        log.write("==== 블루투스 라디오 범위가 넘어갔습니다 ====");
+                        LockCount++;
+
+                        // 아이폰의 경우 락카운트가 1 이상인경우 서비스 통신실패로 간주
+                        if(EnumMobileModel.IOS == mobileModel)
+                        {
+                            log.write("==== IOS 락 카운트가 1 이상인 경우 서비스 통신 실패로 간주 ====");
+                            if (LockCount > 1)
+                            {
+                                IsServiced = false;
+                            }
+                        }
+                        // 안드로이드의 경우
+                        else
+                        {
+                            log.write("==== 안드로이드 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주 ====");
+                            // 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주
+                            if (LockCount > 3)
+                            {
+                                IsServiced = false;
+                            }
+                        }
+                    }
+
                     //이벤트 전달
                     if (OnData != null)
                         OnData(this, "");
@@ -319,8 +375,8 @@ namespace DeviceAgents
                     catch (Exception)
                     {
                         LockCount++;
-                        // 락 카운트가 10 이상인 경우 서비스 통신 실패로 간주
-                        if (LockCount > 3)
+                        // 락 카운트가 1 이상인 경우 서비스 통신 실패로 간주
+                        if (LockCount > 1)
                         {
                             log.write("==== IOS 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주 ====");
                             IsServiced = false;
