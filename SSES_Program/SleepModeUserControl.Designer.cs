@@ -37,10 +37,10 @@
             // 
             this.ChkMode.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.ChkMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ChkMode.Location = new System.Drawing.Point(311, 9);
+            this.ChkMode.Location = new System.Drawing.Point(311, 6);
             this.ChkMode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ChkMode.Name = "ChkMode";
-            this.ChkMode.Size = new System.Drawing.Size(84, 47);
+            this.ChkMode.Size = new System.Drawing.Size(84, 40);
             this.ChkMode.TabIndex = 16;
             this.ChkMode.Text = "확인";
             this.ChkMode.UseVisualStyleBackColor = true;
@@ -51,7 +51,7 @@
             this.rbPcMode.BackColor = System.Drawing.Color.Transparent;
             this.rbPcMode.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.rbPcMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.rbPcMode.Location = new System.Drawing.Point(33, 33);
+            this.rbPcMode.Location = new System.Drawing.Point(33, 30);
             this.rbPcMode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbPcMode.Name = "rbPcMode";
             this.rbPcMode.Size = new System.Drawing.Size(151, 24);
@@ -66,7 +66,7 @@
             this.rbMonitorMode.BackColor = System.Drawing.Color.Transparent;
             this.rbMonitorMode.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.rbMonitorMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.rbMonitorMode.Location = new System.Drawing.Point(33, 10);
+            this.rbMonitorMode.Location = new System.Drawing.Point(33, 7);
             this.rbMonitorMode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbMonitorMode.Name = "rbMonitorMode";
             this.rbMonitorMode.Size = new System.Drawing.Size(110, 24);
@@ -86,7 +86,7 @@
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SleepModeUserControl";
-            this.Size = new System.Drawing.Size(400, 66);
+            this.Size = new System.Drawing.Size(400, 60);
             this.ResumeLayout(false);
             this.PerformLayout();
 

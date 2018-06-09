@@ -82,6 +82,7 @@
             this.label_pairing = new System.Windows.Forms.Label();
             this.tP8_SettingPageNew = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -124,6 +125,7 @@
             this.sqlUpdateCommand4 = new System.Data.SqlClient.SqlCommand();
             this.sqlDeleteCommand4 = new System.Data.SqlClient.SqlCommand();
             this.sqlDataAdapter4 = new System.Data.SqlClient.SqlDataAdapter();
+            this.powerUserControl1 = new SSES_Program.PowerUserControl();
             this.tabControl1.SuspendLayout();
             this.tP1_IntroHome.SuspendLayout();
             this.tP2_DpEnergySol.SuspendLayout();
@@ -530,13 +532,21 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.deviceUserControl1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.passwordUserControl1, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.sleepModeUserControl1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.powerUserControl1, 1, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.SystemColors.ControlLight;
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
             // 
             // label1
             // 
@@ -717,6 +727,12 @@
             this.sqlDataAdapter4.SelectCommand = this.sqlSelectCommand4;
             this.sqlDataAdapter4.UpdateCommand = this.sqlUpdateCommand4;
             // 
+            // powerUserControl1
+            // 
+            this.powerUserControl1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            resources.ApplyResources(this.powerUserControl1, "powerUserControl1");
+            this.powerUserControl1.Name = "powerUserControl1";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -870,6 +886,8 @@
         private System.Data.SqlClient.SqlCommand sqlUpdateCommand4;
         private System.Data.SqlClient.SqlCommand sqlDeleteCommand4;
         private System.Data.SqlClient.SqlDataAdapter sqlDataAdapter4;
+        private System.Windows.Forms.Label label4;
+        private PowerUserControl powerUserControl1;
     }
 }
 

@@ -147,6 +147,12 @@
     </Compile>
     <Compile Include="GetPCEnergy.cs" />
     <Compile Include="PCInfo.cs" />
+    <Compile Include="PowerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PowerUserControl.Designer.cs">
+      <DependentUpon>PowerUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProcessChecker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PasswordUserControl.resx">
       <DependentUpon>PasswordUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PowerUserControl.resx">
+      <DependentUpon>PowerUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

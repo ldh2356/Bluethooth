@@ -35,17 +35,17 @@
             // ChkUserPw
             // 
             this.ChkUserPw.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ChkUserPw.Location = new System.Drawing.Point(311, 8);
+            this.ChkUserPw.Location = new System.Drawing.Point(311, 5);
             this.ChkUserPw.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ChkUserPw.Name = "ChkUserPw";
-            this.ChkUserPw.Size = new System.Drawing.Size(84, 27);
+            this.ChkUserPw.Size = new System.Drawing.Size(84, 25);
             this.ChkUserPw.TabIndex = 19;
             this.ChkUserPw.Text = "확인";
             this.ChkUserPw.UseVisualStyleBackColor = true;
             // 
             // tbUserPw
             // 
-            this.tbUserPw.Location = new System.Drawing.Point(23, 10);
+            this.tbUserPw.Location = new System.Drawing.Point(23, 6);
             this.tbUserPw.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbUserPw.Name = "tbUserPw";
             this.tbUserPw.PasswordChar = '*';
@@ -60,9 +60,9 @@
             this.Controls.Add(this.ChkUserPw);
             this.Controls.Add(this.tbUserPw);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PasswordUserControl";
-            this.Size = new System.Drawing.Size(400, 49);
+            this.Size = new System.Drawing.Size(400, 40);
             this.ResumeLayout(false);
             this.PerformLayout();
 
