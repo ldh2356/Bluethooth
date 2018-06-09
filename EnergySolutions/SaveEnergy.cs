@@ -84,7 +84,7 @@ namespace EnergySolutions
             if (fileName == null) fileName = FileName;
 
             XElement xe = new XElement("SaveEnergy");
-
+          
             xe.Add(new XElement("UsedSec", UsedSec));
             xe.Add(new XElement("UsedOperation", UsedOperation));
             xe.Add(new XElement("UsedKwh", UsedKwh));

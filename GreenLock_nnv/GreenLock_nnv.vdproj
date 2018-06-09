@@ -470,6 +470,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -477,7 +485,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\GreenLock_nnv_1.2.msi"
+        "OutputFilename" = "8:Release\\GreenLock_nnv_1.2.1.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -567,7 +575,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SSES_Program, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:SSES_Program, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_15561B073EFC4BFA96DE854674250D93"
@@ -722,7 +730,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SSES_Program.resources, Version=1.2.0.0, Culture=ko-KR, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:SSES_Program.resources, Version=1.2.1.0, Culture=ko-KR, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_382F825472F0423191EAABDAB787D9AD"
@@ -979,7 +987,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SSES_Program.resources, Version=1.2.0.0, Culture=en-US, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:SSES_Program.resources, Version=1.2.1.0, Culture=en-US, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_7B06009EDEC34B8D83EC15856A254141"

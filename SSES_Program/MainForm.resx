@@ -3519,6 +3519,45 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 10.2pt</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 161</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 42</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>전력값(kW)</value>
+  </data>
+  <data name="label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3526,7 +3565,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>Fill</value>
   </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 11.25pt</value>
+    <value>맑은 고딕, 10.2pt</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 1</value>
@@ -3535,7 +3574,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>0, 0, 0, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 75</value>
+    <value>108, 59</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3556,22 +3595,22 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 11.25pt</value>
+    <value>맑은 고딕, 10.2pt</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 77</value>
+    <value>1, 61</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 75</value>
+    <value>108, 59</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3592,22 +3631,22 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>맑은 고딕, 11.25pt</value>
+    <value>맑은 고딕, 10.2pt</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 153</value>
+    <value>1, 121</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 50</value>
+    <value>108, 39</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3628,7 +3667,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="deviceUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3643,7 +3682,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>3, 4, 3, 4</value>
   </data>
   <data name="deviceUserControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 67</value>
+    <value>429, 51</value>
   </data>
   <data name="deviceUserControl1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3652,13 +3691,13 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>deviceUserControl1</value>
   </data>
   <data name="&gt;&gt;deviceUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.DeviceUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SSES_Program.DeviceUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;deviceUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;deviceUserControl1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="passwordUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3667,13 +3706,13 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>맑은 고딕, 9pt</value>
   </data>
   <data name="passwordUserControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 157</value>
+    <value>113, 125</value>
   </data>
   <data name="passwordUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="passwordUserControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 42</value>
+    <value>429, 31</value>
   </data>
   <data name="passwordUserControl1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3682,13 +3721,13 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>passwordUserControl1</value>
   </data>
   <data name="&gt;&gt;passwordUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.PasswordUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SSES_Program.PasswordUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;passwordUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;passwordUserControl1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="sleepModeUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3697,13 +3736,13 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>맑은 고딕, 9pt</value>
   </data>
   <data name="sleepModeUserControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 81</value>
+    <value>113, 65</value>
   </data>
   <data name="sleepModeUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="sleepModeUserControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 67</value>
+    <value>429, 51</value>
   </data>
   <data name="sleepModeUserControl1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3712,13 +3751,37 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>sleepModeUserControl1</value>
   </data>
   <data name="&gt;&gt;sleepModeUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.SleepModeUserControl, SSES_Program, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SSES_Program.SleepModeUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sleepModeUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;sleepModeUserControl1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
+  </data>
+  <data name="powerUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="powerUserControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 164</value>
+  </data>
+  <data name="powerUserControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 36</value>
+  </data>
+  <data name="powerUserControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;powerUserControl1.Name" xml:space="preserve">
+    <value>powerUserControl1</value>
+  </data>
+  <data name="&gt;&gt;powerUserControl1.Type" xml:space="preserve">
+    <value>SSES_Program.PowerUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;powerUserControl1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;powerUserControl1.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3727,7 +3790,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>546, 204</value>
@@ -3748,7 +3811,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deviceUserControl1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="passwordUserControl1" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="sleepModeUserControl1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,20,Percent,80" /&gt;&lt;Rows Styles="Percent,37.5,Percent,37.5,Percent,25,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label4" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deviceUserControl1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="passwordUserControl1" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="sleepModeUserControl1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="powerUserControl1" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,20,Percent,80" /&gt;&lt;Rows Styles="Percent,30,Percent,30,Percent,20,Percent,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tP8_SettingPageNew.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
@@ -6911,7 +6974,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>11</value>
   </data>
   <data name="label_Version.Text" xml:space="preserve">
-    <value>nnv 1.2.0</value>
+    <value>nnv 1.2.1</value>
   </data>
   <data name="&gt;&gt;label_Version.Name" xml:space="preserve">
     <value>label_Version</value>

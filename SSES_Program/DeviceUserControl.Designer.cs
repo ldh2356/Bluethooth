@@ -44,7 +44,7 @@
             // 
             // tbDeviceAddr5
             // 
-            this.tbDeviceAddr5.Location = new System.Drawing.Point(271, 32);
+            this.tbDeviceAddr5.Location = new System.Drawing.Point(271, 25);
             this.tbDeviceAddr5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDeviceAddr5.MaxLength = 2;
             this.tbDeviceAddr5.Name = "tbDeviceAddr5";
@@ -53,7 +53,7 @@
             // 
             // tbDeviceAddr4
             // 
-            this.tbDeviceAddr4.Location = new System.Drawing.Point(232, 32);
+            this.tbDeviceAddr4.Location = new System.Drawing.Point(232, 25);
             this.tbDeviceAddr4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDeviceAddr4.MaxLength = 2;
             this.tbDeviceAddr4.Name = "tbDeviceAddr4";
@@ -62,7 +62,7 @@
             // 
             // tbDeviceAddr3
             // 
-            this.tbDeviceAddr3.Location = new System.Drawing.Point(191, 32);
+            this.tbDeviceAddr3.Location = new System.Drawing.Point(191, 25);
             this.tbDeviceAddr3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDeviceAddr3.MaxLength = 2;
             this.tbDeviceAddr3.Name = "tbDeviceAddr3";
@@ -71,7 +71,7 @@
             // 
             // tbDeviceAddr2
             // 
-            this.tbDeviceAddr2.Location = new System.Drawing.Point(151, 32);
+            this.tbDeviceAddr2.Location = new System.Drawing.Point(151, 25);
             this.tbDeviceAddr2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDeviceAddr2.MaxLength = 2;
             this.tbDeviceAddr2.Name = "tbDeviceAddr2";
@@ -80,7 +80,7 @@
             // 
             // tbDeviceAddr1
             // 
-            this.tbDeviceAddr1.Location = new System.Drawing.Point(110, 32);
+            this.tbDeviceAddr1.Location = new System.Drawing.Point(110, 25);
             this.tbDeviceAddr1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDeviceAddr1.MaxLength = 2;
             this.tbDeviceAddr1.Name = "tbDeviceAddr1";
@@ -91,7 +91,7 @@
             // 
             this.btOk.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.btOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btOk.Location = new System.Drawing.Point(309, 29);
+            this.btOk.Location = new System.Drawing.Point(309, 24);
             this.btOk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(84, 27);
@@ -101,7 +101,7 @@
             // 
             // tbDeviceAddr0
             // 
-            this.tbDeviceAddr0.Location = new System.Drawing.Point(70, 32);
+            this.tbDeviceAddr0.Location = new System.Drawing.Point(70, 25);
             this.tbDeviceAddr0.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDeviceAddr0.MaxLength = 2;
             this.tbDeviceAddr0.Name = "tbDeviceAddr0";
@@ -111,7 +111,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(14, 8);
+            this.radioButton1.Location = new System.Drawing.Point(14, 0);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(85, 24);
@@ -124,7 +124,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(142, 8);
+            this.radioButton2.Location = new System.Drawing.Point(142, 0);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(54, 24);
@@ -136,7 +136,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 35);
+            this.label1.Location = new System.Drawing.Point(11, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 19;
@@ -158,9 +158,9 @@
             this.Controls.Add(this.btOk);
             this.Controls.Add(this.tbDeviceAddr0);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "DeviceUserControl";
-            this.Size = new System.Drawing.Size(400, 76);
+            this.Size = new System.Drawing.Size(400, 63);
             this.ResumeLayout(false);
             this.PerformLayout();
 

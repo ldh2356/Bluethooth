@@ -795,15 +795,7 @@ namespace SSES_Program
                 //시작 프로그램 추가 
                 RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
            
-            if (registryKey.GetValue("MyApp") == null)
-            {
-                registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
-            }
-            else if (registryKey.GetValue("MyApp").Equals(@"C:\HansCreative\SSES_Program\SSES_Program.exe"))
-            {
-                registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
-            }
-
+        
                 if (registryKey.GetValue("MyApp") == null)
                 {
                     registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
