@@ -195,7 +195,7 @@ namespace GreenLock
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Individual Application Volume Manipulation
 
