@@ -46,9 +46,13 @@ namespace GreenLock
         {
             try
             {
+                MainForm.log.write("start");
                 // 사운드가 재생중이지 않은경우
                 if (!isSoundPlaying)
                 {
+
+                    MainForm.log.write("isSoundPlaying");
+
                     isSoundPlaying = true;
 
                     // 재생직전 볼륨을 저장한다
@@ -73,6 +77,7 @@ namespace GreenLock
         {
             try
             {
+                MainForm.log.write("stop");
                 // 볼륨을 이전에 저장했던 볼륨으로 복원한다
                 AudioManager.SetMasterVolume(lastVolumePercentage);
                 isSoundPlaying = false;
