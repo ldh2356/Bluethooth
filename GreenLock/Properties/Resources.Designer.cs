@@ -39,7 +39,7 @@ namespace GreenLock.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SSES_Program.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GreenLock.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -226,6 +226,26 @@ namespace GreenLock.Properties {
         internal static System.Drawing.Bitmap ScreenSaver_2017_03_24 {
             get {
                 object obj = ResourceManager.GetObject("ScreenSaver-2017-03-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ScreenSaver_2018_06_30 {
+            get {
+                object obj = ResourceManager.GetObject("ScreenSaver-2018-06-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ScreenSaver_2018_06_301 {
+            get {
+                object obj = ResourceManager.GetObject("ScreenSaver-2018-06-301", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

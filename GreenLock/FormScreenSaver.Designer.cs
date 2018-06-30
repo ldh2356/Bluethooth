@@ -34,7 +34,7 @@
             // 
             // pb_screenSaver
             // 
-            this.pb_screenSaver.Image = global::GreenLock.Properties.Resources.ScreenSaver_2017_03_24;
+            this.pb_screenSaver.Image = global::GreenLock.Properties.Resources.ScreenSaver_2018_06_30;
             this.pb_screenSaver.Location = new System.Drawing.Point(0, 0);
             this.pb_screenSaver.Name = "pb_screenSaver";
             this.pb_screenSaver.Size = new System.Drawing.Size(286, 261);
