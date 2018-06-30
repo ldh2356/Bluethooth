@@ -54,10 +54,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NNV|AnyCPU'">
     <OutputPath>bin\NNV\GreenLock.exe\</OutputPath>
     <DefineConstants>DEBUG;TRACE;_nnv</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NV|AnyCPU'">
     <OutputPath>bin\NV\</OutputPath>
-    <DefineConstants>_nv</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_nv</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
