@@ -49,7 +49,7 @@ namespace ClientUpdater
         {
             buffer = new byte[bufferSize];
 
-            string startPath = @"C:\HansCreative\nnv\SSES_Program";
+            string startPath = @"C:\HansCreative\nnv\GreenLock";
 
             updateInfoPath = Path.Combine(startPath, "UpdateInfo.xml");
 
@@ -349,7 +349,7 @@ namespace ClientUpdater
             Directory.SetCurrentDirectory(downloadPath);
 
             //string path = string.Format("{0}\\{1}", downloadPath, clientFileName);
-            string path = string.Format("{0}\\{1}", @"C:\HansCreative\nnv\SSES_Program", "SSES_Program.exe");
+            string path = string.Format("{0}\\{1}", @"C:\HansCreative\nnv\GreenLock", "GreenLock.exe");
 
             if (File.Exists(path) == true)
             {
@@ -379,7 +379,7 @@ namespace ClientUpdater
         private void timer1_Tick(object sender, EventArgs e)
         {
             /*string startPath = Application.StartupPath;
-            string path = Path.Combine(startPath, "SSES_Program.exe");
+            string path = Path.Combine(startPath, "GreenLock.exe");
             ProcessStartInfo startInfo = new ProcessStartInfo(path);
             startInfo.Arguments = this.arguments;
             startInfo.WorkingDirectory = extractPath;

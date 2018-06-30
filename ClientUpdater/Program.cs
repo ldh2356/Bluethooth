@@ -21,7 +21,7 @@ namespace ClientUpdater
             string clientUpdateName = string.Empty;
             string mainPath = string.Empty;
             string clientFileName = string.Empty;
-            mainPath = @"C:\HansCreative\VG\SSES_Program";
+            mainPath = @"C:\HansCreative\VG\GreenLock";
             mainPath = mainPath.Replace('+', ' ');
             Application.Run(new ClientUpdater(clientUpdateName, mainPath));
         }

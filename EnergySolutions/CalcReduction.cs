@@ -30,7 +30,7 @@ namespace EnergySolutions
         {
             get
             {
-                string drivepath = Environment.ExpandEnvironmentVariables("%SystemDrive%") + @"\HansCreative\nnv\SSES_Program";
+                string drivepath = Environment.ExpandEnvironmentVariables("%SystemDrive%") + @"\HansCreative\nnv\GreenLock";
                 string fileName = @"\SSES_log.xml";
                 return drivepath + fileName;
             }
