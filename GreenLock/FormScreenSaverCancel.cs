@@ -101,7 +101,6 @@ namespace GreenLock
                 }
                 else
                 {
-                    Service.AlertSoundStart();
                     MessageBox.Show("비밀번호가 틀렸습니다. \n다시 입력해 주세요.");
                 }
             }
