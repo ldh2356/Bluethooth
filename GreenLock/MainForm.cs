@@ -1402,6 +1402,10 @@ namespace GreenLock
                         screenSaver2 = null;
                     }
                 }
+
+                MainForm.log.write("screenSaver != null" + (screenSaver != null));
+                MainForm.log.write("screenSaver2 != null" + (screenSaver2 != null));
+
                 screensaverStatus = false;
                 Service.AlertSoundStop();
             }
