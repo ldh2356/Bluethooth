@@ -94,13 +94,16 @@ namespace GreenLock
 
                     if (screen.GetLength(0) != 2) // 듀얼 모니터가 아닌 경우
                         formScreenSaver.main.screenSaverAllStop();
-                    else // 듀얼 모니터인 경우
+                    else
+                    { // 듀얼 모니터인 경우
                         formScreenSaver2.main.screenSaverAllStop();
+                    }
 
                     formScreenSaver.main.screensaverPasswordflag = true;
                 }
                 else
                 {
+                    Service.AlertSoundStart();
                     MessageBox.Show("비밀번호가 틀렸습니다. \n다시 입력해 주세요.");
                 }
             }
