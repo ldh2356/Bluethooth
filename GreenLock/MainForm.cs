@@ -875,7 +875,10 @@ namespace GreenLock
                 // 키보드 후킹 해제
                 KeyboardHooking.UnBlockCtrlAltDel();
                 Service.AlertSoundStop();
+
                 Console.WriteLine("Main_Close");
+
+                System.Environment.Exit(0);
                 //SSES_Program.Win32.AllowMonitorPowerdown();
             }
             catch (Exception error)
@@ -1528,6 +1531,7 @@ namespace GreenLock
             {
                 this.Close();
                 this.Dispose();
+                Application.Exit();
             }
             catch (Exception error) {
                 log.write("종료ToolStripMenuItem_Click");
