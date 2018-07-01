@@ -318,5 +318,7 @@ namespace BlueTooth_Test
                 logger.Error(ex);
             }
         }
+
+
     }
 }

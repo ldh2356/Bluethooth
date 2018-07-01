@@ -121,8 +121,10 @@ namespace DeviceAgents
                 Worker = new Thread(DoWork);
                 Worker.Start();
             }
-            catch (Exception)
+            catch (Exception ea)
             {
+                log.write(ea.Message);
+                Worker.Abort();
                 throw;
             }
         }
@@ -234,64 +236,27 @@ namespace DeviceAgents
                 // 파싱한 주소를 가져온다
                 bluetoothAddressString = BluetoothAddress.Parse(MacAddress);
 
-                // 컴퓨터에 블루투스가 연결되어있는지 여부를 확인 한다 
-                while (true)
+                // 컴퓨터에 블루투스가 연결되어있는지 여부를 확인 한다  
+                // 블루투스 장치가 켜져있지 않다면 블루투스 설정 화면을 사용자에게 안내한다
+                if (!BluetoothRadio.IsSupported)
                 {
-                    // 블루투스 장치가 켜져있지 않다면 블루투스 설정 화면을 사용자에게 안내한다
-                    if (!BluetoothRadio.IsSupported)
-                    {
-                        Process.Start("bthprops.cpl");
-                        if (MessageBox.Show(Device.bluetoothOffMsg, "SSES", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
-                        {
-                            break;
-                        }
-                    }
-                    // 블루투스 제어장치가 확인돈다면
-                    else
-                    {
-                        // 블루투스 제어장비를 초기화한다
-                        bluetoothDeviceInfo = new BluetoothDeviceInfo(bluetoothAddressString);
-                        break;
-                    }
+                    MessageBox.Show(Device.bluetoothOffMsg, "GreenLock", MessageBoxButtons.OK);
+                    Process.Start("bthprops.cpl");
                 }
-
+                // 블루투스 제어장치가 확인된다면
+                else
+                {
+                    // 블루투스 제어장비를 초기화한다
+                    bluetoothDeviceInfo = new BluetoothDeviceInfo(bluetoothAddressString);
+                   
+                }
 
                 // 모바일 기기와 연결여부를 지속적으로 체크한다
                 while (true)
-                {
-                    // 블루투스 라디오 신호가 범위안에 잡히는지 확인한다
-                    if (IsInRange())
-                    {
-                        // 콜백 메서드로 이동
-                        IAsyncResult iAsyncResult = bluetoothDeviceInfo.BeginGetServiceRecords(uuid, Service_AsyncCallback, bluetoothDeviceInfo);
-                    }
-                    // 잡히지 않는다면 Count 를 증가시킨다
-                    else
-                    {
-                        log.write("==== 블루투스 라디오 범위가 넘어갔습니다 ====");
-                        LockCount++;
-
-                        // 아이폰의 경우 락카운트가 1 이상인경우 서비스 통신실패로 간주
-                        if(EnumMobileModel.IOS == mobileModel)
-                        {
-                            log.write("==== IOS 락 카운트가 1 이상인 경우 서비스 통신 실패로 간주 ====");
-                            if (LockCount > 1)
-                            {
-                                IsServiced = false;
-                            }
-                        }
-                        // 안드로이드의 경우
-                        else
-                        {
-                            log.write("==== 안드로이드 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주 ====");
-                            // 락 카운트가 3 이상인 경우 서비스 통신 실패로 간주
-                            if (LockCount > 3)
-                            {
-                                IsServiced = false;
-                            }
-                        }
-                    }
-
+                {             
+                    // 콜백 메서드로 이동
+                    IAsyncResult iAsyncResult = bluetoothDeviceInfo.BeginGetServiceRecords(uuid, Service_AsyncCallback, bluetoothDeviceInfo);           
+                 
                     //이벤트 전달
                     if (OnData != null)
                         OnData(this, "");

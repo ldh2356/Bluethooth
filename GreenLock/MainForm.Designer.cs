@@ -86,10 +86,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.deviceUserControl1 = new GreenLock.DeviceUserControl();
-            this.passwordUserControl1 = new GreenLock.PasswordUserControl();
-            this.sleepModeUserControl1 = new GreenLock.SleepModeUserControl();
-            this.powerUserControl1 = new GreenLock.PowerUserControl();
+            this.deviceUserControl1 = new DeviceUserControl();
+            this.passwordUserControl1 = new PasswordUserControl();
+            this.sleepModeUserControl1 = new SleepModeUserControl();
+            this.powerUserControl1 = new PowerUserControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();

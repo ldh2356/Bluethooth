@@ -786,25 +786,6 @@ namespace GreenLock
 #else
     Console.Write("");
 #endif
-                //keyHook.MessageHooked += new EventHandler<Hook.KeyboardHookEventArgs>(keyHook_MessageHooked);
-                //mouseHook.MessageHooked += new EventHandler<Hook.MouseHookEventArgs>(mouseHook_MessageHooked);
-
-                //keyHook.StartHook();
-                //mouseHook.StartHook();
-
-
-                //시작 프로그램 추가 
-                RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
-           
-        
-                //if (registryKey.GetValue("MyApp") == null)
-                //{
-                //    registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
-                //}
-                //else if (registryKey.GetValue("MyApp").Equals(@"C:\HansCreative\SSES_Program\SSES_Program.exe"))
-                //{
-                //    registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
-                //}
 
                 getUpTimeSavingTime();
 

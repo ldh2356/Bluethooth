@@ -78,10 +78,11 @@ namespace GreenLock
         {
             try
             {
-                //ToggleTaskManagerBlock(true);
+                ToggleTaskManagerBlock(true);
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 MainForm.log.write(ex.StackTrace);
             }
         }
