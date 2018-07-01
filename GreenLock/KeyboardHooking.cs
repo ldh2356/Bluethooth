@@ -63,7 +63,7 @@ namespace GreenLock
         {
             try
             {
-                ToggleTaskManagerBlock(false);
+                //ToggleTaskManagerBlock(false);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace GreenLock
         {
             try
             {
-                ToggleTaskManagerBlock(true);
+                //ToggleTaskManagerBlock(true);
             }
             catch (Exception ex)
             {
@@ -202,7 +202,6 @@ namespace GreenLock
                     {
                         blnEat = true;
                     }
-                    Service.AlertSoundStart();
                     break;
             }
 

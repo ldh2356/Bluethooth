@@ -46,20 +46,17 @@ namespace GreenLock
         {
             try
             {
-                MainForm.log.write("start");
                 // 사운드가 재생중이지 않은경우
                 if (!isSoundPlaying)
                 {
-
-                    MainForm.log.write("isSoundPlaying");
-
                     isSoundPlaying = true;
 
                     // 재생직전 볼륨을 저장한다
-                    lastVolumePercentage = int.Parse(AudioManager.GetMasterVolume().ToString());                    
+                    lastVolumePercentage = int.Parse(AudioManager.GetMasterVolume().ToString());
 
-                    // 재생직전 최고 볼륨으로 마스터 볼륨을 설정한다
+                    AudioManager.ToggleMasterVolumeUnMute();
                     AudioManager.SetMasterVolume(100);
+
                     Player.SoundLocation = drivepath + fileName;
                     Player.PlayLooping();
                 }
@@ -77,7 +74,6 @@ namespace GreenLock
         {
             try
             {
-                MainForm.log.write("stop");
                 // 볼륨을 이전에 저장했던 볼륨으로 복원한다
                 AudioManager.SetMasterVolume(lastVolumePercentage);
                 isSoundPlaying = false;

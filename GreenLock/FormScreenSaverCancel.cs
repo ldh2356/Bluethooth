@@ -82,18 +82,17 @@ namespace GreenLock
         {
             try
             {
-                //if (textBox1.Text == "0000")
+                // 패스워드가 일치할경우
                 if (textBox1.Text == MainForm.userPw)
                 {
                     this.Close();
-                    //formScreenSaver.main.screenSaverAllStop(); // 기존에 이거만 있었음
-
-                    // 여기부터 내가 추가한거
                     // 1. 스크린 세이버만 종료
                     Screen[] screen = Screen.AllScreens; // 시스템 내 모든 디스플레이 배열을 가져옴
 
-                    if (screen.GetLength(0) != 2) // 듀얼 모니터가 아닌 경우
+                    if (screen.GetLength(0) != 2)
+                    {
                         formScreenSaver.main.screenSaverAllStop();
+                    }
                     else
                     { // 듀얼 모니터인 경우
                         formScreenSaver2.main.screenSaverAllStop();
@@ -103,8 +102,8 @@ namespace GreenLock
                 }
                 else
                 {
-                    Service.AlertSoundStart();
                     MessageBox.Show("비밀번호가 틀렸습니다. \n다시 입력해 주세요.");
+                    Service.AlertSoundStart();
                 }
             }
             catch (Exception ex)
