@@ -42,6 +42,7 @@
             this.pb_screenSaver.TabIndex = 0;
             this.pb_screenSaver.TabStop = false;
             this.pb_screenSaver.Click += new System.EventHandler(this.pb_screenSaver_Click);
+            this.pb_screenSaver.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb_screenSaver_MouseDown);
             this.pb_screenSaver.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pb_screenSaver_MouseDown);
             this.pb_screenSaver.MouseEnter += new System.EventHandler(this.pb_screenSaver_MouseEnter);
             // 
