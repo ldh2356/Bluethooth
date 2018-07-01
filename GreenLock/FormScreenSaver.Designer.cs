@@ -41,7 +41,10 @@
             this.pb_screenSaver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_screenSaver.TabIndex = 0;
             this.pb_screenSaver.TabStop = false;
+            this.pb_screenSaver.Click += new System.EventHandler(this.pb_screenSaver_Click);
+            this.pb_screenSaver.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb_screenSaver_MouseDown);
             this.pb_screenSaver.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pb_screenSaver_MouseDown);
+            this.pb_screenSaver.MouseEnter += new System.EventHandler(this.pb_screenSaver_MouseEnter);
             // 
             // FormScreenSaver
             // 
@@ -60,6 +63,7 @@
             this.Activated += new System.EventHandler(this.FormScreenSaver_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormScreenSaver_FormClosing);
             this.Load += new System.EventHandler(this.FormScreenSaver_Load);
+            this.Click += new System.EventHandler(this.pb_screenSaver_Click);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormScreenSaver_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pb_screenSaver_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pb_screenSaver)).EndInit();

@@ -23,13 +23,9 @@ namespace GreenLock
         public FormScreenSaverCancel(FormScreenSaver formScreenSaver)
         {
             InitializeComponent();
-            // 왜 있어야 하는지 모르겠음
-            
             this.formScreenSaver = formScreenSaver;
             formScreenSaver.SetFormScreenSaverCancel(this); // 없어도 되나? 가보면 주석처리 돼있음
-
             this.TopMost = true;
-            
         }
 
         
@@ -89,15 +85,7 @@ namespace GreenLock
                     // 1. 스크린 세이버만 종료
                     Screen[] screen = Screen.AllScreens; // 시스템 내 모든 디스플레이 배열을 가져옴
 
-                    if (screen.GetLength(0) != 2)
-                    {
-                        formScreenSaver.main.screenSaverAllStop();
-                    }
-                    else
-                    { // 듀얼 모니터인 경우
-                        formScreenSaver2.main.screenSaverAllStop();
-                    }
-
+                    formScreenSaver.main.screenSaverAllStop();
                     formScreenSaver.main.screensaverPasswordflag = true;
                 }
                 else

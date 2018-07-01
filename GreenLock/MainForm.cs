@@ -1227,7 +1227,6 @@ namespace GreenLock
         {
             try
             {
-                log.write("_Safe_On32FeetData");
                 ScreenSaver();
             }
             catch (Exception ex)
@@ -1280,8 +1279,8 @@ namespace GreenLock
         {
             try
             {
-                log.write($"IsServiced:{bt32FeetDevice.IsServiced.ToString()}");
-                log.write($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
+                Debug.Write($"IsServiced:{bt32FeetDevice.IsServiced.ToString()}");
+                Debug.Write($"screensaverStatus:{screensaverStatus} screensaverPasswordflag:{screensaverPasswordflag} isUserInput:{isUserInput}");
                 if (this.bt32FeetDevice.IsServiced == false )  // will be off
                 {
                     //화면보호기 시작
@@ -1438,11 +1437,13 @@ namespace GreenLock
                     screenSaver.Location = point;
 
                     //GIF파일의 크기를 메인모니터 크기로 조정
+#if DEBUG
+                    screenSaver.pb_screenSaver.Size = new Size(400, 400);
+#else
                     screenSaver.pb_screenSaver.Size = new Size(screen[screen1].Bounds.Width, screen[screen1].Bounds.Height);
+#endif
                     screenSaver.Size = screenSaver.pb_screenSaver.Size;
-
                     screenSaver.Show(this);
-
                     //KeyboardHooking.TaskBarHide();
                 }
                 else
@@ -1453,9 +1454,12 @@ namespace GreenLock
                     screenSaver2.Location = point;
 
                     //GIF파일의 크기를 서브모니터 크기로 조정
+#if DEBUG
+                    screenSaver2.pb_screenSaver.Size = new Size(400, 400);
+#else
                     screenSaver2.pb_screenSaver.Size = new Size(screen[screen2].Bounds.Width, screen[screen2].Bounds.Height);
+#endif
                     screenSaver2.Size = screenSaver2.pb_screenSaver.Size;
-
                     screenSaver2.Show(this);
                 }
             }

@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+
 using System.IO;
 using System.Xml.Linq;
 using DevExpress.XtraEditors;
+using MySql.Data.MySqlClient;
 
 namespace UpdateCreater
 {
