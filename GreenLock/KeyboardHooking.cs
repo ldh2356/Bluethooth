@@ -202,7 +202,6 @@ namespace GreenLock
                     {
                         blnEat = true;
                     }
-                    Service.AlertSoundStart();
                     break;
             }
 
