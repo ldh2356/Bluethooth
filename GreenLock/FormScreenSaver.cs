@@ -117,13 +117,27 @@ namespace GreenLock
             //this.formScreenSaverCancel = formScreenSaverCancel;
         }
 
+
+
+        /// <summary>
+        /// 폼의 마우스 다운 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pb_screenSaver_MouseDown(object sender, MouseEventArgs e)
         {
             try
             {
-                formScreenSaverCancel = new FormScreenSaverCancel(this);
-                formScreenSaverCancel.TopMost = true;
-                formScreenSaverCancel.ShowDialog();
+                MainForm.log.write("스크린세이버1 마우스 다운이벤트");
+                MainForm.log.write("formScreenSaverCancel == null" + (formScreenSaverCancel == null));
+
+                // 비밀번호 입력창을 오픈한다
+                if (formScreenSaverCancel == null)
+                {
+                    formScreenSaverCancel = new FormScreenSaverCancel(this);
+                    formScreenSaverCancel.TopMost = true;
+                    formScreenSaverCancel.ShowDialog();
+                }
             }
             catch (Exception ex)
             {
