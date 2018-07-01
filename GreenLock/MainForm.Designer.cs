@@ -86,9 +86,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.deviceUserControl1 = new DeviceUserControl();
-            this.passwordUserControl1 = new PasswordUserControl();
-            this.sleepModeUserControl1 = new SleepModeUserControl();
+            this.deviceUserControl1 = new GreenLock.DeviceUserControl();
+            this.passwordUserControl1 = new GreenLock.PasswordUserControl();
+            this.sleepModeUserControl1 = new GreenLock.SleepModeUserControl();
+            this.powerUserControl1 = new GreenLock.PowerUserControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -125,7 +126,6 @@
             this.sqlUpdateCommand4 = new System.Data.SqlClient.SqlCommand();
             this.sqlDeleteCommand4 = new System.Data.SqlClient.SqlCommand();
             this.sqlDataAdapter4 = new System.Data.SqlClient.SqlDataAdapter();
-            this.powerUserControl1 = new PowerUserControl();
             this.tabControl1.SuspendLayout();
             this.tP1_IntroHome.SuspendLayout();
             this.tP2_DpEnergySol.SuspendLayout();
@@ -584,6 +584,12 @@
             resources.ApplyResources(this.sleepModeUserControl1, "sleepModeUserControl1");
             this.sleepModeUserControl1.Name = "sleepModeUserControl1";
             // 
+            // powerUserControl1
+            // 
+            this.powerUserControl1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            resources.ApplyResources(this.powerUserControl1, "powerUserControl1");
+            this.powerUserControl1.Name = "powerUserControl1";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
@@ -671,6 +677,7 @@
             resources.ApplyResources(this.label_Version, "label_Version");
             this.label_Version.BackColor = System.Drawing.Color.Transparent;
             this.label_Version.Name = "label_Version";
+            this.label_Version.Click += new System.EventHandler(this.label_Version_Click);
             // 
             // notifyIcon
             // 
@@ -726,12 +733,6 @@
             this.sqlDataAdapter4.InsertCommand = this.sqlInsertCommand4;
             this.sqlDataAdapter4.SelectCommand = this.sqlSelectCommand4;
             this.sqlDataAdapter4.UpdateCommand = this.sqlUpdateCommand4;
-            // 
-            // powerUserControl1
-            // 
-            this.powerUserControl1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            resources.ApplyResources(this.powerUserControl1, "powerUserControl1");
-            this.powerUserControl1.Name = "powerUserControl1";
             // 
             // MainForm
             // 
