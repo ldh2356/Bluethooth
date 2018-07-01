@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Threading;//.Tasks;
 using System.Runtime.InteropServices;
 using System.Media;
+using System.Diagnostics;
 
 namespace GreenLock
 {
@@ -120,16 +121,14 @@ namespace GreenLock
 
 
         /// <summary>
-        /// 폼의 마우스 다운 이벤트
+        /// 스크린세이버를 동작시킨다
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pb_screenSaver_MouseDown(object sender, MouseEventArgs e)
+        private void ActiveScreenSavor()
         {
             try
             {
-                MainForm.log.write("스크린세이버1 마우스 다운이벤트");
-                MainForm.log.write("formScreenSaverCancel == null" + (formScreenSaverCancel == null));
+                Debug.Write("스크린세이버1 마우스 다운이벤트");
+                Debug.Write("formScreenSaverCancel == null" + (formScreenSaverCancel == null));
 
                 // 비밀번호 입력창을 오픈한다
                 if (formScreenSaverCancel == null)
@@ -141,13 +140,62 @@ namespace GreenLock
             }
             catch (Exception ex)
             {
-                MainForm.log.write(ex.Message);                
+                MainForm.log.write(ex.Message);
             }
         }
 
+
+
+        /// <summary>
+        /// 폼의 마우스 다운 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pb_screenSaver_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                ActiveScreenSavor();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// 마우스 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pb_screenSaver_Click(object sender, EventArgs e)
         {
+            try
+            {
+                ActiveScreenSavor();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.StackTrace);
+            }
+        }
 
+
+        /// <summary>
+        /// 두가지 폼중 하나에 진입했을때 폼을 엑티브 시킨다
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pb_screenSaver_MouseEnter(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Activate();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.StackTrace);                
+            }            
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;//.Tasks;
+using System.Diagnostics;
 
 namespace GreenLock
 {
@@ -75,11 +76,45 @@ namespace GreenLock
         {
             try
             {
-                MainForm.log.write("스크린세이버2 마우스 다운이벤트");
-                MainForm.log.write("formScreenSaverCancel == null" + (formScreenSaverCancel == null));
+                ActiveScreenSavor();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.StackTrace);
+            }
+        }
+
+
+        /// <summary>
+        /// 마우스 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pb_screenSaver_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ActiveScreenSavor();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.StackTrace);
+            }
+        }
+
+
+        /// <summary>
+        /// 스크린세이버를 동작시킨다
+        /// </summary>
+        private void ActiveScreenSavor()
+        {
+            try
+            {
+                Debug.Write("스크린세이버2 마우스 다운이벤트");
+                Debug.Write("formScreenSaverCancel == null" + (formScreenSaverCancel == null));
 
                 // 비밀번호 입력창을 오픈한다
-                if(formScreenSaverCancel == null)
+                if (formScreenSaverCancel == null)
                 {
                     formScreenSaverCancel = new FormScreenSaverCancel(this);
                     formScreenSaverCancel.TopMost = true;
@@ -89,6 +124,24 @@ namespace GreenLock
             catch (Exception ex)
             {
                 MainForm.log.write(ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// 두가지 폼중 하나에 진입했을때 폼을 엑티브 시킨다
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pb_screenSaver_MouseEnter(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Activate();
+            }
+            catch (Exception ex)
+            {
+                MainForm.log.write(ex.StackTrace);
             }
         }
     }
