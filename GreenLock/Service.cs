@@ -30,7 +30,7 @@ namespace GreenLock
 
         public static SoundPlayer Player = new SoundPlayer();
 
-        public static string drivepath = Environment.ExpandEnvironmentVariables("%SystemDrive%") + @"\HansCreative\nnv\SSES_Program";
+        public static string drivepath = Environment.ExpandEnvironmentVariables("%SystemDrive%") + @"\HansCreative\nnv\GreenLock";
         public static string fileName = @"\Alert.wav";
 
         [DllImport("user32.dll")]

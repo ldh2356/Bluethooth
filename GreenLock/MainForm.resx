@@ -3691,7 +3691,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>deviceUserControl1</value>
   </data>
   <data name="&gt;&gt;deviceUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.DeviceUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>GreenLock.DeviceUserControl, GreenLock, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;deviceUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -3721,7 +3721,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>passwordUserControl1</value>
   </data>
   <data name="&gt;&gt;passwordUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.PasswordUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>GreenLock.PasswordUserControl, GreenLock, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;passwordUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -3751,7 +3751,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>sleepModeUserControl1</value>
   </data>
   <data name="&gt;&gt;sleepModeUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.SleepModeUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>GreenLock.SleepModeUserControl, GreenLock, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sleepModeUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -3762,11 +3762,17 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
   <data name="powerUserControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="powerUserControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>맑은 고딕, 9pt</value>
+  </data>
   <data name="powerUserControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 164</value>
+    <value>113, 165</value>
+  </data>
+  <data name="powerUserControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="powerUserControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 36</value>
+    <value>429, 34</value>
   </data>
   <data name="powerUserControl1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3775,7 +3781,7 @@ PC와 mobile에 맞는 프로그램을 설치하면 SSES 솔루션을 이용하�
     <value>powerUserControl1</value>
   </data>
   <data name="&gt;&gt;powerUserControl1.Type" xml:space="preserve">
-    <value>SSES_Program.PowerUserControl, SSES_Program, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>GreenLock.PowerUserControl, GreenLock, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;powerUserControl1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>

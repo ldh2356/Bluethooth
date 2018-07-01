@@ -60,6 +60,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NNV|AnyCPU'">
     <OutputPath>bin\NNV\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NV|AnyCPU'">
     <OutputPath>bin\NV\</OutputPath>

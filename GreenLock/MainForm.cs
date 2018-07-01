@@ -293,6 +293,7 @@ namespace GreenLock
         {
             try
             {
+
                 screensaverStatus = false;
                 screensaverPasswordflag = false;
 
@@ -2224,6 +2225,11 @@ namespace GreenLock
         }
 
         #endregion
+
+        private void label_Version_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class Win32
