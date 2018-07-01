@@ -110,9 +110,6 @@ namespace GreenLock
         {
             try
             {
-                Debug.Write("스크린세이버2 마우스 다운이벤트");
-                Debug.Write("formScreenSaverCancel == null" + (formScreenSaverCancel == null));
-
                 // 비밀번호 입력창을 오픈한다
                 if (formScreenSaverCancel == null)
                 {
